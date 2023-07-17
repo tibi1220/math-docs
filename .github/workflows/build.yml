@@ -59,8 +59,8 @@ jobs:
       - name: Install pnpm deps
         run: pnpm install -recursive
 
-      - name: Move own cls files
-        run: ./config.sh
+      - name: Link cls and sty files
+        run: ./link.sh
 
       - name: Generate scripts
         run: pnpm generate

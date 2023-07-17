@@ -4,7 +4,10 @@
   "type": "module",
   "main": "scripts/index.ts",
   "scripts": {
-    "generate": "TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node ./scripts/index.ts"
+    "generate": "TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node ./scripts/index.ts",
+    "deps": "./generate/exercise-deps.sh && ./generate/root_file-deps.sh",
+    "compile": "./generate/exercise-compile.sh && ./generate/root_file-compile.sh",
+    "link": "./link.sh"
   },
   "devDependencies": {
     "@types/node": "^20.4.2",
