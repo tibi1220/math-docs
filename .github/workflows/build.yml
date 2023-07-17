@@ -1,0 +1,83 @@
+name: Build root files and exercises
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - config
+      - exercise
+      - root_file
+      - standalone
+      - .github/workflows/build.yml
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+
+    container:
+      image: danteev/texlive:latest
+
+    permissions: write-all
+
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v3
+
+      - name: Get Date
+        id: get-date
+        run: |
+          echo "date=$(/bin/date -u "+%Y-%m-%d--%H-%M-%S")" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get Cache dirs
+        id: cache-dirs
+        shell: bash
+        run: echo "PNPM=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          key: LaTeX-build-${{ steps.get-date.outputs.date }}
+          path: |
+            /usr/local/texlive/2023/texmf-var/luatex-cache/
+            exercise
+            root_file
+            ${{ steps.cache-dirs.outputs.PNPM }}
+          restore-keys: |
+            LaTeX-build
+
+      - name: Install pnpm deps
+        run: pnpm install -recursive
+
+      - name: Move own cls files
+        run: ./config.sh
+
+      - name: Generate scripts
+        run: pnpm generate
+
+      - name: Install latex deps
+        run: |
+          ./generate/exercise-deps.sh
+          ./generate/root_file-deps.sh
+
+      - name: Compile latex docs
+        run: |
+          ./generate/exercise-compile.sh
+          ./generate/root_file-compile.sh
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: latex-pdf
+          path: |
+            exercise/**/build/*.(pdf|log)
+            root_file/**/build/*.(pdf|log)
