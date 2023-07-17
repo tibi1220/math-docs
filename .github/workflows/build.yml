@@ -79,5 +79,7 @@ jobs:
         with:
           name: latex-pdf
           path: |
-            exercise/**/build/*.(pdf|log)
-            root_file/**/build/*.(pdf|log)
+            exercise/**/build/*.pdf
+            exercise/**/build/*.log
+            root_file/**/build/*.pdf
+            root_file/**/build/*.log
