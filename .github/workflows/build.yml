@@ -83,3 +83,4 @@ jobs:
             exercise/**/build/*.log
             root_file/**/build/*.pdf
             root_file/**/build/*.log
+            generate
