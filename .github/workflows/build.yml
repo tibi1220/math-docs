@@ -69,6 +69,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: generate
+          path: generate/
 
       - name: Setup standalone file cache
         uses: actions/cache@v3
@@ -122,6 +123,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: generate
+          path: generate/
 
       - name: Setup root file cache
         uses: actions/cache@v3
@@ -136,9 +138,6 @@ jobs:
 
       - name: Link cls and sty files
         run: ./link.sh
-
-      - name: Generate scripts
-        run: pnpm generate
 
       - name: Install dependencies
         run: ./generate/root-deps.sh
