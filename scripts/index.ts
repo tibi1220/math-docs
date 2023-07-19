@@ -25,7 +25,9 @@ if (!existsSync(GENERATED_DIR)) {
 LATEX_DIRS.forEach(async ({ dirs, name }) => {
   const configs = await getConfigPaths(BASE_DIR, dirs, CONFIG_NAME);
 
-  const parsed = await Promise.all(configs.map(parseYaml));
+  const parsed = await Promise.all(
+    configs.map(async cfg => parseYaml(cfg, BASE_DIR))
+  );
 
   const deps = mergeDeps(parsed);
 

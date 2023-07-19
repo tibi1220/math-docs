@@ -1,6 +1,6 @@
 import { stringify, parse } from "yaml";
 import { writeFile, readFile } from "fs/promises";
-import { join, dirname } from "path";
+import { join, dirname, relative } from "path";
 
 export async function writeYaml(path: string, content: string) {
   const yaml = stringify(content);
@@ -8,10 +8,15 @@ export async function writeYaml(path: string, content: string) {
   return writeFile(path, yaml);
 }
 
-export async function parseYaml(path: string): Promise<ParsedConfig> {
+export async function parseYaml(
+  path: string,
+  cwd: string
+): Promise<ParsedConfig> {
   const configFile = await readFile(path, "utf8");
 
   const json: LatexConfig = parse(configFile);
+
+  path = relative(cwd, path);
 
   const source_path = dirname(path);
   const output_path = join(source_path, json.out_dir || ".");
