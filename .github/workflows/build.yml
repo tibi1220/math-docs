@@ -96,15 +96,22 @@ jobs:
           chmod +x ./generate/standalone-compile.sh
           ./generate/standalone-compile.sh
 
-      - name: Upload standalone documents and logs
+      - name: Upload standalone logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: LaTeX-standalone-log
+          path: |
+            exercise/**/build/*.log
+            graphics/**/build/*.log
+
+      - name: Upload standalone documents
         uses: actions/upload-artifact@v3
         with:
           name: LaTeX-standalone
           path: |
             exercise/**/build/*.pdf
-            exercise/**/build/*.log
             graphics/**/build/*.pdf
-            graphics/**/build/*.log
+          if-no-files-found: error
 
   build_root:
     name: Compile root files
@@ -153,12 +160,19 @@ jobs:
           chmod +x ./generate/root-compile.sh
           ./generate/root-compile.sh
 
-      - name: Upload root documents and logs
+      - name: Upload root logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: LaTeX-root-log
+          path: |
+            book/**/build/*.log
+            handout/**/build/*.log
+
+      - name: Upload root documents
         uses: actions/upload-artifact@v3
         with:
           name: LaTeX-root
           path: |
             book/**/build/*.pdf
-            book/**/build/*.log
             handout/**/build/*.pdf
-            handout/**/build/*.log
+          if-no-files-found: error

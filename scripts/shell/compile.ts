@@ -7,7 +7,9 @@ export default function configToBash(config: ParsedConfig[]) {
 
       script += `\ncd ${cfg.source_path}\n\n`;
 
-      script += cfg.root_files.map(file => file.resolver).join("\n") + "\n\n\n";
+      script += cfg.root_files.map(file => file.resolver).join("\n") + "\n\n";
+
+      script += `\ncd $current_dir\n\n\n`;
 
       return script;
     })
