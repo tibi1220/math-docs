@@ -12,7 +12,11 @@ for file in config/*; do # config/file.cls
 
   rm -rf $tex/$b
   mkdir -p $tex/$b
-  ln $file $tex/$b/$f
+  if ln $file $tex/$b/$f; then
+    echo "Hard link '$file' => '$tex/$b/$f' successfully created."
+  else
+    echo "Cannot create hard link, copying file '$file' into '$tex/$b' directory instead."
+  fi
 done
 
 mktexlsr $tex
