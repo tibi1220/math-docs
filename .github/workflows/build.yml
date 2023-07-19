@@ -42,7 +42,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: generate
-          path: generate
+          path: generate/
+          if-no-files-found: error
 
   build-standalone:
     name: Compile standalone files
