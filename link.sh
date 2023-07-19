@@ -1,11 +1,8 @@
 #!/bin/bash
 
-# if macos
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  tex=~/Library/texmf/tex/latex/local
-else
-  tex=~/texmf/tex/latex/local
-fi
+texmf=$(kpsewhich -var-value TEXMFHOME)
+
+tex=$texmf/tex/latex/local
 
 mkdir -p $tex
 
