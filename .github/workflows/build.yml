@@ -87,10 +87,14 @@ jobs:
         run: ./link.sh
 
       - name: Install dependencies
-        run: ./generate/standalone-deps.sh
+        run: |
+          chmod +x ./generate/standalone-deps.sh
+          ./generate/standalone-deps.sh
 
       - name: Compile documents
-        run: ./generate/standalone-compile.sh
+        run: |
+          chmod +x ./generate/standalone-compile.sh
+          ./generate/standalone-compile.sh
 
       - name: Upload standalone documents and logs
         uses: actions/upload-artifact@v3
@@ -140,10 +144,14 @@ jobs:
         run: ./link.sh
 
       - name: Install dependencies
-        run: ./generate/root-deps.sh
+        run: |
+          chmod +x ./generate/root-deps.sh
+          ./generate/root-deps.sh
 
       - name: Compile documents
-        run: ./generate/root-compile.sh
+        run: |
+          chmod +x ./generate/root-compile.sh
+          ./generate/root-compile.sh
 
       - name: Upload root documents and logs
         uses: actions/upload-artifact@v3
