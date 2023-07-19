@@ -16,6 +16,7 @@ for file in config/*; do # config/file.cls
     echo "Hard link '$file' => '$tex/$b/$f' successfully created."
   else
     echo "Cannot create hard link, copying file '$file' into '$tex/$b' directory instead."
+    cp $file $tex/$b/$f
   fi
 done
 
