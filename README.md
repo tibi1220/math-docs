@@ -5,23 +5,36 @@
 The repo contains 4 primary latex directories:
 
 ```
-├── config      -- Config files
-├── exercise    -- Exercise files
-├── root_file   -- Root files
-└── standalone  -- Standalone files
+│
+├── .github  -- Workflow files
+│
+├── scripts  -- Typescript files - only used in workflows
+│
+├── config   -- LaTeX class and style files
+│
+├── book     -- LaTeX root files - longer
+├── handout  -- LaTeX root files - shorter
+│
+├── exercise -- LaTeX standalone files - single exercises
+└── graphics -- LaTeX standalone files - single graphics
 ```
 
 ### Config files
 
 Config files are in the config folder. These files are used in the document
-preambles.
+preambles. In order to use these files, they have to be copied or linked to a
+location known to `texlive`. Running the following script takes care of this:
+
+```shellscript
+./link.sh
+```
 
 #### Motivation
 
 Using the same config files in all of our `tex` source files helps us using
-consistent notations through our documents. They also make life easier, if we
-want to change the appearance of a desired element, because the style only needs
-to be changed in the config files this way.
+consistent notations throughout our documents. They also make life easier when
+it comes to changing the styling of a specific element, because this way the
+change only has to be made in one location.
 
 #### Class files
 
@@ -29,14 +42,17 @@ For each filetype, we have custom `class` files. You should begin the documents
 like this:
 
 ```latex
-% Files in the root_file directory
-\documentclass{math-root}
+% Files in the book directory
+\documentclass{math-book}
+
+% Files in the handout directory
+\documentclass{math-handout}
 
 % Files in the exercise directory
-\documentclass{math-exercise}
+\documentclass[exercise]{math-standalone}
 
-% Files in the standalone directory
-\documentclass{math-standalne}
+% Files in the graphics directory
+\documentclass[graphics]{math-standalone}
 ```
 
 #### Style files
@@ -60,11 +76,12 @@ some useful environments or command, like these:
 
 Besides `config` files, we have 3 different `tex` source file types
 
-- `standalone` files are files that contain mainly graphics, that can be reused
-  in different other files.
-- `exercise` files each contain one exercise.
-- `root_file` files are basically files that bundle exerceses and standalone
-  files.
+- Standalone files
+  - `graphics` files contain a single figure.
+  - `exercise` files each contain one exercise.
+- Root files
+  - `handout` files contain approximately 45 minutes worth of information.
+  - `book` files contain more information
 
 ## Contribution
 
@@ -109,5 +126,5 @@ documents on save.
 You also need to configure your editor to use the `.latexmkrc` files during
 compilation.
 
-It is also required to run the `config.sh` script to move the custom class files
+It is also required to run the `link.sh` script to link the custom class files
 to the correct directories.
