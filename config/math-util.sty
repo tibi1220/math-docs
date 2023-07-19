@@ -1,4 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesFile{math-util}
 
-\RequirePackage{currfile}
+\RequirePackage[abspath]{currfile}
+\RequirePackage{lipsum}
+\RequirePackage{standalone}
+
+\newcommand{\includerelative}[1]{\includestandalone{\currfiledir/#1}}

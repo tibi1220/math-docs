@@ -7,4 +7,4 @@
 \RequirePackage{math-font}
 \RequirePackage{math-math}
 \RequirePackage{math-tikz}
-\RequirePackage{math-exercise}
+\RequirePackage[print-solutions]{math-exercise}
