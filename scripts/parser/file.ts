@@ -3,9 +3,8 @@ import { join } from "path";
 
 export async function getConfigPaths(
   base: string,
-  latexDir: string,
+  latexDir: string[],
   name = "config.yml",
-  // exclude = /(node_modules|build|dist|scripts|python|\.pnpm)/gi
   exclude = ["build"]
 ): Promise<string[]> {
   const configs: string[] = [];
@@ -26,7 +25,7 @@ export async function getConfigPaths(
     }
   }
 
-  await traverseDirectory(join(base, latexDir));
+  await Promise.all(latexDir.map(dir => traverseDirectory(join(base, dir))));
 
   return configs;
 }

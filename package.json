@@ -4,10 +4,14 @@
   "type": "module",
   "main": "scripts/index.ts",
   "scripts": {
+    "link": "./link.sh",
     "generate": "TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node ./scripts/index.ts",
-    "deps": "./generate/exercise-deps.sh && ./generate/root_file-deps.sh",
-    "compile": "./generate/exercise-compile.sh && ./generate/root_file-compile.sh",
-    "link": "./link.sh"
+    "deps:root": "./generate/root-deps.sh",
+    "deps:standalone": "./generate/standalone-deps.sh",
+    "deps:all": "./generate/root-deps.sh && ./generate/standalone-deps.sh",
+    "compile:root": "./generate/root-compile.sh",
+    "compile:standalone": "./generate/standalone-compile.sh",
+    "compile:all": "./generate/root-compile.sh && ./generate/standalone-compile.sh"
   },
   "devDependencies": {
     "@types/node": "^20.4.2",

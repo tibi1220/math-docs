@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{math-standalone}
+\ProvidesClass{math-book}
 
-\LoadClass{standalone}
+\LoadClass{scrbook}
 
 \RequirePackage{math-util}
 \RequirePackage{math-font}

@@ -1,7 +1,10 @@
-export interface LatexConfig {
+type Language = "en" | "hu";
+
+interface LatexConfig {
   root_files: {
-    input: string;
-    output: string;
+    input?: string;
+    output?: string;
+    lang?: Language;
   }[];
   out_dir?: string;
   external_deps?: {
@@ -9,7 +12,7 @@ export interface LatexConfig {
   };
 }
 
-export interface ParsedConfig {
+interface ParsedConfig {
   source_path: string;
   output_path: string;
   root_files: {
@@ -18,19 +21,20 @@ export interface ParsedConfig {
     output: string;
     output_long: string;
     resolver: string;
+    lang: Language;
   }[];
   external_deps?: {
     [key: string]: string[];
   };
 }
 
-export interface ParsedDeps {
+interface ParsedDeps {
   program: string;
   deps: string[];
   resolver: string | null;
 }
 
-export interface MergedConfig {
+interface MergedConfig {
   external_deps: ParsedDeps[];
   latex_roots: ParsedConfig[];
 }

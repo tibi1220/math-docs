@@ -1,3 +1,4 @@
+import generateBashScript from "./shell";
 import { getConfigPaths, mergeDeps, parseYaml } from "./parser";
 
 import { join } from "path";
@@ -6,12 +7,12 @@ import { writeFile } from "fs/promises";
 import { createWriteStream, existsSync, mkdirSync } from "fs";
 import { stringify } from "yaml";
 
-import type { MergedConfig } from "./types";
-import generateBashScript from "./shell";
-
 const CONFIG_NAME = "config.yml";
 const BASE_DIR = cwd();
-const LATEX_DIRS = ["root_file", "exercise"];
+const LATEX_DIRS = [
+  { dirs: ["book", "handout"], name: "root" },
+  { dirs: ["exercise", "graphics"], name: "standalone" },
+];
 const GENERATED = "generate";
 const SHEBANG = "#!/bin/bash";
 
@@ -21,8 +22,8 @@ if (!existsSync(GENERATED_DIR)) {
   mkdirSync(GENERATED_DIR);
 }
 
-LATEX_DIRS.forEach(async dir => {
-  const configs = await getConfigPaths(BASE_DIR, dir, CONFIG_NAME);
+LATEX_DIRS.forEach(async ({ dirs, name }) => {
+  const configs = await getConfigPaths(BASE_DIR, dirs, CONFIG_NAME);
 
   const parsed = await Promise.all(configs.map(parseYaml));
 
@@ -33,13 +34,13 @@ LATEX_DIRS.forEach(async dir => {
     latex_roots: parsed,
   };
 
-  const script = generateBashScript(merged, SHEBANG);
+  const script = generateBashScript(merged, name, SHEBANG);
 
-  writeFile(join(GENERATED_DIR, dir + "-deps.yml"), stringify(deps));
-  writeFile(join(GENERATED_DIR, dir + "-compile.yml"), stringify(parsed));
+  writeFile(join(GENERATED_DIR, name + "-deps.yml"), stringify(deps));
+  writeFile(join(GENERATED_DIR, name + "-compile.yml"), stringify(parsed));
 
   const dependencyStream = createWriteStream(
-    join(GENERATED_DIR, dir + "-deps.sh"),
+    join(GENERATED_DIR, name + "-deps.sh"),
     { mode: 0o755 }
   );
 
@@ -47,7 +48,7 @@ LATEX_DIRS.forEach(async dir => {
   dependencyStream.end();
 
   const compileStream = createWriteStream(
-    join(GENERATED_DIR, dir + "-compile.sh"),
+    join(GENERATED_DIR, name + "-compile.sh"),
     { mode: 0o755 }
   );
 

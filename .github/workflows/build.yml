@@ -1,34 +1,17 @@
 name: Build root files and exercises
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - config
-      - exercise
-      - root_file
-      - standalone
-      - .github/workflows/build.yml
+on: [push]
+
 jobs:
-  build_latex:
+  generate-scripts:
+    name: Generate compile scripts
     runs-on: ubuntu-latest
-
-    container:
-      image: danteev/texlive:latest
-
     permissions: write-all
 
     steps:
-      - name: Set up Git repository
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Get Date
-        id: get-date
-        run: |
-          echo "date=$(/bin/date -u "+%Y-%m-%d--%H-%M-%S")" >> $GITHUB_OUTPUT
-        shell: bash
-
-      - name: Install Node.js
+      - name: Install node
         uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -39,25 +22,113 @@ jobs:
           version: 8
           run_install: false
 
-      - name: Get Cache dirs
+      - name: Get cache directories
         id: cache-dirs
-        shell: bash
-        run: echo "PNPM=$(pnpm store path)" >> $GITHUB_OUTPUT
+        run: |
+          echo "PNPM=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - name: Cache
+      - name: Setup pnpm cache
         uses: actions/cache@v3
         with:
-          key: LaTeX-build-${{ steps.get-date.outputs.date }}
+          path: ${{ steps.cache-dirs.outputs.PNPM }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install pnpm deps
+        run: pnpm install
+
+      - name: Upload build scripts
+        uses: actions/upload-artifact@v3
+        with:
+          name: generate
+          path: generate
+
+  build-standalone:
+    name: Compile standalone files
+    runs-on: ubuntu-latest
+    permissions: write-all
+    needs: generate-scripts
+    container:
+      image: danteev/texlive:latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Get Date
+        id: get-date
+        run: |
+          echo "date=$(/bin/date -u "+%Y-%m-%d--%H-%M-%S")" >> $GITHUB_OUTPUT
+
+      - name: Get build scripts
+        uses: actions/download-artifact@v3
+        with:
+          name: generate
+
+      - name: Setup standalone file cache
+        uses: actions/cache@v3
+        with:
+          key:
+            ${{ runner.os }}-LaTeX-standalone-${{ steps.get-date.outputs.date }}
           path: |
             /usr/local/texlive/2023/texmf-var/luatex-cache/
             exercise
-            root_file
-            ${{ steps.cache-dirs.outputs.PNPM }}
+            graphics
           restore-keys: |
-            LaTeX-build
+            ${{ runner.os }}-LaTeX-standalone-
 
-      - name: Install pnpm deps
-        run: pnpm install -recursive
+      - name: Link cls and sty files
+        run: ./link.sh
+
+      - name: Install dependencies
+        run: ./generate/standalone-deps.sh
+
+      - name: Compile documents
+        run: ./generate/standalone-compile.sh
+
+      - name: Upload standalone documents and logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: LaTeX-standalone
+          path: |
+            exercise/**/build/*.pdf
+            exercise/**/build/*.log
+            graphics/**/build/*.pdf
+            graphics/**/build/*.log
+
+  build_root:
+    name: Compile root files
+    runs-on: ubuntu-latest
+    permissions: write-all
+    needs: generate-scripts
+    container:
+      image: danteev/texlive:latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Get Date
+        id: get-date
+        run: |
+          echo "date=$(/bin/date -u "+%Y-%m-%d--%H-%M-%S")" >> $GITHUB_OUTPUT
+
+      - name: Get build scripts
+        uses: actions/download-artifact@v3
+        with:
+          name: generate
+
+      - name: Setup root file cache
+        uses: actions/cache@v3
+        with:
+          key: ${{ runner.os }}-LaTeX-root-${{ steps.get-date.outputs.date }}
+          path: |
+            /usr/local/texlive/2023/texmf-var/luatex-cache/
+            book
+            handout
+          restore-keys: |
+            ${{ runner.os }}-LaTeX-root-
 
       - name: Link cls and sty files
         run: ./link.sh
@@ -65,22 +136,18 @@ jobs:
       - name: Generate scripts
         run: pnpm generate
 
-      - name: Install latex deps
-        run: |
-          ./generate/exercise-deps.sh
-          ./generate/root_file-deps.sh
+      - name: Install dependencies
+        run: ./generate/root-deps.sh
 
-      - name: Compile latex docs
-        run: |
-          ./generate/exercise-compile.sh
-          ./generate/root_file-compile.sh
+      - name: Compile documents
+        run: ./generate/root-compile.sh
 
-      - uses: actions/upload-artifact@v3
+      - name: Upload root documents and logs
+        uses: actions/upload-artifact@v3
         with:
-          name: latex-pdf
+          name: LaTeX-root
           path: |
-            exercise/**/build/*.pdf
-            exercise/**/build/*.log
-            root_file/**/build/*.pdf
-            root_file/**/build/*.log
-            generate
+            book/**/build/*.pdf
+            book/**/build/*.log
+            handout/**/build/*.pdf
+            handout/**/build/*.log

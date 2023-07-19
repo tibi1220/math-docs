@@ -1,3 +1,0 @@
-root_files:
-  - { input: week-1-hu, output: week-1-hu, lang: hu }
-  - { input: week-1-en, output: week-1-en, lang: en }

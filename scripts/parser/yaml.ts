@@ -2,8 +2,6 @@ import { stringify, parse } from "yaml";
 import { writeFile, readFile } from "fs/promises";
 import { join, dirname } from "path";
 
-import type { LatexConfig, ParsedConfig } from "../types";
-
 export async function writeYaml(path: string, content: string) {
   const yaml = stringify(content);
 
@@ -22,7 +20,9 @@ export async function parseYaml(path: string): Promise<ParsedConfig> {
     source_path,
     output_path,
     root_files: json.root_files.map(file => ({
-      ...file,
+      input: file.input || "main",
+      output: file.output || file.input || "main",
+      lang: file.lang || "hu",
       input_long: join(source_path, file.input + ".tex"),
       output_long: join(output_path, file.output + ".pdf"),
       resolver: `latexmk ${file.input}.tex --jobname='${file.output}'`,

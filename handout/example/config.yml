@@ -1,0 +1,3 @@
+root_files:
+  - { input: main, output: example-handout }
+out_dir: build

@@ -1,16 +1,13 @@
 import { echo, INFO } from "./util";
 
-import type { ParsedConfig } from "../types";
-
 export default function configToBash(config: ParsedConfig[]) {
   return config
-    .map((cfg) => {
+    .map(cfg => {
       let script = echo(`Compiling documents in ${cfg.source_path}`, INFO);
 
       script += `\ncd ${cfg.source_path}\n\n`;
 
-      script +=
-        cfg.root_files.map((file) => file.resolver).join("\n") + "\n\n\n";
+      script += cfg.root_files.map(file => file.resolver).join("\n") + "\n\n\n";
 
       return script;
     })

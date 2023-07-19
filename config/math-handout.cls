@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{math-standalone}
+\ProvidesClass{math-handout}
 
-\LoadClass{standalone}
+\LoadClass{scrartcl}
 
 \RequirePackage{math-util}
 \RequirePackage{math-font}
