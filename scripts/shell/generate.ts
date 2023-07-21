@@ -38,13 +38,9 @@ export function generateCompileScript(
 
   script += echo(`Compiling ${name} files.`, INFO);
 
-  script += "\ncurrent_dir=$(pwd)\n\n\n";
+  script += "\ncurrent_dir=$(pwd)\n\n";
 
-  script += configToBash(config);
-
-  script += echo(`Successfully compiled ${name} files.`, INFO);
-
-  script += "\ncd $current_dir\n\n\n";
+  script += configToBash(config, name);
 
   return script;
 }
