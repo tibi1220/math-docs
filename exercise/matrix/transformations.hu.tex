@@ -1,0 +1,44 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+
+\begin{exercise}{%
+    Mi lesz a $P (2;6;8)$ pont képe, ha hattatjuk rá az alábbi leképezéseket?
+  }
+  \begin{itemize}
+    \item először tükrözzük az $x$ tengelyre,
+    \item majd az $y$ tengely körül $(-60^\circ)$-kal forgatjuk,
+    \item végül $y$ irányban a $(-5)$-szörösére nyújtjuk.
+  \end{itemize}
+
+  \exsol[13.1cm]{%
+    \[
+      \begin{array}{rc}
+         & \left[\begin{array}{X{2cm}} 2 \\ 6 \\ 8 \end{array}\right]
+        \\
+        \left[\begin{array}{*{3}{X{22mm}}}
+                  1 & 0  & 0  \\
+                  0 & -1 & 0  \\
+                  0 & 0  & -1
+                \end{array}\right]
+         & \left[\begin{array}{X{2cm}} 2 \\ -6 \\ -8 \end{array}\right]
+        \\
+        \left[\begin{array}{*{3}{X{22mm}}}
+                  \cos (-60^\circ)  & 0 & \sin (-60^\circ) \\
+                  0                 & 1 & 0                \\
+                  -\sin (-60^\circ) & 0 & \cos (-60^\circ)
+                \end{array}\right]
+         & \left[\begin{array}{X{2cm}} 1 + 4 \sqrt{3} \\ -6 \\ \sqrt{3} - 4 \end{array}\right]
+        \\
+        \left[\begin{array}{*{3}{X{22mm}}}
+                  1 & 0  & 0 \\
+                  0 & -5 & 0 \\
+                  0 & 0  & 0
+                \end{array}\right]
+         & \left[\begin{array}{X{2cm}} 1 + 4 \sqrt{3} \\ 30 \\ \sqrt{3} - 4 \end{array}\right]
+      \end{array}
+    \]
+  }
+\end{exercise}
+
+\end{document}

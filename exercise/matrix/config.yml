@@ -1,0 +1,6 @@
+root_files:
+  - { input: rank.hu, output: rank-hu }
+  - { input: transformations.hu, output: transformations-hu }
+  - { input: cramers-rule-singularity.hu, output: cramers-rule-singularity-hu }
+  - { input: determinant-theorems.hu, output: determinant-theorems-hu }
+out_dir: build

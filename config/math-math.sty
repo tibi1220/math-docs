@@ -5,6 +5,9 @@
 \RequirePackage{unicode-math}
 \RequirePackage{icomma}
 \RequirePackage{derivative}
+\RequirePackage{array}
+\RequirePackage{xcolor}
+\RequirePackage{colortbl}
 
 % Imaginary unit
 \newcommand\iu{\mathbf{i}}
@@ -26,3 +29,15 @@
 
 % Regular matrix
 \newcommand{\rmat}[1]{\mathbf{#1}}
+
+% Bracket array matrix [1=number of cols] [2=col width]
+\newcolumntype{x}[1]{>{\centering\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{X}[1]{>{$}x{#1}<{$}}
+\newenvironment{bamatrix}[2]{\left[\begin{array}{*{#1}{X{#2}}}}{\end{array}\right]}
+
+% Own operators
+\let\dim\relax
+\DeclareMathOperator{\dim}{dim}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\defect}{def}

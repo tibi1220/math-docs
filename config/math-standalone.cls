@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{math-standalone}
 
-\LoadClass{standalone}
+\LoadClass[12pt, margin=5mm]{standalone}
 
 \RequirePackage{math-util}
 \RequirePackage{math-font}
