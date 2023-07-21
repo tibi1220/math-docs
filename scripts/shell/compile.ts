@@ -27,10 +27,10 @@ fi
   script += `
 if (( $errorCount > 0 )); then
   ${echo(`Some errors ($errorCount) have occured during compilation`, ERROR)}
-  return 1
+  exit 1
 else
   ${echo(`Successfully compiled ${name} files.`, INFO)}
-  return 0
+  exit 0
 fi
 `;
 
