@@ -1,11 +1,11 @@
-% \begin{noindent}
+% TeX format requirement
 \NeedsTeXFormat{LaTeX2e}
 
-% Package name
+% Package name [\usepackage{math-exercise}]
 \ProvidesPackage{math-exercise}
 
 % Required packages
-\RequirePackage{xargs, xstring}
+\RequirePackage{xargs,xstring}
 \RequirePackage{amsmath}
 \RequirePackage[many]{tcolorbox}
 \tcbuselibrary{breakable}
@@ -16,16 +16,23 @@
 \DeclareOption{print-solutions}{\print@@solstrue}
 \newif\ifkeep@@space
 \keep@@spacefalse
-\DeclareOption{keep-space}{\keep@@spacetrue\print@@solsfalse}
+\DeclareOption{keep-space}{%
+  \ifprint@@sols%
+    \PackageWarning{math-exercise}%
+    {'keep-space' ignored, because it cannot be used together with 'print-solutions'}%
+  \else%
+    \keep@@spacetrue%
+  \fi%
+}
 
-% End package options
+% End of options
 \ProcessOptions\relax
 
 % Check if inside exercise environment
 \newif\ifinside@@exercise
 \inside@@exercisefalse
 % New environment for handling exercises
-\usetikzlibrary{patterns,patterns.meta} 
+\usetikzlibrary{patterns,patterns.meta}
 \ifprint@@sols%
   \def\@@cb{yellow!3}%
   \def\@@cf{cyan!40!black}%
@@ -40,8 +47,8 @@
     \begin{tcbclipinterior}
       \fill[
         pattern={%
-          Dots[distance=5mm, angle=90],%
-        },%
+            Dots[distance=5mm, angle=90],%
+          },%
         pattern color=gray,
         shift={(interior.north west)},
       ] (interior.south west) rectangle (segmentation.east);
@@ -59,45 +66,43 @@
     \begin{block}{\#\theexercisectr\ #1}
   }{%
     \begin{tcolorbox}[%
-      colback=\@@cb,%
-      colframe=\@@cf,%
-      coltitle=\@@ct,%
-      breakable,%
-      title={\#\theexercisectr\ #1},%
-      enhanced,
-      underlay={\@@ul},
-    ]%
-  }%
-}{%
-  \@ifclassloaded{beamer}%
-  {\end{block}}%
-  {\end{tcolorbox}}%
+        colback=\@@cb,%
+        colframe=\@@cf,%
+        coltitle=\@@ct,%
+        breakable,%
+        title={\#\theexercisectr\ #1},%
+        enhanced,
+        underlay={\@@ul},
+      ]%
+      }%
+      }{%
+      \@ifclassloaded{beamer}%
+      {\end{block}}%
+      {\end{tcolorbox}}%
   \inside@@exercisefalse%
 }
 
 \newcommandx{\exsol}[2][1=5cm]{%
-% Throw error if not inside exercise environment
-\ifinside@@exercise
-  % Add separator if true
-  \ifprint@@sols%
-    \tcblower%
-    #2%
-  \fi%
-  \ifkeep@@space%
-    \IfInteger{#1}{%
-      \ifnum#1>0%
-        \tcblower%
-        \vspace{#1}%
-      \fi
-    }{%
+  % Throw error if not inside exercise environment
+  \ifinside@@exercise
+    % Add separator if true
+    \ifprint@@sols%
       \tcblower%
-      \vspace*{#1}%
-    }%
+      #2%
+    \fi%
+    \ifkeep@@space%
+      \IfInteger{#1}{%
+        \ifnum#1>0%
+          \tcblower%
+          \vspace{#1}%
+        \fi
+      }{%
+        \tcblower%
+        \vspace*{#1}%
+      }%
+    \fi%
+  \else%
+    \PackageError{math-exercise}%
+    {'exsol' can only be used in the exercise environment}%
   \fi%
-\else%
-  \PackageError{mystyles}%
-  {'solution' can only be used in the exercise environment}%
-\fi%
 }
-
-% \end{noindent}

@@ -3,4 +3,5 @@ root_files:
   - { input: transformations.hu, output: transformations-hu }
   - { input: cramers-rule-singularity.hu, output: cramers-singularity-hu }
   - { input: determinant-theorem-usage.hu, output: determinant-theorems-hu }
+  - { input: eigen.hu, output: eigen-hu }
 out_dir: build

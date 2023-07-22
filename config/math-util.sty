@@ -1,11 +1,17 @@
+% TeX format requirement
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesFile{math-util}
 
+% Package name [\usepackage{math-util}]
+\ProvidesPackage{math-util}
+
+% Provided packages
 \RequirePackage[abspath]{currfile}
 \RequirePackage{lipsum}
 \RequirePackage{standalone}
 \usepackage[shortlabels]{enumitem}
 
+% Provided document commands
+% !!! use these imports in every file !!!
 \newcommand{\relativeinput}[1]{\input{\currfiledir#1}}
 \newcommand{\relativeinclude}[1]{\input{\currfiledir#1}}
 \newcommand{\relativestandalone}[1]{\includestandalone{\currfiledir#1}}

@@ -1,32 +1,30 @@
+% TeX format requirement
 \NeedsTeXFormat{LaTeX2e}
+
+% Class name [\documentclass{math-book}]
 \ProvidesClass{math-book}
 
-\RequirePackage{expkv-opt,expkv-def}
+% Class options
+\RequirePackage{xkeyval}
 
-% \begin{noindent}
-\newcommand\@lang{english}
-\ekvdefinekeys{math-book}{
-  choice  lang  = {
-    protected hu = \renewcommand\@lang{magyar},
-    protected en = \renewcommand\@lang{english},
-  },
-	unknown code  = \PackageWarning{math-book}
-                  {Unknown option `\detokenize{#1}' received `\detokenize{#2}'},
-  unknown noval = \PackageWarning{mytheorem}{Unknown option `\detokenize{#1}'}
-}
+\newcommand\@@lang{}
 
-\ekvoProcessGlobalOptions{math-book}
-\ekvoUseUnknownHandlers*
-\ekvoProcessLocalOptions{math-book}
+\DeclareOptionX{lang}{\renewcommand\@@lang{#1}}
+\ExecuteOptionsX{lang=magyar}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 
-\RequirePackage[\@lang]{babel}
+% End of options
+\ProcessOptionsX\relax
+\ProcessOptions\relax
 
-% \end{noindent}
-
+% Based on this class
 \LoadClass[a4paper, 12pt]{scrbook}
+
+% Provided packages
+\RequirePackage[\@@lang]{babel}
 
 \RequirePackage{math-util}
 \RequirePackage{math-font}
 \RequirePackage{math-math}
-\RequirePackage{math-tikz}
+\RequirePackage{math-graphics}
 \RequirePackage[print-solutions]{math-exercise}
