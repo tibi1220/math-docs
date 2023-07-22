@@ -26,5 +26,5 @@
 \RequirePackage{math-util}
 \RequirePackage{math-font}
 \RequirePackage{math-math}
-\RequirePackage{math-tikz}
+\RequirePackage{math-graphics}
 \RequirePackage[print-solutions]{math-exercise}
