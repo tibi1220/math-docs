@@ -74,7 +74,7 @@ some useful environments or command, like these:
 
 ### Non config files
 
-Besides `config` files, we have 3 different `tex` source file types
+Besides `config` files, we have 4 different `tex` source file types
 
 - Standalone files
   - `graphics` files contain a single figure.
@@ -82,6 +82,39 @@ Besides `config` files, we have 3 different `tex` source file types
 - Root files
   - `handout` files contain approximately 45 minutes worth of information.
   - `book` files contain more information
+
+## Folder structure
+
+Each folder containing `root` or `standalone` files most contain the following
+files:
+
+- `config.yml`
+
+<!-- prettier-ignore -->
+```yaml
+root_files:
+  - input: main  # Required
+  - output:      # Undefined by default
+  - lang:        # Undefined by default
+out_dir: true    # Can be boolean or string (true - infer, false - fallback, string - force value)
+out_file: true   # Can be true or false (true - infer, false - fallback)
+lang: true       # Can be boolean or string (true - infer, false - off, string - force value)
+external_deps:   # Undefined by default
+  program_name:
+    - dep1
+    - dep2
+```
+
+- `.latexmkrc`
+
+```perl
+#!/usr/bin/perl
+
+$pdf_mode = 4;
+$out_dir = 'build';
+
+set_tex_cmds('--shell-escape -synctex=1 -interaction=nonstopmode %O %S');
+```
 
 ## Contribution
 
