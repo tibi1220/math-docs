@@ -69,6 +69,36 @@ function getLanguageParser(
   };
 }
 
+function getOutputParser(mode = true) {
+  return (
+    input: string
+  ): {
+    status: "fallback" | "invalid" | "infer";
+    output: string;
+  } => {
+    if (!mode) {
+      return {
+        status: "fallback",
+        output: input,
+      };
+    }
+
+    const regex = /(\.)(hu|en)$/g;
+
+    if (!regex.test(input)) {
+      return {
+        status: "invalid",
+        output: input,
+      };
+    }
+
+    return {
+      status: "infer",
+      output: input.replace(regex, "-$2"),
+    };
+  };
+}
+
 async function inferOutDir(
   rcPath: string,
   mode = true,
@@ -197,17 +227,49 @@ export async function parseYaml(
   });
 
   // Global out_file option
-  // let out_file: string;
+  const outputParser = getOutputParser(json.out_file);
 
   return {
     source_path,
     output_path,
     root_files: json.root_files.map(file => {
       const input = file.input || "main";
-      const output = file.output || file.input || "main";
 
       const fileMessages: FileMessage[] = [];
 
+      // Input file
+      if (!file.input) {
+        fileMessages.push({
+          type: "error",
+          message: "Missing input field in config file!",
+        });
+      }
+
+      // Output file
+      let output: string;
+
+      if (file.output) {
+        output = file.output;
+
+        fileMessages.push({
+          type: "info",
+          message: `Using provided output value: '${output}'`,
+        });
+      } else {
+        const { output: _output, status } = outputParser(input);
+
+        output = _output;
+
+        fileMessages.push({
+          type: status === "invalid" ? "warning" : "info",
+          message:
+            status === "infer"
+              ? `Using inferred output value: '${output}'`
+              : `Using fallback output value: '${output}'`,
+        });
+      }
+
+      // Language
       let lang: Language;
       const isLang = isLanguage(file.lang);
 
@@ -252,13 +314,6 @@ export async function parseYaml(
           message: isWarning
             ? `Using fallback lang: '${lang}'`
             : `Using inferred lang: '${_lang}'`,
-        });
-      }
-
-      if (!file.input) {
-        fileMessages.push({
-          type: "error",
-          message: "Missing input field in config file!",
         });
       }
 
