@@ -16,7 +16,7 @@ function inferLanguage(
   input: string,
   fallback: Language = "hu"
 ): { success: boolean; lang: Language } {
-  const lang = input.split(".").at(-2);
+  const lang = input.split(".").at(-1);
 
   const success = isLanguage(lang);
 
@@ -29,7 +29,13 @@ type ParserFn = {
 
 type LanguageParser =
   | {
-      status: "force" | "fallback";
+      status: "off";
+      fallback?: never;
+      parser?: never;
+      message: string;
+    }
+  | {
+      status: "force";
       fallback: Language;
       parser?: never;
       message: string;
@@ -54,9 +60,8 @@ function getLanguageParser(
 
   if (mode === false)
     return {
-      status: "fallback",
-      fallback,
-      message: `Using fallback language mode: '${fallback}'`,
+      status: "off",
+      message: `Language turned off.`,
     };
 
   return {
@@ -70,32 +75,35 @@ function getLanguageParser(
 }
 
 function getOutputParser(mode = true) {
-  return (
-    input: string
-  ): {
-    status: "fallback" | "invalid" | "infer";
-    output: string;
-  } => {
-    if (!mode) {
+  return {
+    message: mode ? "Using inferred output mode" : "Using fallback output mode",
+    parse: (
+      input: string
+    ): {
+      status: "fallback" | "invalid" | "infer";
+      output: string;
+    } => {
+      if (!mode) {
+        return {
+          status: "fallback",
+          output: input,
+        };
+      }
+
+      const regex = /(\.)(hu|en)$/g;
+
+      if (!regex.test(input)) {
+        return {
+          status: "invalid",
+          output: input,
+        };
+      }
+
       return {
-        status: "fallback",
-        output: input,
+        status: "infer",
+        output: input.replace(regex, "-$2"),
       };
-    }
-
-    const regex = /(\.)(hu|en)$/g;
-
-    if (!regex.test(input)) {
-      return {
-        status: "invalid",
-        output: input,
-      };
-    }
-
-    return {
-      status: "infer",
-      output: input.replace(regex, "-$2"),
-    };
+    },
   };
 }
 
@@ -203,7 +211,7 @@ export async function parseYaml(
     out_dir = dir;
 
     configMessages.push({
-      type: status === "warning" ? "warning" : "info",
+      type: status === "warning" ? "warn" : "info",
       message,
     });
   } else {
@@ -222,18 +230,23 @@ export async function parseYaml(
   const langParser = getLanguageParser(json.lang, "hu");
 
   configMessages.push({
-    type: langParser.status === "invalid" ? "warning" : "info",
+    type: langParser.status === "invalid" ? "warn" : "info",
     message: langParser.message,
   });
 
   // Global out_file option
   const outputParser = getOutputParser(json.out_file);
 
+  configMessages.push({
+    type: "info",
+    message: outputParser.message,
+  });
+
   return {
     source_path,
     output_path,
     root_files: json.root_files.map(file => {
-      const input = file.input || "main";
+      const input = file.input || "";
 
       const fileMessages: FileMessage[] = [];
 
@@ -256,12 +269,12 @@ export async function parseYaml(
           message: `Using provided output value: '${output}'`,
         });
       } else {
-        const { output: _output, status } = outputParser(input);
+        const { output: _output, status } = outputParser.parse(input);
 
         output = _output;
 
         fileMessages.push({
-          type: status === "invalid" ? "warning" : "info",
+          type: status === "invalid" ? "warn" : "info",
           message:
             status === "infer"
               ? `Using inferred output value: '${output}'`
@@ -270,7 +283,7 @@ export async function parseYaml(
       }
 
       // Language
-      let lang: Language;
+      let lang: Language | false;
       const isLang = isLanguage(file.lang);
 
       // If status is force, use the forced lang
@@ -292,14 +305,12 @@ export async function parseYaml(
         });
       }
       // Use fallback if provided lang is invalid
-      else if (langParser.status === "fallback") {
-        lang = langParser.fallback;
+      else if (langParser.status === "off") {
+        lang = false;
 
         fileMessages.push({
-          type: file.lang ? "warning" : "info",
-          message: file.lang
-            ? `Provided lang invalid, using fallback: '${langParser.fallback}'`
-            : `Using fallback lang: '${langParser.fallback}'`,
+          type: "info",
+          message: "File is not language specific",
         });
       }
       // Infer lang if provided lang is invalid
@@ -310,21 +321,10 @@ export async function parseYaml(
         const isWarning = !success || file.lang;
 
         fileMessages.push({
-          type: isWarning ? "warning" : "info",
+          type: isWarning ? "warn" : "info",
           message: isWarning
             ? `Using fallback lang: '${lang}'`
-            : `Using inferred lang: '${_lang}'`,
-        });
-      }
-
-      if (!file.output) {
-        fileMessages.push({
-          type: "warning",
-          message:
-            "Missing output field in config file. " +
-            (file.input
-              ? `Using input value: '${output}'`
-              : `Using default value: '${output}'`),
+            : `Using inferred lang: '${lang}'`,
         });
       }
 

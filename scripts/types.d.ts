@@ -25,12 +25,12 @@ interface ConfigErrors {
 }
 
 interface ConfigMessage {
-  type: "warning" | "info";
+  type: "warn" | "info";
   message: string;
 }
 
 type FileMessage = {
-  type: "warning" | "info" | "error";
+  type: "warn" | "info" | "error";
   message: string;
 };
 

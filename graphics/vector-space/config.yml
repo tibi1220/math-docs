@@ -1,3 +1,4 @@
 root_files:
   - { input: linear-dependency }
-out_dir: build
+lang: false
+out_file: false
