@@ -1,9 +1,16 @@
 import { echo, log, INFO, ERROR, WARN, Logger } from "./util";
 
+const ECHO_MAP = {
+  info: INFO,
+  error: ERROR,
+  warn: WARN,
+} as const;
+
 import chalk from "chalk";
 const g = chalk.green;
 
 const INCREMENT_ERROR = "errorCount=$((errorcount + 1))";
+const INCREMENT_WARN = "warnCount=$((errorcount + 1))";
 
 function parseErrors({ errors, source_path }: ConfigErrors, logger: Logger) {
   let script =
@@ -19,51 +26,86 @@ function parseErrors({ errors, source_path }: ConfigErrors, logger: Logger) {
   return script;
 }
 
-function parseConfigWarnings(
-  { warnings, source_path }: ParsedSchema,
+function parseConfigMessages(
+  { messages, source_path }: ParsedSchema,
   logger: Logger
 ): string {
-  if (!warnings) return "";
+  if (!messages) return "";
 
-  let script =
-    echo(`Some warnings occured while parsing ${g(source_path)}.yml`, WARN) +
-    "\n";
+  let script = "";
 
-  warnings.forEach(warn => {
-    script += echo(warn.message, WARN) + "\n";
-    script += logger.write(`${warn.message} [${warn.path}]`, "warn") + "\n";
+  if (messages.some(({ type }) => type === "warn")) {
+    script +=
+      echo(
+        `Some warnings occured while parsing ${g(`${source_path}.yml`)}`,
+        WARN
+      ) + "\n";
+  }
+
+  messages.forEach(({ message, type }) => {
+    script += echo(message, ECHO_MAP[type]) + "\n";
+    script += logger.write(message, type) + "\n";
+
+    if (type === "warn") script += INCREMENT_WARN + "\n";
   });
 
-  return script + "\n\n";
+  return script + "\n";
 }
 
-function parseFileWarnings(
-  { warnings, relative_input }: RootFile,
+function parseFileMessages(
+  { messages, relative_input }: RootFile,
   logger: Logger
 ) {
-  if (!warnings) return "";
+  if (!messages) return { script: "", error: false };
 
-  let script =
-    echo(`Some warnings occured while parsing ${g(relative_input)}`, WARN) +
-    "\n";
+  const errors = messages.filter(({ type }) => type === "error");
 
-  warnings.forEach(warn => {
-    script += echo(warn, WARN) + "\n";
-    script += logger.write(`${warn} [${relative_input}]`, "warn") + "\n";
+  if (errors.length) {
+    return {
+      script: errors
+        .map(
+          err => `${echo(err.message, ERROR)}
+${logger.write(`${err.message}`, "error")}
+${INCREMENT_ERROR}
+`
+        )
+        .join(""),
+      error: true,
+    };
+  }
+
+  let script = "";
+
+  if (messages.some(({ type }) => type === "warn")) {
+    script +=
+      echo(
+        `Some warnings occured while parsing ${g(`${relative_input}.tex`)}`,
+        WARN
+      ) + "\n";
+  }
+
+  messages.forEach(({ message, type }) => {
+    script += echo(message, ECHO_MAP[type]) + "\n";
+    script += logger.write(`${message} [${relative_input}]`, type) + "\n";
+
+    if (type === "warn") script += INCREMENT_WARN + "\n";
   });
 
-  return script + "\n\n";
+  return { script: script, error: false };
 }
 
 function parseFile(file: RootFile, logger: Logger): string {
-  let script = parseFileWarnings(file, logger);
+  let { script, error } = parseFileMessages(file, logger);
+
+  if (error) return script;
+
+  script = echo(`Now compiling ${file.input}.tex`, INFO) + "\n" + script;
 
   // prettier-ignore
-  script += `${echo(`Now compiling ${file.input}.tex`, INFO)}
-
+  script += `
 if ${file.resolver}; then
-  ${echo(`${file.relative_input} successfully compiled`, INFO)}
-  ${echo(`${file.relative_output} has been generated`, INFO)}
+  ${echo(`${file.relative_input}.tex successfully compiled`, INFO)}
+  ${echo(`${file.relative_output}.pdf has been generated`, INFO)}
   ${logger.write(`Compilation successful [${file.relative_input} -> ${file.relative_output}]`, "info")}
 else
   ${echo(`An error occured while compiling ${file.relative_input}`, ERROR)}
@@ -76,7 +118,8 @@ fi\n
 }
 
 export default function configToBash(config: ParsedConfig[], name: string) {
-  let script = `errorCount=0\n\n`;
+  let script = `errorCount=0
+warnCount=0\n\n`;
 
   const logger = log(name);
 
@@ -93,12 +136,18 @@ export default function configToBash(config: ParsedConfig[], name: string) {
 
     script += `\ncd ${cfg.source_path}\n`;
 
-    script += parseConfigWarnings(cfg, logger);
+    script += parseConfigMessages(cfg, logger);
 
-    script += cfg.root_files.map(file => parseFile(file, logger));
+    script += cfg.root_files.map(file => parseFile(file, logger)).join("\n");
 
-    script += `cd $current_dir\n`;
+    script += `cd $current_dir\n\n`;
   });
+
+  script += `
+if (( $warnCount > 0 )); then
+  ${echo(`Some warnings ($warnCount) have occured during compilation`, WARN)}
+fi\n
+`;
 
   script += `
 if (( $errorCount > 0 )); then

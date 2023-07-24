@@ -1,0 +1,21 @@
+root_files:
+  - input: main # Required
+  - output: # Undefined by default
+  - lang: # Undefined by default
+out_dir: true # Can be boolean or string
+out_file: true # Can be true or false
+lang: true # Can be boolean or string
+external_deps: # Undefined by default
+  program_name:
+    - dep1
+    - dep2
+
+# Examples
+graphics_example:
+  root_files:
+    - { input: plot-root }
+  lang: false
+
+exercise_example:
+  root_files:
+    - { input: ex.hu } # Output inferred to be ex-hu
