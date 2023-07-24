@@ -245,105 +245,118 @@ export async function parseYaml(
   return {
     source_path,
     output_path,
-    root_files: json.root_files.map(file => {
-      const input = file.input || "";
+    root_files: await Promise.all(
+      json.root_files.map(async file => {
+        const input = file.input || "";
 
-      const fileMessages: FileMessage[] = [];
+        const fileMessages: FileMessage[] = [];
 
-      // Input file
-      if (!file.input) {
-        fileMessages.push({
-          type: "error",
-          message: "Missing input field in config file!",
-        });
-      }
+        // Input file
+        if (!file.input) {
+          fileMessages.push({
+            type: "error",
+            message: "Missing input field in config file!",
+          });
+        }
 
-      // Output file
-      let output: string;
+        try {
+          await access(join(source_path, input + ".tex"));
+        } catch {
+          fileMessages.push({
+            type: "error",
+            message: `Provided input file does not exist: '${input}.tex'`,
+          });
+        }
 
-      if (file.output) {
-        output = file.output;
+        // Output file
+        let output: string;
 
-        fileMessages.push({
-          type: "info",
-          message: `Using provided output value: '${output}'`,
-        });
-      } else {
-        const { output: _output, status } = outputParser.parse(input);
+        if (file.output) {
+          output = file.output;
 
-        output = _output;
+          fileMessages.push({
+            type: "info",
+            message: `Using provided output value: '${output}'`,
+          });
+        } else {
+          const { output: _output, status } = outputParser.parse(input);
 
-        fileMessages.push({
-          type: status === "invalid" ? "warn" : "info",
-          message:
-            status === "infer"
-              ? `Using inferred output value: '${output}'`
-              : `Using fallback output value: '${output}'`,
-        });
-      }
+          output = _output;
 
-      // Language
-      let lang: Language | false;
-      const isLang = isLanguage(file.lang);
+          fileMessages.push({
+            type: status === "invalid" ? "warn" : "info",
+            message:
+              status === "infer"
+                ? `Using inferred output value: '${output}'`
+                : `Using fallback output value: '${output}'`,
+          });
+        }
 
-      // If status is force, use the forced lang
-      if (langParser.status === "force") {
-        lang = langParser.fallback;
+        // Language
+        let lang: Language | false;
+        const isLang = isLanguage(file.lang);
 
-        fileMessages.push({
-          type: "info",
-          message: `Using forced lang: '${lang}'`,
-        });
-      }
-      // If provided lang is valid, use it
-      else if (isLang) {
-        lang = file.lang as Language;
+        // If status is force, use the forced lang
+        if (langParser.status === "force") {
+          lang = langParser.fallback;
 
-        fileMessages.push({
-          type: "info",
-          message: `Using provided lang: '${lang}'`,
-        });
-      }
-      // Use fallback if provided lang is invalid
-      else if (langParser.status === "off") {
-        lang = false;
+          fileMessages.push({
+            type: "info",
+            message: `Using forced lang: '${lang}'`,
+          });
+        }
+        // If provided lang is valid, use it
+        else if (isLang) {
+          lang = file.lang as Language;
 
-        fileMessages.push({
-          type: "info",
-          message: "File is not language specific",
-        });
-      }
-      // Infer lang if provided lang is invalid
-      else {
-        const { success, lang: _lang } = (langParser.parser as ParserFn)(input);
+          fileMessages.push({
+            type: "info",
+            message: `Using provided lang: '${lang}'`,
+          });
+        }
+        // Use fallback if provided lang is invalid
+        else if (langParser.status === "off") {
+          lang = false;
 
-        lang = _lang;
-        const isWarning = !success || file.lang;
+          fileMessages.push({
+            type: "info",
+            message: "File is not language specific",
+          });
+        }
+        // Infer lang if provided lang is invalid
+        else {
+          const { success, lang: _lang } = (langParser.parser as ParserFn)(
+            input
+          );
 
-        fileMessages.push({
-          type: isWarning ? "warn" : "info",
-          message: isWarning
-            ? `Using fallback lang: '${lang}'`
-            : `Using inferred lang: '${lang}'`,
-        });
-      }
+          lang = _lang;
+          const isWarning = !success || file.lang;
 
-      return {
-        input,
-        relative_input: join(source_path, input),
-        absolute_input: join(absolute_source_path, input),
+          fileMessages.push({
+            type: isWarning ? "warn" : "info",
+            message: isWarning
+              ? `Using fallback lang: '${lang}'`
+              : `Using inferred lang: '${lang}'`,
+          });
+        }
 
-        output,
-        relative_output: join(output_path, output),
-        absolute_output: join(absolute_output_path, output),
+        return {
+          input,
+          relative_input: join(source_path, input),
+          absolute_input: join(absolute_source_path, input),
 
-        lang,
+          output,
+          relative_output: join(output_path, output),
+          absolute_output: join(absolute_output_path, output),
 
-        resolver: `latexmk ${file.input}.tex --jobname='${file.output}'`,
+          lang,
 
-        ...(fileMessages.length && { messages: fileMessages }),
-      };
-    }),
+          resolver: `latexmk ${file.input}.tex --jobname='${file.output}'`,
+
+          ...(fileMessages.length && { messages: fileMessages }),
+        };
+      })
+    ),
     external_deps: json.external_deps,
     ...(configMessages.length && { messages: configMessages }),
   };

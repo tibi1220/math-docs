@@ -49,20 +49,30 @@ function parseConfigMessages(
     if (type === "warn") script += INCREMENT_WARN + "\n";
   });
 
-  return script + "\n\n";
+  return script + "\n";
 }
 
 function parseFileMessages(
-  { messages, relative_input, input }: RootFile,
+  { messages, relative_input }: RootFile,
   logger: Logger
 ) {
-  if (!messages) return "";
+  if (!messages) return { script: "", error: false };
 
-  if (!input)
-    return `${echo(`No input name provided`, ERROR)}
-${logger.write(`No input name provided`, "error")}
-${INCREMENT_ERROR}\n
-`;
+  const errors = messages.filter(({ type }) => type === "error");
+
+  if (errors.length) {
+    return {
+      script: errors
+        .map(
+          err => `${echo(err.message, ERROR)}
+${logger.write(`${err.message}`, "error")}
+${INCREMENT_ERROR}
+`
+        )
+        .join(""),
+      error: true,
+    };
+  }
 
   let script = "";
 
@@ -81,13 +91,15 @@ ${INCREMENT_ERROR}\n
     if (type === "warn") script += INCREMENT_WARN + "\n";
   });
 
-  return script + "\n\n";
+  return { script: script, error: false };
 }
 
 function parseFile(file: RootFile, logger: Logger): string {
-  let script = echo(`Now compiling ${file.input}.tex`, INFO) + "\n";
+  let { script, error } = parseFileMessages(file, logger);
 
-  script += parseFileMessages(file, logger);
+  if (error) return script;
+
+  script = echo(`Now compiling ${file.input}.tex`, INFO) + "\n" + script;
 
   // prettier-ignore
   script += `
@@ -126,9 +138,9 @@ warnCount=0\n\n`;
 
     script += parseConfigMessages(cfg, logger);
 
-    script += cfg.root_files.map(file => parseFile(file, logger));
+    script += cfg.root_files.map(file => parseFile(file, logger)).join("\n");
 
-    script += `cd $current_dir\n`;
+    script += `cd $current_dir\n\n`;
   });
 
   script += `
