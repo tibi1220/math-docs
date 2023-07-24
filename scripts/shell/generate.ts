@@ -8,24 +8,21 @@ export function generateDependencyScript(
   name: string,
   shebang = "#!/bin/bash"
 ) {
+  name = chalk.green(name);
+
   let script = shebang + "\n\n";
 
-  const cName = chalk.green(name);
-
   if (!config.length) {
-    return script + echo(`No dependencies required for ${cName} files.`, INFO);
+    return script + echo(`No dependencies required for ${name} files.`, INFO);
   }
 
-  script += echo(`Installing dependencies for ${cName} files`, INFO);
+  script += echo(`Installing dependencies for ${name} files`, INFO);
 
   script += "\n" + depsToBash(config) + "\n\n\n";
 
   script += `echo -e ""\n`;
 
-  script += echo(
-    `Dependencies successfully installed for ${cName} files`,
-    INFO
-  );
+  script += echo(`Dependencies successfully installed for ${name} files`, INFO);
 
   return script;
 }
@@ -35,15 +32,19 @@ export function generateCompileScript(
   name: string,
   shebang = "#!/bin/bash"
 ) {
+  name = chalk.green(name);
+
   let script = shebang + "\n\n";
 
-  const cName = chalk.green(name);
+  script += echo(`Compiling ${name} files.`, INFO);
 
-  script += echo(`Compiling ${cName} files.`, INFO);
+  script += "\ncurrent_dir=$(pwd)\n\n\n";
 
-  script += "\ncurrent_dir=$(pwd)\n\n";
+  script += configToBash(config);
 
-  script += configToBash(config, name);
+  script += echo(`Successfully compiled ${name} files.`, INFO);
+
+  script += "\ncd $current_dir\n\n\n";
 
   return script;
 }

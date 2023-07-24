@@ -1,7 +1,0 @@
-root_files:
-  - { input: base-generator-none.hu, output: base-generator-none-hu }
-  - { input: linear-independence.hu, output: linear-independence-hu }
-  - { input: linear-map-tf.hu, output: linear-map-tf-hu }
-  - { input: linear-map.hu, output: linear-map-hu }
-  - { input: vector-space-tf.hu, output: vector-space-tf-hu }
-out_dir: build
