@@ -6,7 +6,9 @@ interface LatexConfig {
     output?: string;
     lang?: Language;
   }[];
-  out_dir?: string;
+  lang?: Language | boolean;
+  out_dir?: boolean | string;
+  out_file?: boolean;
   external_deps?: {
     [key: string]: string[];
   };
@@ -14,7 +16,7 @@ interface LatexConfig {
 
 interface ConfigErrors {
   source_path: string;
-  output_path: string;
+  output_path?: string;
   errors: {
     path: string;
     message: string;
@@ -22,12 +24,15 @@ interface ConfigErrors {
   external_deps?: never;
 }
 
-interface ConfigWarning {
-  path: string;
+interface ConfigMessage {
+  type: "warning" | "info";
   message: string;
 }
 
-type FileWarning = string;
+type FileMessage = {
+  type: "warning" | "info" | "error";
+  message: string;
+};
 
 interface RootFile {
   input: string;
@@ -37,8 +42,8 @@ interface RootFile {
   relative_output: string;
   absolute_output: string;
   resolver: string;
-  lang: Language;
-  warnings?: FileWarning[];
+  lang: Language | false;
+  messages?: FileMessage[];
 }
 
 interface ParsedSchema {
@@ -48,7 +53,7 @@ interface ParsedSchema {
   external_deps?: {
     [key: string]: string[];
   };
-  warnings?: ConfigWarning[];
+  messages?: ConfigMessage[];
   errors?: never;
 }
 

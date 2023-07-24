@@ -19,6 +19,44 @@ function inferLanguage(
   return { success, lang: success ? (lang as Language) : fallback };
 }
 
+async function inferOutDir(
+  rcPath: string,
+  mode = true,
+  fallback = "build"
+): Promise<{
+  dir: string;
+  status: "fallback" | "infer" | "warning";
+  message: string;
+}> {
+  if (mode === false) {
+    return {
+      status: "fallback",
+      dir: fallback,
+      message: `Using default out_dir value: '${fallback}'`,
+    };
+  }
+
+  const rc = await readFile(rcPath, "utf8");
+  const regex = /\$out_dir.*=.*(\'|\")(\w+)(\'|\")/g;
+
+  // The second capturing group is needed
+  const dir = regex.exec(rc)?.[2];
+
+  if (!dir) {
+    return {
+      status: "warning",
+      dir: fallback,
+      message: `Cannot infer out_dir. Using default value: '${fallback}'`,
+    };
+  }
+
+  return {
+    status: "infer",
+    dir,
+    message: `Inferred out_dir: '${dir}'`,
+  };
+}
+
 export async function parseYaml(
   path: string,
   cwd: string
@@ -28,26 +66,24 @@ export async function parseYaml(
   const json: LatexConfig | null = parse(configFile);
 
   const absolute_source_path = dirname(path);
-  const absolute_output_path = join(absolute_source_path, json?.out_dir || ".");
-
   const source_path = relative(cwd, absolute_source_path);
-  const output_path = join(source_path, json?.out_dir || ".");
 
   const errors: ConfigErrors = {
     source_path,
-    output_path,
     errors: [],
   };
 
+  // Config file is totally empty
   if (json === null) {
     errors.errors.push({
       path: path,
-      message: "Yaml file is empty.",
+      message: "Invalid yaml file",
     });
 
     return errors;
   }
 
+  // The config file does not contain files to compile
   if (!json.root_files) {
     errors.errors.push({
       path,
@@ -60,16 +96,53 @@ export async function parseYaml(
   try {
     await access(rcPath);
   } catch {
+    // The .latexmkrc file does not exist
     errors.errors.push({
       path: rcPath,
       message: "Missing .latexmkrc file!",
     });
   }
 
+  // In case of an error, we won't be able to compile any files in that dir
   // Second condition is redundant, but is needed to make ts happy
   if (errors.errors.length || !json.root_files) {
     return errors;
   }
+
+  const configMessages: ConfigMessage[] = [];
+
+  // Global out dir option
+  let out_dir: string;
+
+  if (typeof json.out_dir !== "string") {
+    const { dir, status, message } = await inferOutDir(
+      rcPath,
+      json.out_dir,
+      "build"
+    );
+    out_dir = dir;
+
+    configMessages.push({
+      type: status === "warning" ? "warning" : "info",
+      message,
+    });
+  } else {
+    out_dir = json.out_dir;
+
+    configMessages.push({
+      type: "info",
+      message: `Using out_dir value: '${out_dir}'`,
+    });
+  }
+
+  const absolute_output_path = join(absolute_source_path, out_dir);
+  const output_path = join(source_path, out_dir);
+
+  // Global lang option
+  // let lang: string;
+
+  // Global out_file option
+  // let out_file: string;
 
   return {
     source_path,
@@ -80,29 +153,35 @@ export async function parseYaml(
       const inferredLang = inferLanguage(input);
       const lang = file.lang || inferredLang.lang;
 
-      const warnings: FileWarning[] = [];
+      const fileMessages: FileMessage[] = [];
 
       if (!file.input) {
-        warnings.push(
-          "Missing input field in config file. " +
-            `Using default value: '${input}'`
-        );
+        fileMessages.push({
+          type: "warning",
+          message:
+            "Missing input field in config file. " +
+            `Using default value: '${input}'`,
+        });
       }
       if (!file.output) {
-        warnings.push(
-          "Missing output field in config file. " +
+        fileMessages.push({
+          type: "warning",
+          message:
+            "Missing output field in config file. " +
             (file.input
               ? `Using input value: '${output}'`
-              : `Using default value: '${output}'`)
-        );
+              : `Using default value: '${output}'`),
+        });
       }
       if (!file.lang) {
-        warnings.push(
-          "Missing lang field in config file. " + //
+        fileMessages.push({
+          type: inferredLang.success ? "info" : "warning",
+          message:
+            "Missing lang field in config file. " + //
             (inferredLang.success
               ? `Using inferred value: '${inferredLang.lang}'`
-              : `Using default value: '${inferredLang.lang}'`)
-        );
+              : `Using default value: '${inferredLang.lang}'`),
+        });
       }
 
       return {
@@ -118,9 +197,10 @@ export async function parseYaml(
 
         resolver: `latexmk ${file.input}.tex --jobname='${file.output}'`,
 
-        ...(warnings.length && { warnings }),
+        ...(fileMessages.length && { messages: fileMessages }),
       };
     }),
     external_deps: json.external_deps,
+    ...(configMessages.length && { messages: configMessages }),
   };
 }
