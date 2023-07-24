@@ -1,0 +1,106 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+
+\begin{exercise}{Oldjuk meg az alábbi lineáris egyenletrendszert!}
+  \[
+    \begin{array}{*{7}{c}}
+      x_{1}   & + & 4 x_{2} & + & 8 x_{3} & = & 23 \\
+              &   & x_{2}   &   &         & = & 1  \\
+      2 x_{1} & + & 4 x_{2} & + & 6 x_{3} & = & 22
+    \end{array}
+  \]
+
+  \exsol{%
+    Oldjuk meg a feladatot mátrix inverziós módszerrel! Írjuk fel az együttható
+    mátrixot, az ismeretlenek vektorát és a konstans vektort:
+    \[
+      \rmat A = \begin{bmatrix}
+        1 & 4 & 8 \\
+        0 & 1 & 0 \\
+        2 & 4 & 6
+      \end{bmatrix}
+      \text,
+      \quad
+      \rvec x = \begin{bmatrix}
+        x_1 \\ x_2 \\ x_3
+      \end{bmatrix}
+      \text,
+      \quad
+      \rvec b = \begin{bmatrix}
+        23 \\ 1 \\ 22
+      \end{bmatrix}
+      \text.
+    \]
+
+    Az $\rmat A$ mátrix inverzét már korábban meghatároztuk:
+    \[
+      \rmat A^{-1} = \begin{bmatrix}
+        -3/5 & -4/5 & 4/5   \\
+        0    & 1    & 0     \\
+        1/5  & -2/5 & -1/10
+      \end{bmatrix}
+      \text.
+    \]
+
+    Az egyenletrendszer megoldása tehát:
+    \[
+      \rvec x
+      = \rmat A^{-1} \rvec b
+      = \begin{bmatrix}
+        -3/5 & -4/5 & 4/5   \\
+        0    & 1    & 0     \\
+        1/5  & -2/5 & -1/10
+      \end{bmatrix} \begin{bmatrix}
+        23 \\ 1 \\ 22
+      \end{bmatrix}
+      = \begin{bmatrix}
+        -3/5 \cdot 23 - 4/5 \cdot 1 + 4/5 \cdot 22 \\
+        0 \cdot 23 + 1 \cdot 1 + 0 \cdot 22        \\
+        1/5 \cdot 23 - 2/5 \cdot 1 - 1/10 \cdot 22
+      \end{bmatrix}
+      = \begin{bmatrix}
+        3 \\ 1 \\ 2
+      \end{bmatrix}
+      \text.
+    \]
+
+    Tehát az egyes változók értékei: $x_1 = 3$, $x_2 = 1$, és $x_3 = 2$.
+
+    \tcbline
+
+    Oldjuk meg Gauss-eliminációval is az egyenletrendszert:
+    \newcommand{\qgj}[6]{\left[\begin{array}{*{3}{X{8mm}}|X{8mm}}
+          #1 \\#3\\#5
+        \end{array}\right]\begin{matrix}#2\\#4\\#6\end{matrix}}
+    \begin{align*}
+         & \qgj
+      {1 & 4    & 8   & 23}{}
+      {0 & 1    & 0   & 1 }{}
+      {2 & 4    & 6   & 22}{(-2S_1)}
+      \\
+         & \qgj
+      {1 & 4    & 8   & 23 }{(-4S_2)}
+      {0 & 1    & 0   & 1  }{}
+      {0 & -4   & -10 & -24}{(+4S_2)}
+      \\
+         & \qgj
+      {1 & 0    & 8   & 19 }{}
+      {0 & 1    & 0   & 1  }{}
+      {0 & 0    & -10 & -20}{(/(-10))}
+      \\
+         & \qgj
+      {1 & 0    & 8   & 19}{(-8S_3)}
+      {0 & 1    & 0   & 1 }{}
+      {0 & 0    & 1   & 2 }{\;}
+      \\
+         & \qgj
+      {1 & 0    & 0   & 3}{}
+      {0 & 1    & 0   & 1}{}
+      {0 & 0    & 1   & 2}{}
+    \end{align*}
+    Látható, hogy ezzel a módszerrel is ugyan azokat a megoldásokat kaptuk.
+  }
+\end{exercise}
+
+\end{document}

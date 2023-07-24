@@ -1,0 +1,26 @@
+\documentclass[graphics]{math-standalone}
+
+\begin{document}
+\begin{tikzpicture}[ultra thick]
+  \foreach \i/\j/\l in {0/0/a,1/0/b,0/1/c,1/1/d}{
+      \draw[draw=gray, dashed, rounded corners, thick]
+      (\i*5cm,-\j*3cm)
+      node[below right] {\l)}
+      rectangle ++(4.5cm,-2.5cm)
+      coordinate [midway] (\i\j);
+
+      \draw[-latex, cyan!40!black] ($(\i\j)-(0,7.5mm)$)
+      coordinate (\i\j)
+      -- ++(1.5,0);
+    }
+
+  \begin{scope}[-latex, yellow!40!black]
+    \draw (00) -- ++(0,1.5);
+    \draw (10) -- ++(-1.5/1.41,1.5/1.41);
+    \draw (01) -- ++(-1.5/1.41,1.5/1.41);
+    \draw (11) -- ++(-1.5,0);
+
+    \draw[red!40!black] (01) -- ++(0.574,1.386);
+  \end{scope}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,183 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+
+\begin{exercise}{%
+    Milyen alakzatot írnak le az alábbi másodfokú görbék?
+    Írjuk fel a kanonikus egyenletüket!
+    Írjuk fel a főtengelyek irányvektorait a standard normális bázisban!
+  }
+  \begin{enumerate}[a)]
+    \item $x^2 + 10\sqrt{3} xy + 11y^2 = 64$
+    \item $7x^2 + 6\sqrt{3} xy + 13y^2 = 64$
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $x^2 + 10\sqrt{3} xy + 11y^2= 64$
+
+            Hozzuk az egyenlet bal oldalát mátrixos alakra:
+            \[
+              x^2 + 10\sqrt{3} xy + 11 y^2 =
+              \begin{bmatrix} x & y \end{bmatrix}
+              \begin{bmatrix} 1 & 5\sqrt{3} \\ 5\sqrt{3} & 11 \end{bmatrix}
+              \begin{bmatrix} x \\ y \end{bmatrix}
+              \text.
+            \]
+            Határozzuk meg a mátrix sajátértékeit:
+            \[
+              \begin{vmatrix} 1 - \lambda & 5\sqrt{3} \\ 5\sqrt{3} & 11 - \lambda \end{vmatrix}
+              = (1 - \lambda)(11 - \lambda) - 75
+              = \lambda^2 - 12 \lambda + 11 - 75
+              = \lambda^2 - 12 \lambda -64
+              = 0
+              \text,
+            \]
+            \[
+              (\lambda - 16)(\lambda + 4) = 0
+              \quad \rightarrow \quad
+              \lambda_{12} = \begin{cases}
+                16 \text, \\
+                -4 \text.
+              \end{cases}
+            \]
+            Látható, hogy az egyik sajátérték pozitív, a másik pedig negatív,
+            vagyis indefinit. Az alakzat ebből következőleg hiperbola.
+            Az egyes sajátértékekhez tartozó sajátvektorok:
+            \begin{enumerate}[1)]
+              \item $\lambda_1 = 16$
+                    \[
+                      \begin{vmatrix}
+                        1 - 16     & 5 \sqrt{3} \\
+                        5 \sqrt{3} & 11 - 16
+                      \end{vmatrix} \;\sim\; \begin{vmatrix}
+                        -15        & 5 \sqrt{3} \\
+                        5 \sqrt{3} & -5
+                      \end{vmatrix} \;\sim\; \begin{vmatrix}
+                        -\sqrt{3} & 1 \\
+                        0         & 0
+                      \end{vmatrix}
+                      \quad \rightarrow \quad
+                      \rvec v_1 = t_1 \begin{bmatrix}
+                        1 \\ \sqrt{3}
+                      \end{bmatrix}
+                    \]
+              \item $\lambda_2 = -4$
+                    \[
+                      \begin{vmatrix}
+                        1 + 4      & 5 \sqrt{3} \\
+                        5 \sqrt{3} & 11 + 4
+                      \end{vmatrix} \;\sim\; \begin{vmatrix}
+                        5          & 5 \sqrt{3} \\
+                        5 \sqrt{3} & 15
+                      \end{vmatrix} \;\sim\; \begin{vmatrix}
+                        1 & \sqrt{3} \\
+                        0 & 0
+                      \end{vmatrix}
+                      \quad \rightarrow \quad
+                      \rvec v_2 = t_2 \begin{bmatrix}
+                        -\sqrt{3} \\ 1
+                      \end{bmatrix}
+                    \]
+            \end{enumerate}
+
+            A hiperbola kanonikus egyenlete:
+            \[
+              \lambda_1 \xi^2 + \lambda_2 \eta^2 = 64
+              \quad \rightarrow \quad
+              16 \xi^2 - 4 \eta^2 = 64
+              \quad \rightarrow \quad
+              \frac{\xi^2}{2^2} - \frac{\eta^2}{4^2} = 1
+              \text.
+            \]
+
+            \begin{center}
+              \relativestandalone{../../graphics/plot/hyperbola-eigen}
+            \end{center}
+
+            \tcbline
+      \item $7x^2 + 6\sqrt{3} xy + 13y^2 = 64$
+
+            Hozzuk az egyenlet bal oldalát mátrixos alakra:
+            \[
+              7x^2 + 6\sqrt{3} xy + 13y^2 =
+              \begin{bmatrix} x & y \end{bmatrix}
+              \begin{bmatrix} 7 & 3\sqrt{3} \\ 3\sqrt{3} & 13 \end{bmatrix}
+              \begin{bmatrix} x \\ y \end{bmatrix}
+              \text.
+            \]
+            Határozzuk meg a mátrix sajátértékeit:
+            \[
+              \begin{vmatrix} 7 - \lambda & 3\sqrt{3} \\ 3\sqrt{3} & 13 - \lambda \end{vmatrix}
+              = (7 - \lambda)(13 - \lambda) - 27
+              = \lambda^2 - 20 \lambda + 91 - 27
+              = \lambda^2 - 20 \lambda + 64
+              = 0
+              \text,
+            \]
+            \[
+              (\lambda - 16)(\lambda - 4) = 0
+              \quad \rightarrow \quad
+              \lambda_{12} = \begin{cases}
+                16 \text, \\
+                4 \text.
+              \end{cases}
+            \]
+            Látható, hogy minkét sajátérték pozitív, vagyis a mátrix pozitív
+            definit. Az alakzat ebből következőleg ellipszis.
+            Az egyes sajátértékekhez tartozó sajátvektorok:
+            \begin{enumerate}[1)]
+              \item $\lambda_1 = 16$
+                    \[
+                      \begin{vmatrix}
+                        7 - 16     & 3 \sqrt{3} \\
+                        3 \sqrt{3} & 13 - 16
+                      \end{vmatrix} \;\sim\; \begin{vmatrix}
+                        -9         & 3 \sqrt{3} \\
+                        3 \sqrt{3} & -3
+                      \end{vmatrix} \;\sim\; \begin{vmatrix}
+                        -\sqrt{3} & 1 \\
+                        0         & 0
+                      \end{vmatrix}
+                      \quad \rightarrow \quad
+                      \rvec v_1 = t_1 \begin{bmatrix}
+                        1 \\ \sqrt{3}
+                      \end{bmatrix}
+                    \]
+              \item $\lambda_2 = 4$
+                    \[
+                      \begin{vmatrix}
+                        7 - 4      & 3 \sqrt{3} \\
+                        3 \sqrt{3} & 13 - 4
+                      \end{vmatrix} \;\sim\; \begin{vmatrix}
+                        3          & 3 \sqrt{3} \\
+                        3 \sqrt{3} & 9
+                      \end{vmatrix} \;\sim\; \begin{vmatrix}
+                        1 & \sqrt{3} \\
+                        0 & 0
+                      \end{vmatrix}
+                      \quad \rightarrow \quad
+                      \rvec v_2 = t_2 \begin{bmatrix}
+                        -\sqrt{3} \\ 1
+                      \end{bmatrix}
+                    \]
+            \end{enumerate}
+
+            Az ellipszis kanonikus egyenlete:
+            \[
+              \lambda_1 \xi^2 + \lambda_2 \eta^2 = 64
+              \quad \rightarrow \quad
+              16 \xi^2 + 4 \eta^2 = 64
+              \quad \rightarrow \quad
+              \frac{\xi^2}{2^2} + \frac{\eta^2}{4^2} = 1
+              \text.
+            \]
+
+            \begin{center}
+              \relativestandalone{../../graphics/plot/parabola-eigen}
+            \end{center}
+    \end{enumerate}
+  }
+\end{exercise}
+
+\end{document}

@@ -1,0 +1,192 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+
+\begin{exercise}{Határozzuk meg az alábbi mátrixok inverzét!}
+  \[
+    \rmat A = \begin{bmatrix}
+      2 & 3 \\
+      3 & 5
+    \end{bmatrix}
+    \hspace{2cm}
+    \rmat B = \begin{bmatrix}
+      1 & 4 & 8 \\
+      0 & 1 & 0 \\
+      2 & 4 & 6
+    \end{bmatrix}
+  \]
+
+  \exsol{
+    Határozzuk meg $\rmat A$ inverzét mindkét tanult módszer segítségével:
+    \begin{itemize}
+      \item Definíció szerint:
+            \begin{itemize}
+              \item A mátrix determinánsa:
+                    \[
+                      \det \rmat A = \begin{vmatrix}
+                        2 & 3 \\
+                        3 & 5 \\
+                      \end{vmatrix} = 2 \cdot 5 - 3 \cdot 3 = 1
+                      \text.
+                    \]
+              \item A mátrix transzponáltja:
+                    \[
+                      \rmat A^{\mathsf T} = \begin{bmatrix}
+                        2 & 3 \\
+                        3 & 5 \\
+                      \end{bmatrix}
+                      \text.
+                    \]
+              \item A mátrix adjugáltja:
+                    \[
+                      \adj \rmat A = \begin{bmatrix}
+                        +5 & -3 \\
+                        -3 & +2
+                      \end{bmatrix}
+                      \text.
+                    \]
+              \item Az inverz ezek alapján:
+                    \[
+                      \rmat A^{-1}
+                      = \frac{\adj \rmat A}{\det \rmat A}
+                      = \frac{1}{1} \begin{bmatrix}
+                        5  & -3 \\
+                        -3 & 2
+                      \end{bmatrix}  = \begin{bmatrix}
+                        5  & -3 \\
+                        -3 & 2
+                      \end{bmatrix}
+                      \text.
+                    \]
+            \end{itemize}
+
+      \item Gauss-Jordan eliminációval:
+            \begin{align*}
+               & \left[\begin{array}{X{6mm}X{8mm}|X{9mm}X{6mm}}
+                           2 & 3 & 1 & 0 \\
+                           3 & 5 & 0 & 1
+                         \end{array}\right]\begin{matrix}(/2)\\\,\end{matrix}
+              \\
+               & \left[\begin{array}{X{6mm}X{8mm}|X{9mm}X{6mm}}
+                           1 & 3/2 & 1/2 & 0 \\
+                           3 & 5   & 0   & 1
+                         \end{array}\right]\begin{matrix}\\(-3S_1)\end{matrix}
+              \\
+               & \left[\begin{array}{X{6mm}X{8mm}|X{9mm}X{6mm}}
+                           1 & 3/2 & 1/2  & 0 \\
+                           0 & 1/2 & -3/2 & 1
+                         \end{array}\right]\begin{matrix}(-3S_2)\\\,\end{matrix}
+              \\
+               & \left[\begin{array}{X{6mm}X{8mm}|X{9mm}X{6mm}}
+                           1 & 0   & 5    & -3 \\
+                           0 & 1/2 & -3/2 & 1
+                         \end{array}\right]\begin{matrix}(\cdot2)\\\,\end{matrix}
+              \\
+               & \left[\begin{array}{X{6mm}X{8mm}|X{9mm}X{6mm}}
+                           1 & 0 & 5  & -3 \\
+                           0 & 1 & -3 & 2
+                         \end{array}\right]
+            \end{align*}
+    \end{itemize}
+
+    \tcbline
+
+    Határozzuk meg $\rmat B$ inverzét mindkét tanult módszer segítségével:
+    \begin{itemize}
+      \item Definíció alapján:
+            \begin{itemize}
+              \item A mátrix determinánsát már korábban meghatároztuk:
+                    \[
+                      \det \rmat B = -10
+                      \text.
+                    \]
+
+              \item A mátrix transzponáltja:
+                    \[
+                      \rmat B^{\mathsf T} = \begin{bmatrix}
+                        1 & 0 & 2 \\
+                        4 & 1 & 4 \\
+                        8 & 0 & 6
+                      \end{bmatrix}
+                      \text.
+                    \]
+              \item A mátrix adjugáltja:
+                    \newcommand{\qvmat}[4]{\begin{vmatrix}#1 & #2 \\ #3 & #4\end{vmatrix}}
+                    \[
+                      \adj \rmat B = \begin{bmatrix}
+                        +\qvmat{1}{4}{0}{6} & -\qvmat{4}{4}{8}{6} & +\qvmat{4}{1}{8}{0} \\
+                        -\qvmat{0}{2}{0}{6} & +\qvmat{1}{2}{8}{6} & -\qvmat{1}{0}{8}{0} \\
+                        +\qvmat{0}{2}{1}{4} & -\qvmat{1}{2}{4}{4} & +\qvmat{1}{0}{4}{1} \\
+                      \end{bmatrix} = \begin{bmatrix}
+                        6  & 8   & -8 \\
+                        0  & -10 & 0  \\
+                        -2 & 4   & 1  \\
+                      \end{bmatrix}
+                      \text.
+                    \]
+              \item Az inverz ezek alapján:
+                    \begin{align*}
+                      \rmat B^{-1}
+                      = \frac{\adj \rmat B}{\det \rmat B}
+                      = & \frac{1}{-10}
+                      \left[\begin{array}{X{1.2cm}X{1.2cm}X{1.2cm}}
+                                6  & 8   & -8 \\
+                                0  & -10 & 0  \\
+                                -2 & 4   & 1  \\
+                              \end{array}\right]
+                      \\
+                      = & \phantom{\frac{1}{-10}} \left[\begin{array}{X{1.2cm}X{1.2cm}X{1.2cm}}
+                                                            -6/10 & -8/10 & 8/10  \\
+                                                            0     & 1     & 0     \\
+                                                            2/10  & -4/10 & -1/10
+                                                          \end{array}\right]
+                      \\
+                      = & \phantom{\frac{1}{-10}} \left[\begin{array}{X{1.2cm}X{1.2cm}X{1.2cm}}
+                                                            -3/5 & -4/5 & 4/5   \\
+                                                            0    & 1    & 0     \\
+                                                            1/5  & -2/5 & -1/10
+                                                          \end{array}\right]
+                      \text.
+                    \end{align*}
+            \end{itemize}
+
+      \item Gauss-Jordan eliminációval:
+            \newcommand{\qgj}[6]{\left[\begin{array}{*{3}{X{12mm}}|*{3}{X{12mm}}}
+                  #1 \\#3\\#5
+                \end{array}\right]\begin{matrix}#2\\#4\\#6\end{matrix}}
+            \begin{align*}
+                 & \qgj
+              {1 & 4    & 8   & 1     & 0     & 0}{}
+              {0 & 1    & 0   & 0     & 1     & 0}{}
+              {2 & 4    & 6   & 0     & 0     & 1}{(-2S_1)}
+              \\
+                 & \qgj
+              {1 & 4    & 8   & 1     & 0     & 0}{(-4S_2)}
+              {0 & 1    & 0   & 0     & 1     & 0}{}
+              {0 & -4   & -10 & -2    & 0     & 1}{(+4S_2)}
+              \\
+                 & \qgj
+              {1 & 0    & 8   & 1     & -4    & 0}{}
+              {0 & 1    & 0   & 0     & 1     & 0}{}
+              {0 & 0    & -10 & -2    & 4     & 1}{(/(-10))}
+              \\
+                 & \qgj
+              {1 & 0    & 8   & 1     & -4    & 0}{(-8S_3)}
+              {0 & 1    & 0   & 0     & 1     & 0}{}
+              {0 & 0    & 1   & 2/10  & -4/10 & -1/10}{\;}
+              \\
+                 & \qgj
+              {1 & 0    & 0   & -6/10 & -8/10 & 8/10}{}
+              {0 & 1    & 0   & 0     & 1     & 0}{}
+              {0 & 0    & 1   & 2/10  & -4/10 & -1/10}{}
+              \\
+                 & \qgj
+              {1 & 0    & 0   & -3/5  & -4/5  & 4/5}{}
+              {0 & 1    & 0   & 0     & 1     & 0}{}
+              {0 & 0    & 1   & 1/5   & -2/5  & -1/10}{}
+            \end{align*}
+    \end{itemize}
+  }
+\end{exercise}
+
+\end{document}

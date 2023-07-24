@@ -11,6 +11,8 @@
 \@@keepspacefalse
 
 % Process class options
+\RequirePackage{xkeyval}
+
 \DeclareOption{graphics}{\OptionNotUsed}
 \DeclareOption{exercise}{%
   \PassOptionsToClass{varwidth=18cm}{standalone}%
@@ -25,15 +27,22 @@
   \@@keepspacetrue%
 }
 
+\newcommand\@@lang{}
+\DeclareOptionX{lang}{\renewcommand\@@lang{#1}}
+\ExecuteOptionsX{lang=magyar}
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{standalone}}
 
 % End of otions
+\ProcessOptionsX\relax
 \ProcessOptions\relax
 
 % Based on this class
 \LoadClass[12pt, margin=5mm]{standalone}
 
 % Provided packages
+\RequirePackage[\@@lang]{babel}
+
 \if@@keepspace\else
   \PassOptionsToPackage{print-solutions}{math-exercise}
 \fi
