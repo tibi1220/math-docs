@@ -1,0 +1,86 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+
+\begin{exercise}{%
+    Határozzuk meg az alábbi integrál értékét az $(1;-1)$ középpontú,
+    $2$ egység sugarú kör által meghatározott zárt tartományon!
+  }
+  \[
+    \int_A x^2 + y^2 \, \mathrm dA
+  \]
+
+  \exsol{%
+    A keresett tartomány:
+    \[
+      (x - 1)^2 + (y + 1)^2 \leq 2^2
+      \text.
+    \]
+
+    Térjünk át polárkoordináta-rendszerre:
+    \[
+      x:= 1 + r \cos \varphi
+      \text,
+      \qquad
+      y:= -1 + r \sin \varphi
+      \text.
+    \]
+
+    Az integrálási határok:
+    \[
+      r \in [0; 2]
+      \text,
+      \quad
+      \varphi \in [0; 2\pi]
+      \text.
+    \]
+
+    A Jacobi-mátrix determinánsa:
+    \[
+      \begin{vmatrix}
+        \cos \varphi & -r \sin \varphi \\
+        \sin \varphi & r \cos \varphi
+      \end{vmatrix}
+      = r \cos^2 \varphi + r \sin^2 \varphi
+      = r
+      \text.
+    \]
+
+    Helyettesítsünk vissza:
+    \[
+      \int_0^2 \int_0^{2\pi} \Big(
+      (1 + r \cos \varphi)^2 +
+      (-1 + r \sin \varphi)^2
+      \Big) \, r \, \mathrm d\varphi \, \mathrm dr
+      \text.
+    \]
+
+    Bontsuk ki a zárójeleket:
+    \[
+      \int_0^2 \int_0^{2\pi}
+      2 r + 2 r^2 \cos \varphi - 2 r^2 \sin \varphi + r^3
+      \, \mathrm d\varphi \, \mathrm dr
+      \text.
+    \]
+
+    Tudjuk, hogy a $[0; 2\pi]$ intervallumon vett integrálja a szinusz és a
+    koszinusz függvényeknek is zérus, ezért az integrál az alábbi alakra
+    egyszerűsödik:
+    \[
+      \int_0^2 \int_0^{2\pi} 2 r + r^3 \, \mathrm d\varphi \, \mathrm dr
+      \text.
+    \]
+
+    Végezzük el az integrálást:
+    \[
+      \int_0^2 \int_0^{2\pi} 2 r + r^3 \, \mathrm d\varphi \, \mathrm dr =
+      \int_0^2 4\pi r + 2 \pi r^3 \, \mathrm dr =
+      \left[ 2 \pi r^2 + \frac{\pi r^4}{2} \right]_0^2 =
+      8 \pi + 8 \pi =
+      16 \pi
+      \text.
+    \]
+  }
+\end{exercise}
+
+\end{document}

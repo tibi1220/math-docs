@@ -1,0 +1,130 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+
+\begin{exercise}{%
+    Válaszoljuk meg az alábbi kérdéseket az alábbi függvénnyel kapcsolatban!
+  }
+  \[
+    \rvec f(x;y;z) = \begin{bmatrix}
+      x^2 + e^{2z}  \\
+      \sin xy + z^6 \\
+      xyz
+    \end{bmatrix}
+  \]
+  \begin{enumerate}[a)]
+    \item Adjuk meg a függvény Jacobi-mátrixát a $(2; \pi/4; 0)$ pontban!
+    \item Adjuk meg az második komponens-függvény $(1; \pi; 1)$ pontbeli
+          $\rvec v = (0; 3; 4)$ irányú iránymenti deriváltját!
+    \item Adjuk meg a harmadik komponens-függvény $(1;1;1)$ pontbeli
+          olyan irányú iránymenti deriváltját, mely irány a komponens-függvény
+          legnagyobb növekedésének irányába mutat.
+  \end{enumerate}
+
+  \exsol{
+    Határozzuk meg az egyes komponens-függvények gradienseit paraméteresen:
+    \begin{align*}
+      \grad f_1 & = \left[
+        \begin{array}{*{3}{X{2cm}}}
+          2x & 0 & 2 e^{2z}
+        \end{array}
+        \right]^{\mathsf T}
+      \text,
+      \\
+      \grad f_2 & = \left[
+        \begin{array}{*{3}{X{2cm}}}
+          y \cos xy & x \cos xy & 6 z^5
+        \end{array}
+        \right]^{\mathsf T}
+      \text,
+      \\
+      \grad f_3 & =\left[
+        \begin{array}{*{3}{X{2cm}}}
+          yz & xz & xy
+        \end{array}
+        \right]^{\mathsf T}
+      \text.
+    \end{align*}
+
+    \begin{enumerate}[a)]
+      \item A Jacobi mátrix paraméteresen a gradiensek alapján:
+            \[
+              \rmat J = \left[
+                \begin{array}{*{3}{X{2cm}}}
+                  2x        & 0         & 2 e^{2z} \\
+                  y \cos xy & x \cos xy & 6 z^5    \\
+                  yz        & xz        & xy
+                \end{array}
+                \right]
+              \text.
+            \]
+            A $(2; \pi/4; 0)$ pontban kiértékelve pedig:
+            \[
+              \rmat J = \left[
+                \begin{array}{*{3}{X{2cm}}}
+                  4 & 0 & 2       \\
+                  0 & 0 & 0       \\
+                  0 & 0 & \pi / 2
+                \end{array}
+                \right]
+              \text.
+            \]
+
+      \item Az gradiens adott pontbeli értéke:
+            \[
+              \grad f_2(1; \pi; 1) =
+              \begin{bmatrix}
+                -\pi \\ -1 \\ 6
+              \end{bmatrix}
+              \text.
+            \]
+            A kijelölt irányba mutató egységvektor:
+            \[
+              \uvec v = \frac{1}{\sqrt{0^2 + 3^2 + 4^2}}
+              \begin{bmatrix}
+                0 \\ 3 \\ 4
+              \end{bmatrix} =
+              \begin{bmatrix}
+                0 \\ 3/5 \\ 4/5
+              \end{bmatrix}
+              \text.
+            \]
+            A keresett iránymenti derivált értéke az előző két vektor skaláris
+            szorzatával egyenlő, vagyis:
+            \[
+              \left.\pdv{f_2(x;y;z)}{\uvec v}\right|_{(1; \pi; 1)}
+              = \begin{bmatrix}
+                -\pi \\ -1 \\ 6
+              \end{bmatrix}^{\mathsf T} \begin{bmatrix}
+                0 \\ 3/5 \\ 4/5
+              \end{bmatrix}
+              = -3/5 + 6 \cdot 4/5
+              = 4,2
+              \text.
+            \]
+
+      \item A legnagyobb növekmény irányába a gradiens vektor mutat, melynek
+            adott pontbeli értéke:
+            \[
+              \grad f_3(1; 1; 1) =
+              \begin{bmatrix}
+                1 \\ 1 \\ 1
+              \end{bmatrix}
+              \text.
+            \]
+            A keresett derivált tehát:
+            \[
+              \left.\pdv{f_3(x;y;z)}{\grad f_3|_{(1;1;1)}}\right|_{(1; 1; 1)}
+              = \begin{bmatrix}
+                1 \\ 1 \\ 1
+              \end{bmatrix}^{\mathsf T}\frac{1}{\sqrt 3} \begin{bmatrix}
+                1 \\ 1\\ 1
+              \end{bmatrix}
+              = \sqrt 3
+              \text.
+            \]
+    \end{enumerate}
+  }
+\end{exercise}
+
+\end{document}

@@ -1,0 +1,95 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+
+\begin{exercise}{%
+    Állítsuk elő az alábbi függvények $x_0$ körüli Taylor sorát!
+    Hány tagból áll a Taylor-sor? Adjuk meg a nemzérus tagok együtthatóinak
+    szorzatát!
+  }
+  \newcommand{\tit}[2]{\begin{tabular}{*{2}{p{3.5cm}}} #1 & #2 \end{tabular}}
+  \begin{enumerate}[a)]
+    \item \tit{$f(x) = x^3 + 2x$,}{$x_0 = -2$}
+
+    \item \tit{$g(x) = x^2 - 6x$,}{$x_0 = 2$}
+
+    \item \tit{$h(x) = x^4$,}{$x_0 = 0$}
+  \end{enumerate}
+
+  \exsol{
+    \newcommand{\tit}[2]{\begin{tabular}{*{2}{p{3.5cm}}} #1 & #2 \end{tabular}}
+    \begin{enumerate}[a)]
+      \item \tit{$f(x) = x^3 + 2x$,}{$x_0 = -2$}\\[3mm]
+            %
+            Állítsuk elő a függvény deriváltjait, és értékeljük ki őket az
+            $x_0 = -2$ pontban.
+            \begin{alignat*}{9}
+               & f(x)    &  & = x^3 + 2x \hspace{2cm} &  & f(x_0)    &  & = -12 \\
+               & f'(x)   &  & = 3x^2 + 2 \hspace{2cm} &  & f'(x_0)   &  & = 14  \\
+               & f''(x)  &  & = 6x \hspace{2cm}       &  & f''(x_0)  &  & = -12 \\
+               & f'''(x) &  & = 6 \hspace{2cm}        &  & f'''(x_0) &  & = 6
+            \end{alignat*}
+            Ezek alapján a Taylor-sor:
+            \begin{align*}
+              T(x)
+              %  & = \sum_{k = 0}^n
+              % \frac{f^{(k)}(x_0)}{k!}
+              % (x - x_0)^k
+              % \\
+               & = \frac{-12}{0!}(x + 2)^0
+              + \frac{14}{1!}(x + 2)^1
+              + \frac{-12}{2!}(x + 2)^2
+              + \frac{6}{3!}(x + 2)^3
+              \\[2mm]
+               & = -12
+              + 14 (x + 2)
+              - 6(x + 2)^2
+              + 1(x + 2)^3
+              \text.
+            \end{align*}
+            A sor tagszáma 4, az együtthatók szorzata pedig:
+            \[
+              (-12) \cdot 14 \cdot (-6) \cdot 1 = 1008
+              \text.
+            \]
+
+      \item \tit{$g(x) = x^2 - 6x$,}{$x_0 = 2$}\\[3mm]
+            %
+            Állítsuk elő a függvény deriváltjait, és értékeljük ki őket az
+            $x_0 = 2$ pontban.
+            \begin{alignat*}{9}
+               & g(x)   &  & = x^2 - 6x \hspace{2cm} &  & g(x_0)   &  & = -8 \\
+               & g'(x)  &  & = 2x - 6 \hspace{2cm}   &  & g'(x_0)  &  & = -2 \\
+               & g''(x) &  & = 2 \hspace{2cm}        &  & g''(x_0) &  & = 2  \\
+            \end{alignat*}
+            Ezek alapján a Taylor-sor:
+            \begin{align*}
+              T(x)
+              %  & = \sum_{k = 0}^n
+              % \frac{f^{(k)}(x_0)}{k!}
+              % (x - x_0)^k
+              % \\
+               & = \frac{-8}{0!}(x - 2)^0
+              + \frac{-2}{1!}(x - 2)^1
+              + \frac{2}{2!}(x - 2)^2
+              \\[2mm]
+               & = -8
+              - 2(x - 2)
+              + 1(x - 2)^2
+              \text.
+            \end{align*}
+            A sor tagszáma 3, az együtthatók szorzata pedig:
+            \[
+              (-8) \cdot (-2) \cdot 1 = 16
+              \text.
+            \]
+
+      \item \tit{$h(x) = x^4$,}{$x_0 = 0$}\\[3mm]
+            %
+            A $h(x)$ függvény már önmagában egy $x_0 = 0$ körüli Taylor-sor,
+            melynek tagszáma 1, az együtthatóinak szorzata pedig szintén 1.
+    \end{enumerate}
+  }
+\end{exercise}
+
+\end{document}

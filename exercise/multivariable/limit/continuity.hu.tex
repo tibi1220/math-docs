@@ -1,0 +1,86 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+
+\begin{exercise}{Folytonosak-e az alábbi függvények az origóban?}
+  % \begin{multicols}{2}
+  \begin{enumerate}[a)]
+    \item $f(x; y) = \begin{cases}
+              \dfrac{2\,x\,y}{\sqrt{x^2 + y^2}} & \text{ ha } (x;y) \neq (0;0) \\
+              0                                 & \text{ ha } (x;y) = (0;0)
+            \end{cases}$
+
+    \item $g(x) = \begin{cases}
+              \dfrac{x^3 - y^3}{y - x} & \text{ ha } y - x \neq 0 \\
+              0                        & \text{ ha } y - x = 0
+            \end{cases}$
+  \end{enumerate}
+  % \end{multicols}
+
+  \exsol{
+    \begin{enumerate}[a)]
+      \item $f(x; y) = \dfrac{2\,x\,y}{\sqrt{x^2 + y^2}}$\\[2mm]
+            %
+            A függvény folytonos, ha az adott pontban vett határértéke
+            megegyezik az adott pontbeli függvényértékkel, vagyis:
+            \[
+              \lim_{\rvec x \rightarrow \rvec a} f(\rvec x) = f(\rvec a)
+              \text.
+            \]
+            Mivel az origóban vagyunk kíváncsiak $f$ határérékére, azért
+            élhetünk az alábbi helyettesítéssel:
+            \[
+              x := r \cos\varphi
+              \text,\qquad
+              y := r \sin\varphi
+              \text.
+            \]
+            Végezzük el a helyettesítéseket:
+            \[
+              \lim_{\rvec x \rightarrow \nvec} f(\rvec x) =
+              \lim_{r \rightarrow 0} \frac{
+                2 r \cos(\varphi) r \sin(\varphi)
+              }{
+                \sqrt{(r \cos\varphi)^2 + (r \sin\varphi)^2}
+              }
+              \text.
+            \]
+            Végezzük el az egyszerűsítéseket:
+            \[
+              \lim_{r \rightarrow 0} \frac{
+                2 r^2 \cos \varphi \sin \varphi
+              }{
+                r
+              } =
+              \lim_{r \rightarrow 0} 2r \cos\varphi \sin\varphi
+              = 0
+              \text.
+            \]
+            Mivel a $2 \cos \varphi \sin \varphi$ szorzat korlátos, ezért az
+            adott pontbeli határérték 0, amely megegyezik az adott pontbeli
+            függvényértékkel, vagyis a függvény \textbf{folytonos}.
+
+      \item $g(x; y) = \dfrac{x^3 - y^3}{{y - x}}$\\[2mm]
+            %
+            Egyszerűsítsük a törtfüggvényt:
+            \[
+              \frac{x^3 - y^3}{y - x} =
+              \frac{(x - y)(x^2 + xy + y^2)}{-(x - y)} =
+              -(x^2 + xy + y^2)
+              \text.
+            \]
+            A határérték tehát az origóban:
+            \[
+              \lim_{\rvec x \rightarrow \nvec} -(x^2 + xy + y^2)
+              = -(0 + 0 + 0)
+              = 0
+              \text.
+            \]
+            Mivel az origóban felvett függvényérték megegyezik az adott
+            pontbeli határértékkel, ezért a függvény \textbf{folytonos} a
+            $(0;0)$ pontban.
+    \end{enumerate}
+  }
+\end{exercise}
+
+\end{document}
