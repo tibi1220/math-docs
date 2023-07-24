@@ -1,4 +1,0 @@
-root_files:
-  - { input: hyperbola-eigen }
-  - { input: parabola-eigen }
-out_dir: "build"

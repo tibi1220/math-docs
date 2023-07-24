@@ -1,7 +1,7 @@
 type Language = "en" | "hu";
 
 interface LatexConfig {
-  root_files?: {
+  root_files: {
     input?: string;
     output?: string;
     lang?: Language;
@@ -12,47 +12,21 @@ interface LatexConfig {
   };
 }
 
-interface ConfigErrors {
+interface ParsedConfig {
   source_path: string;
   output_path: string;
-  errors: {
-    path: string;
-    message: string;
+  root_files: {
+    input: string;
+    input_long: string;
+    output: string;
+    output_long: string;
+    resolver: string;
+    lang: Language;
   }[];
-  external_deps?: never;
-}
-
-interface ConfigWarning {
-  path: string;
-  message: string;
-}
-
-type FileWarning = string;
-
-interface RootFile {
-  input: string;
-  relative_input: string;
-  absolute_input: string;
-  output: string;
-  relative_output: string;
-  absolute_output: string;
-  resolver: string;
-  lang: Language;
-  warnings?: FileWarning[];
-}
-
-interface ParsedSchema {
-  source_path: string;
-  output_path: string;
-  root_files: RootFile[];
   external_deps?: {
     [key: string]: string[];
   };
-  warnings?: ConfigWarning[];
-  errors?: never;
 }
-
-type ParsedConfig = ParsedSchema | ConfigErrors;
 
 interface ParsedDeps {
   program: string;

@@ -20,4 +20,4 @@ for file in config/*; do # config/file.cls
   fi
 done
 
-mktexlsr $texmf
+mktexlsr $tex
