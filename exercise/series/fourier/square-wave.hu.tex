@@ -1,0 +1,243 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+
+\begin{exercise}{%
+    Állítsuk elő a $[-\pi; \pi]$ intervallumon az alábbi, $2\pi$ szerint
+    periodikus függvények Fourier-sorát! Adjuk meg az összegfüggvények
+    $9 \pi$-ben felvett értékét, valamint az $a_0$, $a_5$ és $b_5$
+    együtthatókat!
+  }
+  \begin{enumerate}[a)]
+    \item $f(x) = \sgn x$
+    \item $g(x) = 1 - 2\sgn x$
+    \item $h(x) = a + b \sgn x$
+  \end{enumerate}
+
+  \exsol{%
+    A Fourier-sor az alábbi alakot veszi fel:
+    \[
+      f(x) = a_0 + \sum_{n = 1}^{\infty} \left(
+      a_n \cos nx + b_n \sin nx
+      \right)
+      \text.
+    \]
+
+    Az egyes együtthatók az alábbi képletekkel számíthatóak:
+    \begin{align*}
+      a_0 & =
+      \frac{1}{2\pi} \int_0^{2\pi} f(x) \, \mathrm d x
+      \text,
+      \\
+      a_n & =
+      \frac{1}{\pi} \int_0^{2\pi} f(x) \cos(n x) \, \mathrm d x
+      \text,
+      \\
+      b_n & =
+      \frac{1}{\pi} \int_0^{2\pi} f(x) \sin(n x) \, \mathrm d x
+      \text.
+    \end{align*}
+
+    \tcbline
+    %
+    Egyszerű eset: $f(x) = \sgn x$. \\[3mm]
+    %
+    Ebben az esetben a függvényünk tisztán páratlan, vagyis $a_0 = a_n = 0$.
+    Csak szinuszos együtthatóink vannak. Határozzuk meg ezeket:
+    \begin{align*}
+      b_n
+       & = \frac{1}{\pi} \int_0^{2\pi} \sgn x \sin(n x) \, \mathrm d x
+      \\
+       & = \frac{1}{\pi} \left(
+      \int_0^{\pi} \sin(n x) \, \mathrm d x -
+      \int_\pi^{2\pi} \sin(n x) \, \mathrm d x
+      \right)
+      \\
+       & = \frac{1}{\pi} \left(
+      \Bigg[ \frac{-\cos nx}{n} \Bigg]_{0}^{\pi} -
+      \Bigg[ \frac{-\cos nx}{n} \Bigg]_{\pi}^{2\pi}
+      \right)
+      \\
+       & = \frac{1}{\pi} \left(
+      \frac{%
+        - \cos \pi n
+        + \cos 0
+        + \cos 2 \pi n
+        - \cos \pi n
+      }{n}
+      \right)
+      \\
+       & = \frac{2}{\pi} \left(
+      \frac{1 - \cos \pi n}{n}
+      \right)
+      = \begin{cases}
+          \sfrac{4}{n \pi}, & \text{ha } n \text{ páratlan,} \\
+          0,                & \text{ha } n \text{ páros.}
+        \end{cases}
+    \end{align*}
+
+    Vagyis a páros indexű, szinuszos együtthatók zérusak, a páratlan indexűek
+    értéke pedig:
+    \[
+      b_n = \frac{4}{n\pi}
+      \text.
+    \]
+
+    A keresett együtthatók értéke tehát:
+    \[
+      a_0 = 0
+      \text,
+      \quad
+      a_5 = 0
+      \text,
+      \quad
+      b_5 = \frac{4}{5 \pi}
+      \text.
+    \]
+
+    Az összegfüggvény $9\pi$-ben felvett értéke:
+    \[
+      F(9 \pi) = F(\pi) = \frac{f(\pi^-) + f(\pi^+)}{2} = \frac{1-1}{2} = 0
+      \text.
+    \]
+
+    \tcbline
+
+    Bonyolultabb eset: $g(x) = 1 - 2\sgn x$. \\[3mm]
+    %
+    Ebben az esetben a függvény nem páratlan, viszont azzá tehető. Ha az $y$
+    tengely mentén negatív irányban eltoljuk egy egységnyit. Keressük most ennek
+    a $g^*(x) = -2 \sgn x$ függvénynek a Fourier együtthatóit. Mivel ez a
+    függvény már páratlan, ezért csak szinuszos együtthatói lesznek:
+    \begin{align*}
+      b_n
+       & = \frac{1}{\pi} \int_0^{2\pi} -2\sgn x \sin(n x) \, \mathrm d x
+      \\
+       & = \frac{-2}{\pi} \int_0^{2\pi} \sgn x \sin(n x) \, \mathrm d x
+      \\
+       & = \frac{-2}{\pi} \left(
+      \int_0^{\pi} \sin(n x) \, \mathrm d x -
+      \int_\pi^{2\pi} \sin(n x) \, \mathrm d x
+      \right)
+      \\
+       & = \frac{-2}{\pi} \left(
+      \Bigg[ \frac{-\cos nx}{n} \Bigg]_{0}^{\pi} -
+      \Bigg[ \frac{-\cos nx}{n} \Bigg]_{\pi}^{2\pi}
+      \right)
+      \\
+       & = \frac{-2}{\pi} \left(
+      \frac{%
+        - \cos \pi n
+        + \cos 0
+        + \cos 2 \pi n
+        - \cos \pi n
+      }{n}
+      \right)
+      \\
+       & = \frac{-4}{\pi} \left(
+      \frac{1 - \cos \pi n}{n}
+      \right)
+      = \begin{cases}
+          \sfrac{-8}{n \pi}, & \text{ha } n \text{ páratlan,} \\
+          0,                 & \text{ha } n \text{ páros.}
+        \end{cases}
+    \end{align*}
+
+    Vagyis a páros indexű, szinuszos együtthatók zérusak, a páratlan indexűek
+    értéke pedig:
+    \[
+      b_n = \frac{-8}{n\pi}
+      \text.
+    \]
+
+    Az eredeti függvény együtthatói egyetlen kivétellel megegyeznek $g^*(x)$
+    függvény együtthatóival, hiszen az eltolás miatt a $g(x)$ függvénynek
+    lesz egy $a_0 = 1$-es együtthatója is. A keresett együtthatók tehát:
+    \[
+      a_0 = 1
+      \text,
+      \quad
+      a_5 = 0
+      \text,
+      \quad
+      b_5 = \frac{-8}{5 \pi}
+      \text.
+    \]
+
+    Az összegfüggvény $9\pi$-ben felvett értéke:
+    \[
+      G(9 \pi) = G(\pi) = \frac{g(\pi^-) + g(\pi^+)}{2} = \frac{-1+3}{2} = 1
+      \text.
+    \]
+
+    \tcbline
+
+    Általános eset: $h(x) = a + b \sgn x$. \\[3mm]
+    %
+    Ebben az esetben sem páros a függvényünk, viszont azzá tehető, hogyha
+    az $y$ tengely mentén $a$ egységgel lefele toljuk el. $h^*(x) = b \sgn x$
+    függvény már páratlan, tehát ennek is csak szinuszos együtthatói lesznek:
+    \begin{align*}
+      b_n
+       & = \frac{1}{\pi} \int_0^{2\pi} b \sgn x \sin(n x) \, \mathrm d x
+      \\
+       & = \frac{b}{\pi} \int_0^{2\pi} \sgn x \sin(n x) \, \mathrm d x
+      \\
+       & = \frac{b}{\pi} \left(
+      \int_0^{\pi} \sin(n x) \, \mathrm d x -
+      \int_\pi^{2\pi} \sin(n x) \, \mathrm d x
+      \right)
+      \\
+       & = \frac{b}{\pi} \left(
+      \Bigg[ \frac{-\cos n x}{n} \Bigg]_{0}^{\pi} -
+      \Bigg[ \frac{-\cos n x}{n} \Bigg]_{\pi}^{2\pi}
+      \right)
+      \\
+       & = \frac{b}{\pi} \left(
+      \frac{%
+        - \cos \pi n
+        + \cos 0
+        + \cos 2 \pi n
+        - \cos \pi n
+      }{n}
+      \right)
+      \\
+       & = \frac{2b}{\pi} \left(
+      \frac{1 - \cos \pi n}{n}
+      \right)
+      = \begin{cases}
+          \sfrac{4b}{n \pi}, & \text{ha } n \text{ páratlan,} \\
+          0,                 & \text{ha } n \text{ páros.}
+        \end{cases}
+    \end{align*}
+
+    Vagyis a páros indexű, szinuszos együtthatók zérusak, a páratlan indexűek
+    értéke pedig:
+    \[
+      b_n = \frac{4b}{n\pi}
+      \text.
+    \]
+
+    Az eredeti függvény együtthatói egyetlen kivétellel megegyeznek $h^*(x)$
+    függvény együtthatóival, hiszen az eltolás miatt a $h(x)$ függvénynek
+    lesz egy $a_0 = a$-s együtthatója is. A keresett együtthatók tehát:
+    \[
+      a_0 = a
+      \text,
+      \quad
+      a_5 = 0
+      \text,
+      \quad
+      b_5 = \frac{4b}{5 \pi}
+      \text.
+    \]
+
+    Az összegfüggvény $9\pi$-ben felvett értéke:
+    \[
+      H(9 \pi) = H(\pi) = \frac{h(\pi^-) + h(\pi^+)}{2} = \frac{(a+b)+(a-b)}{2} = a
+      \text.
+    \]
+  }
+\end{exercise}
+
+\end{document}

@@ -1,0 +1,100 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+
+\begin{exercise}{%
+    Válaszoljuk meg az alábbi kérdéseket az adott függvénnyel kapcsolatban!
+  }
+  \[
+    f(x;y) = \tan\left(\dfrac{x}{y}\right)
+  \]
+  \begin{enumerate}[a)]
+    \item Adjuk meg a függvény $(\pi; 1)$ pontbeli érintősíkjának egyenletét!
+    \item Adjuk meg a függvény $(\pi; 1)$ pontbeli $(3;-4)$ irányú érintőjének
+          egyenletét!
+    \item Melyik pontokban lesz a függvény érintősíkja merőleges az
+          $\rvec r = (1; 0; -1)$ irányvektorú egyenesre?
+  \end{enumerate}
+
+  \exsol{%
+  Az összes részfeladat megoldásához szükségünk van a függvény gradiensére:
+  \[
+    \grad f(x;y) = \begin{bmatrix}
+      \dfrac{1}{y \cos^2(x / y)} &
+      \dfrac{-x}{y^2 \cos^2(x / y)}
+    \end{bmatrix}^{\mathsf T}
+  \]
+  \begin{enumerate}[a)]
+    \item A parciális deriváltak értéke a $(\pi; 1)$ pontban:
+          \[
+            \left. \pdv{f(x;y)}{x} \right|_{(\pi; 1)} = 1
+            \text, \qquad
+            \left. \pdv{f(x;y)}{y} \right|_{(\pi; 1)} = -\pi
+            \text.
+          \]
+          A függvényérték a keresett pontban:
+          \[
+            f(\pi; 1) = 0 \text.
+          \]
+          Ezek alapján az érintősík egyenlete:
+          \[
+            1(x - \pi) - \pi (y - 1) = x - 0
+            \text.
+          \]
+          Az egyszerűsítések után a sík egyenlete:
+          \[
+            z = x - y \pi
+            \text.
+          \]
+    \item Szükségünk van az adott pontbeli iránymenti deriváltra. Az
+          irány normáltja:
+          \[
+            \uvec v = \frac{1}{\sqrt{3^2 + 4^2}} \begin{bmatrix}
+              3 \\ -4
+            \end{bmatrix} = \begin{bmatrix}
+              3/5 \\ -4/5
+            \end{bmatrix}
+            \text.
+          \]
+          A vektor segítségével a keresett derivált értéke:
+          \[
+            \left.\pdv{f(x;y)}{\uvec v}\right|_{(\pi;1)}=
+            \begin{bmatrix}
+              1 \\ -\pi
+            \end{bmatrix}^{\mathsf T}
+            \begin{bmatrix}
+              3/5 \\ -4/5
+            \end{bmatrix}
+            = \frac{3 + 4\pi}{5}
+            \text.
+          \]
+          Az érintő egyenlete ezek alapján:
+          \[
+            \frac{x - \pi}{3/5} = \frac{y - 1}{-4/5} = \frac{z - 0}{(3 + 4\pi)/5}
+            \text.
+          \]
+    \item Az érintősík normálvektora:
+          \[
+            \rvec n = \begin{bmatrix}
+              \displaystyle\pdv{f}{x} & \displaystyle\pdv{f}{y} & -1
+            \end{bmatrix}^{\mathsf T}
+            \text.
+          \]
+          Ebből következik, hogy:
+          \[
+            \dfrac{1}{y \cos^2(x / y)} = 1
+            \text,\qquad
+            \dfrac{-x}{y^2 \cos^2(x / y)} = 0
+            \text.
+          \]
+          Az második egyenletből következik, hogy $x = 0$, az elsőből pedig,
+          hogy $y = 1$. A keresett pont tehát:
+          \[
+            (x_\perp; y_\perp) = (0; 1)
+            \text.
+          \]
+  \end{enumerate}
+  }
+\end{exercise}
+
+\end{document}

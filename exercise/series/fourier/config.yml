@@ -1,0 +1,3 @@
+root_files:
+  - { input: square-wave.hu }
+  - { input: trig.hu }

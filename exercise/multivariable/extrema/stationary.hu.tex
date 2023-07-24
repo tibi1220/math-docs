@@ -1,0 +1,188 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+
+\begin{exercise}{%
+    Keressük meg az alábbi függvények stacionárius pontjait! Írjuk fel az adott
+    pontbeli Hesse-mátrixokat, valamint adjuk meg a pontok típusait!
+  }
+  \begin{enumerate}[a)]
+    \item $f(x; y) = x^2 + 2xy - y^3$
+    \item $g(x; y) = -x^2 + 2xy + y^3$
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $f(x; y) = x^2 + 2xy - y^3$\\[2mm]
+            %
+            Állítsuk elő a függvény elsőrendű parciális deriváltjait:
+            \[
+              \pdv{f}{x} = 2x + 2y
+              \text,
+              \qquad
+              \pdv{f}{y} = 2x - 3y^2
+              \text.
+            \]
+            Stacionárius pont ott található, ahol a függvény összes változó
+            szerinti parciális deriváltjai eltűnnek, vagyis:
+            \[
+              2x + 2y = 0
+              \text,
+              \qquad
+              2x - 3y^2 = 0
+              \text.
+            \]
+            Oldjuk meg az egyenletrendszert:
+            \[
+              -2y - 3y^2 = 0
+              \quad \rightarrow \quad
+              y(-2 - 3y) = 0
+              \text.
+            \]
+            A megoldások:
+            \[
+              (x_1; y_1) = (0; 0)
+              \text, \qquad
+              (x_2; y_2) = (2/3; -2/3)
+              \text.
+            \]
+
+            Határozzuk meg a függvény másodrendű parciális deriváltjait:
+            \[
+              \pdv[order=2]{f}{x} = 2 \text,
+              \qquad
+              \pdv[order=2]{f}{y} = -6y \text,
+              \qquad
+              \pdv{f}{x,y}        = 2 \text.
+            \]
+
+            A Hesse-mátrix paraméteresen:
+            \[
+              \rmat H = \begin{bmatrix}
+                2 & 2 \\ 2 & -6y
+              \end{bmatrix}
+              \text.
+            \]
+
+            \begin{enumerate}[1)]
+              \item Vizsgáljuk meg a mátrix determinánsát $(0; 0)$ pontban:
+                    \[
+                      \det \rmat H(0;0) = \begin{vmatrix}
+                        2 & 2 \\ 2 & 0
+                      \end{vmatrix} = -4 \text.
+                    \]
+                    Mivel a determináns negatív, ezért a stacionárius pont
+                    egy nyeregpont.
+
+              \item Most vizsgáljuk meg a mátrix determinánsát $(2/3; -2/3)$
+                    pontban:
+                    \[
+                      \det \rmat H(2/3;-2/3) = \begin{vmatrix}
+                        2 & 2 \\ 2 & 4
+                      \end{vmatrix} = 4 \text.
+                    \]
+                    Mivel a determináns pozitív, ezért a stacionárius pont
+                    egy lehetséges szélsőérték hely. Mivel a Hesse-mátrix
+                    összes aldeterminánsa pozitív, ($\det \rmat H > 0$,
+                    $h_{11} > 0$,) ezért ebben a pontban a függvénynek lokális
+                    minimuma van.
+            \end{enumerate}
+
+            Összegezve tehát:
+            \begin{alignat*}{9}
+              f & (0  ; 0  )  &  & = 0 \quad     &  & \rightarrow \quad
+              \text{nyeregpont,}
+              \\
+              f & (2/3; -2/3) &  & = -4/27 \quad &  & \rightarrow \quad
+              \text{lokális minimum.}
+            \end{alignat*}
+
+      \item $g(x; y) = -x^2 + 2xy + y^3$\\[2mm]
+            %
+            Állítsuk elő a függvény elsőrendű parciális deriváltjait:
+            \[
+              \pdv{g}{x} = -2x + 2y
+              \text,
+              \qquad
+              \pdv{g}{y} = 2x + 3y^2
+              \text.
+            \]
+            Stacionárius pont ott található, ahol a függvény összes változó
+            szerinti parciális deriváltjai eltűnnek, vagyis:
+            \[
+              -2x + 2y = 0
+              \text,
+              \qquad
+              2x + 3y^2 = 0
+              \text.
+            \]
+            Oldjuk meg az egyenletrendszert:
+            \[
+              2y + 3y^2 = 0
+              \quad \rightarrow \quad
+              y(2 + 3y) = 0
+              \text.
+            \]
+            A megoldások:
+            \[
+              (x_1; y_1) = (0; 0)
+              \text, \qquad
+              (x_2; y_2) = (-2/3; -2/3)
+              \text.
+            \]
+
+            Határozzuk meg a függvény másodrendű parciális deriváltjait:
+            \[
+              \pdv[order=2]{g}{x} = -2 \text,
+              \qquad
+              \pdv[order=2]{g}{y} = 6y \text,
+              \qquad
+              \pdv{g}{x,y}        = 2 \text.
+            \]
+
+            A Hesse-mátrix paraméteresen:
+            \[
+              \rmat H = \begin{bmatrix}
+                -2 & 2 \\ 2 & 6y
+              \end{bmatrix}
+              \text.
+            \]
+
+            \begin{enumerate}[1)]
+              \item Vizsgáljuk meg a mátrix determinánsát $(0; 0)$ pontban:
+                    \[
+                      \det \rmat H(0;0) = \begin{vmatrix}
+                        -2 & 2 \\ 2 & 0
+                      \end{vmatrix} = -4 \text.
+                    \]
+                    Mivel a determináns negatív, ezért a stacionárius pont
+                    egy nyeregpont.
+
+              \item Most vizsgáljuk meg a mátrix determinánsát $(2/3; -2/3)$
+                    pontban:
+                    \[
+                      \det \rmat H(-2/3;-2/3) = \begin{vmatrix}
+                        -2 & 2 \\ 2 & -4
+                      \end{vmatrix} = 4 \text.
+                    \]
+                    Mivel a determináns pozitív, ezért a stacionárius pont
+                    egy lehetséges szélsőérték hely. Mivel a Hesse-mátrix
+                    aldeterminánsainak előjele váltakozik, ($\det \rmat H > 0$,
+                    $h_{11} < 0$,) ezért ebben a pontban a függvénynek
+                    lokális maximuma van.
+            \end{enumerate}
+
+            Összegezve tehát:
+            \begin{alignat*}{9}
+              g & (0  ; 0  )   &  & = 0 \quad    &  & \rightarrow \quad
+              \text{nyeregpont,}
+              \\
+              g & (-2/3; -2/3) &  & = 4/27 \quad &  & \rightarrow \quad
+              \text{lokális maximum.}
+            \end{alignat*}
+
+    \end{enumerate}
+  }
+\end{exercise}
+
+\end{document}

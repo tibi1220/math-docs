@@ -1,0 +1,3 @@
+root_files:
+  - { input: basic.hu }
+  - { input: polar.hu }
