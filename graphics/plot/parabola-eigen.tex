@@ -1,0 +1,40 @@
+\documentclass[graphics]{math-standalone}
+
+\begin{document}
+
+\begin{tikzpicture}[very thick]
+  \begin{scope}[xshift=3.43cm, yshift=2.845cm]
+    \draw[-to] (-3,0) -- (3,0) node[below left] {$x$};
+    \draw[-to] (0,-2.5) -- (0,2.5) node[below right] {$y$};
+
+    \begin{scope}[rotate=60, draw=red!40!black]
+      \draw[-to] (-2.5,0) -- (2.5,0) node[below right] {$\xi$};
+      \draw[-to] (0,-3) -- (0,3) node[above right] {$\eta$};
+    \end{scope}
+  \end{scope}
+  \begin{axis}[
+      xticklabels={,,},
+      yticklabels={,,},
+      axis line style={draw=none},
+      tick style={draw=none},
+      ymin=-50/6.86, xmin=-50/5.69,
+      ymax=50/6.86, xmax=50/5.69,
+    ]
+    \addplot +[
+    no markers,
+    raw gnuplot,
+    ultra thick,
+    empty line = jump,
+    cyan!60!black,
+    ] gnuplot {
+        set contour base;
+        set cntrparam levels discrete 0.003;
+        unset surface;
+        set view map;
+        set isosamples 250;
+        splot 7 * x**2 + 10.39230485 * x * y + 13 * y**2 - 64;
+      };
+  \end{axis}
+\end{tikzpicture}
+
+\end{document}

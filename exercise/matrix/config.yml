@@ -1,0 +1,13 @@
+root_files:
+  - { input: conic.hu, output: conic-hu }
+  - { input: cramers-rule-singularity.hu, output: cramers-singularity-hu }
+  - { input: determinant-calc.hu, output: determinant-calc-hu }
+  - { input: determinant-theorem-usage.hu, output: determinant-theorems-hu }
+  - { input: eigen.hu, output: eigen-hu }
+  - { input: equation.hu, output: equation-hu }
+  - { input: exponentiation.hu, output: exponentiation-hu }
+  - { input: inverse.hu, output: inverse-hu }
+  - { input: linear-equations.hu, output: linear-equations-hu }
+  - { input: rank.hu, output: rank-hu }
+  - { input: transformations.hu, output: transformations-hu }
+out_dir: build

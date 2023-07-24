@@ -1,0 +1,96 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+
+\begin{exercise}{%
+    Döntsük el, hogy alteret alkotnak-e az alábbi számhármasok
+    $\mathbb R^3$-ban?
+  }
+  \begin{enumerate}[a)]
+    \item $Q_1 = \bigset{(x_1; x_2; x_3)}{x_1 + x_2 = 0}$
+    \item $Q_2 = \bigset{(x_1; x_2; x_3)}{x_1 = \pi}$
+    \item $Q_3 = \bigset{(x_1; x_2; x_3)}{x_1 = x_2 = x_3}$
+    \item $Q_4 = \bigset{(x_1; x_2; x_3)}{x_1 = (x_2)^2}$
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item Igen, mert a műveletek sosem mutatnak ki a vektortérből:
+            \begin{enumerate}[1)]
+              \item Összeadásra való ellenőrzés:
+                    $\forall \rvec a ; \rvec b \in Q_1:
+                      \rvec a + \rvec b \overset{?}{\in} Q_1$.
+                    \[
+                      \rvec a := \begin{pmatrix} a \\ -a \\ c \end{pmatrix}
+                      \quad
+                      \rvec b := \begin{pmatrix} b \\ -b \\ d \end{pmatrix}
+                      \quad \rightarrow \quad
+                      \rvec a + \rvec b
+                      = \begin{pmatrix} a + b \\ -a - b \\ c + d \end{pmatrix}
+                      = \begin{pmatrix} a + b \\ -(a+b) \\ c + d \end{pmatrix}
+                      \in Q_1
+                    \]
+
+              \item Skalárral való szorzásra való ellenőrzés:
+                    $\forall \rvec a \in Q_1 \text{ és } \forall \lambda \in \mathbb R:
+                      \lambda \rvec a \overset{?}{\in} Q_1$.
+                    \[
+                      \rvec a := \begin{pmatrix} a \\ -a \\ c \end{pmatrix}
+                      \quad \rightarrow \quad
+                      \lambda \rvec a
+                      = \begin{pmatrix} \lambda a \\ \lambda (-a) \\ \lambda c \end{pmatrix}
+                      = \begin{pmatrix} \lambda a \\ -(\lambda a) \\ \lambda c \end{pmatrix}
+                      \in Q_1
+                    \]
+            \end{enumerate}
+
+            \tcbline
+      \item Nem, hiszen $\lambda \pi \neq \pi$ (, kivéve ha $\lambda = 1$).
+            % \[
+            %   \lambda \begin{pmatrix} \pi \\ a \\ b \end{pmatrix}
+            %   = \begin{pmatrix} \lambda \pi \\ \lambda a \\ \lambda b \end{pmatrix}
+            %   \not\in Q_2
+            %   \text.
+            % \]
+
+            \tcbline
+      \item Igen, mert a műveletek sosem mutatnak ki a vektortérből:
+            \begin{enumerate}[1)]
+              \item Összeadásra való ellenőrzés:
+                    $\forall \rvec a ; \rvec b \in Q_3:
+                      \rvec a + \rvec b \overset{?}{\in} Q_1$.
+                    \[
+                      \rvec a := \begin{pmatrix} a \\ a \\ a \end{pmatrix}
+                      \quad
+                      \rvec b := \begin{pmatrix} b \\ b \\ b \end{pmatrix}
+                      \quad \rightarrow \quad
+                      \rvec a + \rvec b
+                      = \begin{pmatrix} a + b \\ a + b \\ a + b \end{pmatrix}
+                      \in Q_3
+                    \]
+
+              \item Skalárral való szorzásra való ellenőrzés:
+                    $\forall \rvec a \in Q_3 \text{ és } \forall \lambda \in \mathbb R:
+                      \lambda \rvec a \overset{?}{\in} Q_3$.
+                    \[
+                      \rvec a := \begin{pmatrix} a \\ a \\ a \end{pmatrix}
+                      \quad \rightarrow \quad
+                      \lambda \rvec a
+                      = \begin{pmatrix} \lambda a \\ \lambda a \\ \lambda a \end{pmatrix}
+                      \in Q_3
+                    \]
+            \end{enumerate}
+
+            \tcbline
+      \item Nem, hiszen $(a + b)^2 \neq a^2 + b^2$ (, kivéve ha $ab = 0$).
+            % \[
+            %   \begin{pmatrix} a^2 \\ a \\ c \end{pmatrix} +
+            %   \begin{pmatrix} b^2 \\ b \\ d \end{pmatrix} =
+            %   \begin{pmatrix} a^2 + b^2 \\ a + b \\ c + d \end{pmatrix} \neq
+            %   \begin{pmatrix} (a + b)^2 \\ a + b \\ c + d \end{pmatrix} \text.
+            % \]
+    \end{enumerate}
+  }
+\end{exercise}
+
+\end{document}

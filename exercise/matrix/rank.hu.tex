@@ -1,0 +1,95 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+
+\newcommand{\gcc}[1]{\cellcolor{gray!25}{#1}}
+
+\begin{exercise}{Határozzuk meg az alábbi mátrixok rangjait!}
+  \[
+    \rmat A = \begin{bmatrix}
+      1 & 3 & 4 & 5 \\
+      3 & 6 & 9 & 9 \\
+      2 & 3 & 5 & 4
+    \end{bmatrix} % (2)
+    \hspace{2cm}
+    \rmat B = \begin{bmatrix}
+      2  & -2  & 1 & 6  \\
+      4  & -4  & 2 & -2 \\
+      10 & -10 & 5 & 2
+    \end{bmatrix} % (1)
+  \]
+
+  \exsol{
+    Először határozzuk meg az $\rmat A$ mátrix rangját!
+    \begin{align*}
+      \rg \rmat A
+       & = \rg
+      \begin{bamatrix}{4}{5.5mm}
+        1 & 3 & 4 & 5 \\
+        3 & 6 & 9 & 9 \\
+        2 & 3 & 5 & 4
+      \end{bamatrix}
+      \;
+      \begin{matrix}
+        \\\\(+S_1 - S_2)
+      \end{matrix}
+      \\
+       & = \rg
+      \begin{bamatrix}{4}{5.5mm}
+        1 & 3 & 4 & 5 \\
+        3 & 6 & 9 & 9 \\
+        0 & 0 & 0 & 0
+      \end{bamatrix}
+      \;
+      \begin{matrix}
+        \\(-3S_1)\\\,
+      \end{matrix}
+      \\
+       & = \rg
+      \begin{bamatrix}{4}{5.5mm}
+        \gcc{1} & \gcc{3}  & \gcc{4}  & \gcc{5}  \\
+        0       & \gcc{-3} & \gcc{-3} & \gcc{-6} \\
+        0       & 0        & 0        & 0
+      \end{bamatrix}
+      =2
+    \end{align*}
+
+    \tcbline
+
+    Most pedig határozzuk meg $\rmat B$ mátrix rangját!
+    \begin{align*}
+      \rg \rmat B
+       & = \rg
+      \begin{bamatrix}{4}{7.5mm}
+        2  & -2  & 1 & 6  \\
+        4  & -4  & 2 & -2 \\
+        10 & -10 & 5 & 2
+      \end{bamatrix}
+      \;
+      \begin{matrix}
+        \\\\(-S_1 - 2S_2)
+      \end{matrix}
+      \\
+       & = \rg
+      \begin{bamatrix}{4}{7.5mm}
+        2  & -2  & 1 & 6  \\
+        4  & -4  & 2 & -2 \\
+        0 & 0 & 0 & 0
+      \end{bamatrix}
+      \;
+      \begin{matrix}
+        \\(-2S_1)\\\,
+      \end{matrix}
+      \\
+       & = \rg
+      \begin{bamatrix}{4}{7.5mm}
+        \gcc{2} & \gcc{-2} & \gcc{1} & \gcc{6}   \\
+        0       & 0        & 0       & \gcc{-14} \\
+        0       & 0        & 0       & 0
+      \end{bamatrix}
+      =2
+    \end{align*}
+  }
+\end{exercise}
+
+\end{document}

@@ -1,0 +1,13 @@
+% TeX format requirement
+\NeedsTeXFormat{LaTeX2e}
+
+% Package name [\usepackage{math-graphics}]
+\ProvidesPackage{math-graphics}
+
+% Provided packages
+\RequirePackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\pgfplotsset{compat=1.18}
+\pgfkeys{/pgf/plot/gnuplot call={cd build && gnuplot}}
+
+% Provided tikz macros
