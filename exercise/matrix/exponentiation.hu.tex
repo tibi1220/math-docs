@@ -1,0 +1,147 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+
+\begin{exercise}{Határozzuk meg $\rmat A^{12}$ és $\rmat B^{25}$ mátrixokat!}
+  \[
+    \rmat A = \begin{bmatrix}
+      -8  & 6  \\
+      -15 & 11
+    \end{bmatrix}
+    \hspace{2cm}
+    \rmat B = \begin{bmatrix}
+      \sqrt{3} / 2 & -1/2         \\
+      1/2          & \sqrt{3} / 2
+    \end{bmatrix}
+  \]
+
+  \exsol{%
+  A hatványozást elvégezni nagyon hosszadalmas lenne nem diagonális
+  mátrixon. Transzformáljuk át a mátrixot a saját koordináta-rendszerébe,
+  végezzük el ott a hatványozást, majd utána transzformáljuk vissza a
+  jelenlegi ko\-or\-di\-ná\-ta-rendszerünkbe. A bázis-transzformáció
+  elvégzéséhez szükségünk van a hatványozandó mátrix sajátértékeire és
+  sajátvektoraira. Ezeket már korábban meghatároztuk:
+  \[
+    \lambda_1 = 1
+    \text,
+    \quad
+    \rvec v_1 = \begin{bmatrix}
+      2 \\ 3
+    \end{bmatrix}
+    \text,
+    \qquad
+    \lambda_2 = 2
+    \text,
+    \quad
+    \rvec v_2 = \begin{bmatrix}
+      3 \\ 5
+    \end{bmatrix}
+    \text.
+  \]
+  Az eredeti és a diagonális mátrix közötti kapcsolat:
+  \[
+    \rmat A = \rmat T \mbfLambda \rmat T^{-1}
+    \text.
+  \]
+  A $\rmat T$ transzformációs mátrixot úgy kapjuk meg, hogy a sajátvektorokat,
+  mint oszlopvektorokat a mátrix egyes soraiba helyezzük el:
+  \[
+    \rmat T = \begin{bmatrix}
+      2 & 3 \\
+      3 & 5
+    \end{bmatrix}
+    \text.
+  \]
+  Szükségünk van továbbá ennek a mátrixnak az inverzére is. Ezt korábban már
+  meghatároztuk:
+  \[
+    \rmat T^{-1} = \begin{bmatrix}
+      5  & -3 \\
+      -3 & 2
+    \end{bmatrix}
+    \text.
+  \]
+  A diagonális mátrix elemei maguk a sajátértékek lesznek, mégpedig olyan
+  sorrendben, ahogyan a hozzájuk tartozó sajátvektorokat beírtuk a
+  transzformációs mátrixba. Ezt számítással ellenőrizhetjük:
+  \[
+    \mbfLambda
+    = \rmat T^{-1} \rmat A \rmat T
+    = \begin{bmatrix}
+      5  & -3 \\
+      -3 & 2
+    \end{bmatrix} \begin{bmatrix}
+      -8  & 6  \\
+      -15 & 11
+    \end{bmatrix} \begin{bmatrix}
+      2 & 3 \\
+      3 & 5
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      5  & -3 \\
+      -6 & 4
+    \end{bmatrix} \begin{bmatrix}
+      2 & 3 \\
+      3 & 5
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      1 & 0 \\
+      0 & 2
+    \end{bmatrix}
+    \text.
+  \]
+  A hatványozást itt már könnyen el tudjuk végezni:
+  \[
+    \mbfLambda^{12}
+    = \begin{bmatrix} 1 & 0 \\ 0 & 2 \end{bmatrix}^{12}
+    = \begin{bmatrix} 1^{12} & 0 \\ 0 & 2^{12} \end{bmatrix}
+    = \begin{bmatrix} 1 & 0 \\ 0 & 4096  \end{bmatrix}
+    \text.
+  \]
+  Transzformáljuk vissza az eredményül kapott mátrixunkat:
+  \begin{align*}
+    \rmat A^{12} = \rmat T \mbfLambda^{12} \rmat T^{-1}
+     & =
+    \begin{bmatrix} 2 & 3 \\ 3 & 5 \end{bmatrix}
+    \begin{bmatrix} 1 & 0 \\ 0 & 4096 \end{bmatrix}
+    \begin{bmatrix} 5  & -3 \\ -3 & 2 \end{bmatrix}
+    \\
+     & =
+    \begin{bmatrix} 2 & 12288 \\ 3 & 20480 \end{bmatrix}
+    \begin{bmatrix} 5  & -3 \\ -3 & 2 \end{bmatrix}
+    \\
+     & =
+    \begin{bmatrix}
+      -36854 & 24570 \\
+      -61425 & 40951
+    \end{bmatrix}
+    \text.
+  \end{align*}
+
+  \tcbline
+
+  Ahelyett, hogy elkezdenénk vadul számolni, álljunk meg egy percre, és
+  vizsgáljuk meg az $\rmat B$ mátrixot. Megállapíthatjuk róla, hogy ez egy
+  forgatási mátrix, mégpedig a $z$ tengely körül $+30^\circ$-ot forgat:
+  \[
+    \rmat B = \begin{bmatrix}
+      \cos 30^\circ & - \sin 30^\circ \\
+      \sin 30^\circ & \cos 30^\circ
+    \end{bmatrix}
+    \text.
+  \]
+  A huszonötödik hatványra való emelés azt jelenti, hogy huszonötször forgatunk
+  $30^\circ$-kal egymás után, amely 2 teljes körbefordulást ($2 \times 12 \times
+    30^\circ = 2 \times 360^\circ$), majd utána még egy $30^\circ$-os forgatást
+  jelent, vagyis ezen mátrix huszonötödik hatványa önmaga:
+  \[
+    \rmat B^{25} = \rmat B
+    \text.
+  \]
+  }
+\end{exercise}
+
+\end{document}

@@ -101,6 +101,7 @@ jobs:
         with:
           name: LaTeX-standalone-log
           path: |
+            standalone.log
             exercise/**/build/*.log
             graphics/**/build/*.log
 
@@ -165,6 +166,7 @@ jobs:
         with:
           name: LaTeX-root-log
           path: |
+            root.log
             book/**/build/*.log
             handout/**/build/*.log
 
