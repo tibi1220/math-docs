@@ -8,10 +8,17 @@
 \RequirePackage[abspath]{currfile}
 \RequirePackage{lipsum}
 \RequirePackage{standalone}
-\usepackage[shortlabels]{enumitem}
+\RequirePackage[shortlabels]{enumitem}
+\RequirePackage{xcolor}
 
 % Provided document commands
 % !!! use these imports in every file !!!
 \newcommand{\relativeinput}[1]{\input{\currfiledir#1}}
 \newcommand{\relativeinclude}[1]{\input{\currfiledir#1}}
 \newcommand{\relativestandalone}[1]{\includestandalone{\currfiledir#1}}
+
+% Provided colors
+\colorlet{red-base}{red!40!black}
+\colorlet{blue-base}{cyan!40!black}
+\colorlet{yellow-base}{yellow!40!gray}
+\colorlet{gray-base}{gray}
