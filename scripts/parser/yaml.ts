@@ -2,6 +2,10 @@ import { stringify, parse } from "yaml";
 import { writeFile, readFile, access } from "fs/promises";
 import { join, dirname, relative } from "path";
 
+function isLanguage(lang?: string) {
+  return lang === "en" || lang === "hu";
+}
+
 export async function writeYaml(path: string, content: string) {
   const yaml = stringify(content);
 
@@ -14,9 +18,55 @@ function inferLanguage(
 ): { success: boolean; lang: Language } {
   const lang = input.split(".").at(-2);
 
-  const success = lang === "en" || lang === "hu";
+  const success = isLanguage(lang);
 
   return { success, lang: success ? (lang as Language) : fallback };
+}
+
+type ParserFn = {
+  (input: string): { success: boolean; lang: Language };
+};
+
+type LanguageParser =
+  | {
+      status: "force" | "fallback";
+      fallback: Language;
+      parser?: never;
+      message: string;
+    }
+  | {
+      status: "infer" | "invalid";
+      fallback: Language;
+      parser: ParserFn;
+      message: string;
+    };
+
+function getLanguageParser(
+  mode: boolean | string = true,
+  fallback: Language = "hu"
+): LanguageParser {
+  if (mode === "en" || mode === "hu")
+    return {
+      status: "force",
+      fallback: mode,
+      message: `Using forced language mode: '${mode}'`,
+    };
+
+  if (mode === false)
+    return {
+      status: "fallback",
+      fallback,
+      message: `Using fallback language mode: '${fallback}'`,
+    };
+
+  return {
+    status: mode === true ? "infer" : "invalid",
+    fallback,
+    parser: (input: string) => inferLanguage(input, fallback),
+    message: `${
+      mode === true ? "" : `Invalid language: '${mode}'. `
+    }Using inferred language mode with fallback: '${fallback}'`,
+  };
 }
 
 async function inferOutDir(
@@ -139,7 +189,12 @@ export async function parseYaml(
   const output_path = join(source_path, out_dir);
 
   // Global lang option
-  // let lang: string;
+  const langParser = getLanguageParser(json.lang, "hu");
+
+  configMessages.push({
+    type: langParser.status === "invalid" ? "warning" : "info",
+    message: langParser.message,
+  });
 
   // Global out_file option
   // let out_file: string;
@@ -150,19 +205,63 @@ export async function parseYaml(
     root_files: json.root_files.map(file => {
       const input = file.input || "main";
       const output = file.output || file.input || "main";
-      const inferredLang = inferLanguage(input);
-      const lang = file.lang || inferredLang.lang;
 
       const fileMessages: FileMessage[] = [];
 
-      if (!file.input) {
+      let lang: Language;
+      const isLang = isLanguage(file.lang);
+
+      // If status is force, use the forced lang
+      if (langParser.status === "force") {
+        lang = langParser.fallback;
+
         fileMessages.push({
-          type: "warning",
-          message:
-            "Missing input field in config file. " +
-            `Using default value: '${input}'`,
+          type: "info",
+          message: `Using forced lang: '${lang}'`,
         });
       }
+      // If provided lang is valid, use it
+      else if (isLang) {
+        lang = file.lang as Language;
+
+        fileMessages.push({
+          type: "info",
+          message: `Using provided lang: '${lang}'`,
+        });
+      }
+      // Use fallback if provided lang is invalid
+      else if (langParser.status === "fallback") {
+        lang = langParser.fallback;
+
+        fileMessages.push({
+          type: file.lang ? "warning" : "info",
+          message: file.lang
+            ? `Provided lang invalid, using fallback: '${langParser.fallback}'`
+            : `Using fallback lang: '${langParser.fallback}'`,
+        });
+      }
+      // Infer lang if provided lang is invalid
+      else {
+        const { success, lang: _lang } = (langParser.parser as ParserFn)(input);
+
+        lang = _lang;
+        const isWarning = !success || file.lang;
+
+        fileMessages.push({
+          type: isWarning ? "warning" : "info",
+          message: isWarning
+            ? `Using fallback lang: '${lang}'`
+            : `Using inferred lang: '${_lang}'`,
+        });
+      }
+
+      if (!file.input) {
+        fileMessages.push({
+          type: "error",
+          message: "Missing input field in config file!",
+        });
+      }
+
       if (!file.output) {
         fileMessages.push({
           type: "warning",
@@ -171,16 +270,6 @@ export async function parseYaml(
             (file.input
               ? `Using input value: '${output}'`
               : `Using default value: '${output}'`),
-        });
-      }
-      if (!file.lang) {
-        fileMessages.push({
-          type: inferredLang.success ? "info" : "warning",
-          message:
-            "Missing lang field in config file. " + //
-            (inferredLang.success
-              ? `Using inferred value: '${inferredLang.lang}'`
-              : `Using default value: '${inferredLang.lang}'`),
         });
       }
 

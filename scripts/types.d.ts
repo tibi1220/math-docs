@@ -4,9 +4,9 @@ interface LatexConfig {
   root_files?: {
     input?: string;
     output?: string;
-    lang?: Language;
+    lang?: string;
   }[];
-  lang?: Language | boolean;
+  lang?: string | boolean;
   out_dir?: boolean | string;
   out_file?: boolean;
   external_deps?: {
