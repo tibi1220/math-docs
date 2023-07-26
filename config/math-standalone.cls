@@ -4,49 +4,40 @@
 % Class name [\documentclass{math-standalone}]
 \ProvidesClass{math-standalone}
 
-% Ifs for option processing
-\newif\if@@exercise
-\@@exercisefalse
-\newif\if@@keepspace
-\@@keepspacefalse
+% Default class options
+\PassOptionsToClass{12pt, margin=5mm}{standalone}
 
 % Process class options
-\RequirePackage{xkeyval}
+\RequirePackage{kvoptions}
 
-\DeclareOption{graphics}{\OptionNotUsed}
-\DeclareOption{exercise}{%
-  \PassOptionsToClass{varwidth=18cm}{standalone}%
-  \@@exercisetrue
+\SetupKeyvalOptions{family=standalone,prefix=standalone@@}
+
+\DeclareStringOption[magyar]{lang}
+\DeclareBoolOption{graphics}
+\DeclareBoolOption{exercise}
+\DeclareBoolOption{nosolutions}
+
+\DeclareDefaultOption{
+  \AtBeginOfClassFile{\PassOptionsToClass{\CurrentOption}{standalone}}
 }
 
-\DeclareOption{print-solutions}{%
-  \PassOptionsToPackage{\CurrentOption}{math-exercise}
-}
-\DeclareOption{keep-space}{%
-  \PassOptionsToPackage{\CurrentOption}{math-exercise}%
-  \@@keepspacetrue%
-}
-
-\newcommand\@@lang{}
-\DeclareOptionX{lang}{\renewcommand\@@lang{#1}}
-\ExecuteOptionsX{lang=magyar}
-
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{standalone}}
-
-% End of otions
-\ProcessOptionsX\relax
-\ProcessOptions\relax
+\ProcessKeyvalOptions*
 
 % Based on this class
-\LoadClass[12pt, margin=5mm]{standalone}
+\ifstandalone@@exercise
+  \PassOptionsToClass{varwidth=18cm}{standalone}
+\fi
+\LoadClass{standalone}
 
 % Provided packages
-\RequirePackage[\@@lang]{babel}
+\RequirePackage[\standalone@@lang]{babel}
 
-\if@@keepspace\else
+\ifstandalone@@nosolutions
+  \PassOptionsToPackage{keep-space}{math-exercise}
+\else
   \PassOptionsToPackage{print-solutions}{math-exercise}
 \fi
-\if@@exercise
+\ifstandalone@@exercise
   \RequirePackage{math-exercise}
 \fi
 
