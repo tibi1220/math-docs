@@ -4,8 +4,9 @@ export const INFO = `[${chalk.green("INFO")}]`;
 export const ERROR = `[${chalk.red("ERROR")}]`;
 export const WARN = `[${chalk.yellow("WARN")}]`;
 
-export function echo(message: string, prefix?: string) {
-  return `echo -e "${prefix ? prefix + " - " : ""}${message}\\n"`;
+export function echo(message: string, prefix?: string, newLine = true) {
+  // prettier-ignore
+  return `echo -e "${prefix ? prefix + " - " : ""}${message}${newLine ? "\\n" : ""}"`;
 }
 
 export function date(format = "%H:%M:%S") {

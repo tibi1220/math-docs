@@ -1,3 +1,4 @@
 root_files:
   - { input: main, output: example-graphics }
-out_dir: build
+lang: false
+out_file: false

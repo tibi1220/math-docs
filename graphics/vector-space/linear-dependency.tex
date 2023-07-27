@@ -9,18 +9,18 @@
       rectangle ++(4.5cm,-2.5cm)
       coordinate [midway] (\i\j);
 
-      \draw[-latex, cyan!40!black] ($(\i\j)-(0,7.5mm)$)
+      \draw[-latex, blue-base] ($(\i\j)-(0,7.5mm)$)
       coordinate (\i\j)
       -- ++(1.5,0);
     }
 
-  \begin{scope}[-latex, yellow!40!black]
+  \begin{scope}[-latex, yellow-base]
     \draw (00) -- ++(0,1.5);
     \draw (10) -- ++(-1.5/1.41,1.5/1.41);
     \draw (01) -- ++(-1.5/1.41,1.5/1.41);
     \draw (11) -- ++(-1.5,0);
 
-    \draw[red!40!black] (01) -- ++(0.574,1.386);
+    \draw[red-base] (01) -- ++(0.574,1.386);
   \end{scope}
 \end{tikzpicture}
 \end{document}

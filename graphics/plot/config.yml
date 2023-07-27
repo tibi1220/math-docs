@@ -1,4 +1,6 @@
 root_files:
   - { input: hyperbola-eigen }
   - { input: parabola-eigen }
-out_dir: "build"
+  - { input: 3x+4y-extrema }
+lang: false
+out_file: false

@@ -7,7 +7,7 @@
     \draw[-to] (-4,0) -- (4,0) node[below left] {$x$};
     \draw[-to] (0,-3) -- (0,3) node[below right] {$y$};
 
-    \begin{scope}[rotate=60, draw=red!40!black]
+    \begin{scope}[rotate=60, draw=red-base]
       \draw[-to] (-3,0) -- (3,0) node[below right] {$\xi$};
       \draw[-to] (0,-3) -- (0,3) node[above right] {$\eta$};
     \end{scope}
@@ -25,7 +25,7 @@
     raw gnuplot,
     ultra thick,
     empty line = jump,
-    cyan!60!black,
+    blue-deep,
     ] gnuplot {
         set contour base;
         set cntrparam levels discrete 0.003;

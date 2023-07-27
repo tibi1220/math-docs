@@ -77,7 +77,6 @@ jobs:
           key:
             ${{ runner.os }}-LaTeX-standalone-${{ steps.get-date.outputs.date }}
           path: |
-            /usr/local/texlive/2023/texmf-var/luatex-cache/
             exercise
             graphics
           restore-keys: |
@@ -142,7 +141,6 @@ jobs:
         with:
           key: ${{ runner.os }}-LaTeX-root-${{ steps.get-date.outputs.date }}
           path: |
-            /usr/local/texlive/2023/texmf-var/luatex-cache/
             book
             handout
           restore-keys: |

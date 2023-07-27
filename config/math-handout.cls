@@ -4,24 +4,26 @@
 % Class name [\documentclass{math-handout}]
 \ProvidesClass{math-handout}
 
+% Default class options
+\PassOptionsToClass{a4paper, 12pt}{scrartcl}
+
 % Class options
-\RequirePackage{xkeyval}
+\RequirePackage{kvoptions}
 
-\newcommand\@@lang{}
+\SetupKeyvalOptions{family=handout,prefix=handout@@}
 
-\DeclareOptionX{lang}{\renewcommand\@@lang{#1}}
-\ExecuteOptionsX{lang=magyar}
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
+\DeclareStringOption[magyar]{lang}
+\DeclareDefaultOption{
+  \AtEndOfClass{\PassOptionsToClass{\CurrentOption}{scrartcl}}
+}
 
-% End of options
-\ProcessOptionsX\relax
-\ProcessOptions\relax
+\ProcessKeyvalOptions*
 
 % Based on this class
-\LoadClass[a4paper, 12pt]{scrartcl}
+\LoadClass{scrartcl}
 
 % Provided packages
-\RequirePackage[\@@lang]{babel}
+\RequirePackage[\handout@@lang]{babel}
 
 \RequirePackage{math-util}
 \RequirePackage{math-font}
