@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-$pdf_mode = 4;
+$pdf_mode = 5;
 $out_dir = 'build';
 
 set_tex_cmds('--shell-escape -interaction=nonstopmode %O %S');
