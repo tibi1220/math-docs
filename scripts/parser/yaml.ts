@@ -276,6 +276,8 @@ export async function parseYaml(
           relative_output: join(relative_path, buildDir, output),
           absolute_output: join(absolute_path, buildDir, output),
 
+          relative_rc,
+
           lang,
 
           resolver: `latexmk -norc -silent -r ${relative_rc} ${input}.tex --jobname='${output}'`,

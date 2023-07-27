@@ -41,8 +41,9 @@ interface RootFile {
   output: string;
   relative_output: string;
   absolute_output: string;
-  resolver: string;
+  relative_rc: string;
   lang: Language | false;
+  resolver: string;
   messages?: FileMessage[];
 }
 
