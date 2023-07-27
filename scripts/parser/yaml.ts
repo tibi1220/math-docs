@@ -107,44 +107,6 @@ function getOutputParser(mode = true) {
   };
 }
 
-export async function inferOutDir(
-  rcPath: string,
-  mode = true,
-  fallback = "build"
-): Promise<{
-  dir: string;
-  status: "fallback" | "infer" | "warning";
-  message: string;
-}> {
-  if (mode === false) {
-    return {
-      status: "fallback",
-      dir: fallback,
-      message: `Using default out_dir value: '${fallback}'`,
-    };
-  }
-
-  const rc = await readFile(rcPath, "utf8");
-  const regex = /\$out_dir.*=.*(\'|\")(\w+)(\'|\")/g;
-
-  // The second capturing group is needed
-  const dir = regex.exec(rc)?.[2];
-
-  if (!dir) {
-    return {
-      status: "warning",
-      dir: fallback,
-      message: `Cannot infer out_dir. Using default value: '${fallback}'`,
-    };
-  }
-
-  return {
-    status: "infer",
-    dir,
-    message: `Inferred out_dir: '${dir}'`,
-  };
-}
-
 export async function parseYaml(
   path: string,
   cwd: string,
@@ -157,6 +119,8 @@ export async function parseYaml(
 
   const absolute_path = dirname(path);
   const relative_path = relative(cwd, absolute_path);
+
+  const relative_rc = relative(absolute_path, rcFile);
 
   const errors: ConfigErrors = {
     source_path: relative_path,
@@ -314,7 +278,7 @@ export async function parseYaml(
 
           lang,
 
-          resolver: `latexmk -norc -silent -r ${rcFile} ${input}.tex --jobname='${output}'`,
+          resolver: `latexmk -norc -silent -r ${relative_rc} ${input}.tex --jobname='${output}'`,
 
           messages: fileMessages.length ? fileMessages : undefined,
         };
