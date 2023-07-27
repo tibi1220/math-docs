@@ -351,9 +351,9 @@ export async function parseYaml(
 
           lang,
 
-          resolver: `latexmk ${file.input}.tex --jobname='${file.output}'`,
+          resolver: `latexmk ${input}.tex --jobname='${output}'`,
 
-          ...(fileMessages.length && { messages: fileMessages }),
+          messages: fileMessages.length ? fileMessages : undefined,
         };
       })
     ),
