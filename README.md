@@ -96,24 +96,12 @@ root_files:
   - input: main  # Required
   - output:      # Undefined by default
   - lang:        # Undefined by default
-out_dir: true    # Can be boolean or string (true - infer, false - fallback, string - force value)
 out_file: true   # Can be true or false (true - infer, false - fallback)
 lang: true       # Can be boolean or string (true - infer, false - off, string - force value)
 external_deps:   # Undefined by default
   program_name:
     - dep1
     - dep2
-```
-
-- `.latexmkrc`
-
-```perl
-#!/usr/bin/perl
-
-$pdf_mode = 4;
-$out_dir = 'build';
-
-set_tex_cmds('--shell-escape -synctex=1 -interaction=nonstopmode %O %S');
 ```
 
 ## Contribution
@@ -170,40 +158,6 @@ Some of the most important plugins when working with latex:
 - [`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim) - formatting
 
 #### VS Code
-
-The most essential plugins I recommend are:
-
-- [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
-- [LaTeX Utilities](https://marketplace.visualstudio.com/items?itemName=tecosaur.latex-utilities)
-
-The recommended settings are:
-
-<!-- prettier-ignore -->
-```jsonc
-{
-  // ...
-  // Format on save / paste
-  "[tex,sty,cls]": { 
-    "editor.defaultFormatter": "James-Yu.latex-workshop",
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true
-  },
-  // I like these stats :)
-  "latex-utilities.countWord.format": "${words} words, ${math} eq",
-  // Very important !!! 
-  // This way, our local .latexmkrc files will be used during compilation
-  "latex-workshop.latex.recipe.default": "latexmk (latexmkrc)",
-  // Formatting
-  "latex-workshop.latexindent.args": [
-    "-l",
-    "%WORKSPACE_FOLDER%/latexindent.yaml",
-    "-c",
-    "%DIR%/",
-    "%TMPFILE%"
-  ],
-  // ...
-}
-```
 
 These settings and extensions are already included in the repo, so if you are
 using VS Code, there is no need to change anything in your config.

@@ -7,7 +7,7 @@ interface LatexConfig {
     lang?: string;
   }[];
   lang?: string | boolean;
-  out_dir?: boolean | string;
+  // out_dir?: boolean | string;
   out_file?: boolean;
   external_deps?: {
     [key: string]: string[];

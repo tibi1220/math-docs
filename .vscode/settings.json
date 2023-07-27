@@ -6,7 +6,29 @@
   },
   "latex-workshop.view.pdf.viewer": "tab",
   "latex-utilities.countWord.format": "${words} words, ${math} eq",
-  "latex-workshop.latex.recipe.default": "latexmk (latexmkrc)",
+  "latex-workshop.latex.recipes": [
+    { "name": "latexmk-dev", "tools": ["dev"] },
+    { "name": "latexmk-prod", "tools": ["prod"] }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "dev",
+      "command": "latexmk",
+      "args": ["-norc", "-r", "%WORKSPACE_FOLDER%/.latexmkrc.develop", "%DOC%"]
+    },
+    {
+      "name": "prod",
+      "command": "latexmk",
+      "args": [
+        "-norc",
+        "-silent",
+        "-r",
+        "%WORKSPACE_FOLDER%/.latexmkrc.production",
+        "%DOC%"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "latexmk-dev",
   "latex-workshop.latexindent.args": [
     "-l",
     "%WORKSPACE_FOLDER%/latexindent.yaml",

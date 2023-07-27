@@ -10,4 +10,3 @@ root_files:
   - { input: linear-equations.hu, output: linear-equations-hu }
   - { input: rank.hu, output: rank-hu }
   - { input: transformations.hu, output: transformations-hu }
-out_dir: build

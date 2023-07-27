@@ -25,8 +25,10 @@ if (!existsSync(GENERATED_DIR)) {
 LATEX_DIRS.forEach(async ({ dirs, name }) => {
   const configs = await getConfigPaths(BASE_DIR, dirs, CONFIG_NAME);
 
+  const rcFile = join(BASE_DIR, ".latexmkrc.production");
+
   const parsed = await Promise.all(
-    configs.map(async cfg => parseYaml(cfg, BASE_DIR))
+    configs.map(async cfg => parseYaml(cfg, BASE_DIR, rcFile, "build"))
   );
 
   const deps = mergeDeps(parsed);

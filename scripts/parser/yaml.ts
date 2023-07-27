@@ -107,7 +107,7 @@ function getOutputParser(mode = true) {
   };
 }
 
-async function inferOutDir(
+export async function inferOutDir(
   rcPath: string,
   mode = true,
   fallback = "build"
@@ -147,17 +147,19 @@ async function inferOutDir(
 
 export async function parseYaml(
   path: string,
-  cwd: string
+  cwd: string,
+  rcFile: string,
+  buildDir = "build"
 ): Promise<ParsedConfig | ConfigErrors> {
   const configFile = await readFile(path, "utf8");
 
   const json: LatexConfig | null = parse(configFile);
 
-  const absolute_source_path = dirname(path);
-  const source_path = relative(cwd, absolute_source_path);
+  const absolute_path = dirname(path);
+  const relative_path = relative(cwd, absolute_path);
 
   const errors: ConfigErrors = {
-    source_path,
+    source_path: relative_path,
     errors: [],
   };
 
@@ -179,18 +181,6 @@ export async function parseYaml(
     });
   }
 
-  const rcPath = join(absolute_source_path, ".latexmkrc");
-
-  try {
-    await access(rcPath);
-  } catch {
-    // The .latexmkrc file does not exist
-    errors.errors.push({
-      path: rcPath,
-      message: "Missing .latexmkrc file!",
-    });
-  }
-
   // In case of an error, we won't be able to compile any files in that dir
   // Second condition is redundant, but is needed to make ts happy
   if (errors.errors.length || !json.root_files) {
@@ -198,33 +188,6 @@ export async function parseYaml(
   }
 
   const configMessages: ConfigMessage[] = [];
-
-  // Global out dir option
-  let out_dir: string;
-
-  if (typeof json.out_dir !== "string") {
-    const { dir, status, message } = await inferOutDir(
-      rcPath,
-      json.out_dir,
-      "build"
-    );
-    out_dir = dir;
-
-    configMessages.push({
-      type: status === "warning" ? "warn" : "info",
-      message,
-    });
-  } else {
-    out_dir = json.out_dir;
-
-    configMessages.push({
-      type: "info",
-      message: `Using out_dir value: '${out_dir}'`,
-    });
-  }
-
-  const absolute_output_path = join(absolute_source_path, out_dir);
-  const output_path = join(source_path, out_dir);
 
   // Global lang option
   const langParser = getLanguageParser(json.lang, "hu");
@@ -243,8 +206,8 @@ export async function parseYaml(
   });
 
   return {
-    source_path,
-    output_path,
+    source_path: relative_path,
+    output_path: relative_path,
     root_files: await Promise.all(
       json.root_files.map(async file => {
         const input = file.input || "";
@@ -260,7 +223,7 @@ export async function parseYaml(
         }
 
         try {
-          await access(join(source_path, input + ".tex"));
+          await access(join(relative_path, input + ".tex"));
         } catch {
           fileMessages.push({
             type: "error",
@@ -342,16 +305,16 @@ export async function parseYaml(
 
         return {
           input,
-          relative_input: join(source_path, input),
-          absolute_input: join(absolute_source_path, input),
+          relative_input: join(relative_path, input),
+          absolute_input: join(absolute_path, input),
 
           output,
-          relative_output: join(output_path, output),
-          absolute_output: join(absolute_output_path, output),
+          relative_output: join(relative_path, buildDir, output),
+          absolute_output: join(absolute_path, buildDir, output),
 
           lang,
 
-          resolver: `latexmk ${input}.tex --jobname='${output}'`,
+          resolver: `latexmk -norc -silent -r ${rcFile} ${input}.tex --jobname='${output}'`,
 
           messages: fileMessages.length ? fileMessages : undefined,
         };
