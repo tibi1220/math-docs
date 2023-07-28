@@ -84,8 +84,9 @@ ${INCREMENT_ERROR}
       ) + "\n";
   }
 
-  messages.forEach(({ message, type }) => {
-    script += echo(message, ECHO_MAP[type]) + "\n";
+  messages.forEach(({ message, type }, i) => {
+    script +=
+      echo(message, ECHO_MAP[type], false, messages.length - 1 === i) + "\n";
     script += logger.write(`${message} [${relative_input}]`, type) + "\n";
 
     if (type === "warn") script += INCREMENT_WARN + "\n";
@@ -99,7 +100,8 @@ function parseFile(file: RootFile, logger: Logger): string {
 
   if (error) return script;
 
-  script = echo(`Now compiling ${file.input}.tex`, INFO) + "\n" + script;
+  script =
+    echo(`Now compiling ${file.input}.tex`, INFO, true, true) + "\n" + script;
 
   // prettier-ignore
   script += `
@@ -132,7 +134,12 @@ warnCount=0\n\n`;
       return;
     }
 
-    script += echo(`Compiling documents in ${g(cfg.source_path)}`, INFO);
+    script += echo(
+      `Compiling documents in ${g(cfg.source_path)}`,
+      INFO,
+      true,
+      true
+    );
 
     script += `\ncd ${cfg.source_path}\n`;
 
@@ -154,7 +161,7 @@ if (( $errorCount > 0 )); then
   ${echo(`Some errors ($errorCount) have occured during compilation`, ERROR)}
   exit 1
 else
-  ${echo(`Successfully compiled ${g(name)} files.`, INFO)}
+  ${echo(`Successfully compiled ${g(name)} files.`, INFO, true, false)}
   exit 0
 fi\n
 `;
