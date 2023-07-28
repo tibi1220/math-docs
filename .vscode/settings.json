@@ -5,6 +5,7 @@
     "editor.formatOnPaste": true
   },
   "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.outDir": "%DIR%/build",
   "latex-utilities.countWord.format": "${words} words, ${math} eq",
   "latex-workshop.latex.recipes": [
     { "name": "latexmk-dev", "tools": ["dev"] },
