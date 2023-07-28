@@ -1,3 +1,2 @@
 root_files:
-  - { input: main, output: example-handout }
-lang: en
+  - { input: main.en, output: example-handout-en }

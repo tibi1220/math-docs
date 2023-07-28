@@ -85,6 +85,8 @@ Besides `config` files, we have 4 different `tex` source file types
 
 ## Folder structure
 
+### Required files
+
 Each folder containing `root` or `standalone` files most contain the following
 files:
 
@@ -103,6 +105,13 @@ external_deps:   # Undefined by default
     - dep1
     - dep2
 ```
+
+### Naming conventions
+
+- Language specific files must use either `.hu.tex` or `.en.tex` extensions.
+- Other files, that do not contain any language specific text (like graphics)
+  can use the `.tex` extension, but `lang = false` must also be specified in the
+  corresponding `config.yml` file.
 
 ## Contribution
 

@@ -1,3 +1,2 @@
 root_files:
-  - { input: main, output: example-book }
-lang: en
+  - { input: main.hu, output: example-book-hu }
