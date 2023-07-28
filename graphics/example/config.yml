@@ -1,4 +1,3 @@
 root_files:
   - { input: main, output: example-graphics }
 lang: false
-out_file: false
