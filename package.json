@@ -5,6 +5,7 @@
   "main": "scripts/index.ts",
   "scripts": {
     "link": "./link.sh",
+    "clean": "rm -rf ./**/build && rm -rf generate",
     "generate": "TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node ./scripts/index.ts",
     "deps:root": "./generate/root-deps.sh",
     "deps:standalone": "./generate/standalone-deps.sh",

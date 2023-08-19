@@ -43,7 +43,7 @@
 \setlength\parskip{.5em}
 
 \newcommand{\area}[1]{\def\@area{#1}}
-\newcommand{\docno}[1]{\def\@docno{#1}}
+\newcommand{\docno}[1]{\def\@docno{#1}\setcounter{exercise}{#1}}
 \renewcommand{\subject}[1]{\def\@subject{#1}}
 
 \RequirePackage{lastpage}
@@ -90,7 +90,6 @@
 }
 
 % Counters
-\refstepcounter{section}
 \numberwithin{definition}{section}
 \numberwithin{exercise}{section}
 \numberwithin{note}{section}
