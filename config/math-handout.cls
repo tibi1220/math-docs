@@ -33,6 +33,12 @@
 \RequirePackage[print-solutions]{math-exercise}
 \RequirePackage{standalone}
 
+% Counters
+\numberwithin{definition}{section}
+\numberwithin{exercise}{section}
+\numberwithin{note}{section}
+\let\section\subsection
+
 % Page layout
 \ifhandout@@debug
   \PassOptionsToPackage{showframe}{geometry}
@@ -43,7 +49,7 @@
 \setlength\parskip{.5em}
 
 \newcommand{\area}[1]{\def\@area{#1}}
-\newcommand{\docno}[1]{\def\@docno{#1}\setcounter{exercise}{#1}}
+\newcommand{\docno}[1]{\def\@docno{#1}\setcounter{section}{#1}}
 \renewcommand{\subject}[1]{\def\@subject{#1}}
 
 \RequirePackage{lastpage}
@@ -88,9 +94,3 @@
 \newcommand\listofexercises{%
   \listoftoc[Alma]{lox}
 }
-
-% Counters
-\numberwithin{definition}{section}
-\numberwithin{exercise}{section}
-\numberwithin{note}{section}
-\let\section\subsection
