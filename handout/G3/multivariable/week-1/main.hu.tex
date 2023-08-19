@@ -1,0 +1,99 @@
+\documentclass[lang=magyar,debug]{math-handout}
+
+\setlength\parindent{0em}
+\setlength\parskip{.66em}
+
+\author{Sándor Tibor}
+\title{Ismétlés}
+\subtitle{Többváltozós analízis}
+
+\numberwithin{exercise}{section}
+
+\newcounter{alma}
+\makeatletter
+
+\addtotoclist{alma}
+
+% \begin{noindent}
+\newenvironment{alma}{%
+  \bgroup
+  \refstepcounter{alma}%
+  \begin{center}%
+  \thealma%
+  \newcommand{\almatitle}[1]{\def\@almatitle{##1}}%
+  \newcommand{\almasol}[1]{\def\@almasol{##1}}%
+  \newcommand{\almashort}[1]{\def\@almashort{##1}}%
+  \newcommand{\almaskip}[1]{\def\@almaskip{##1}}%
+}{%
+  \addcontentsline{alma}{section}{\@almashort}%
+  % \@ifundefined{@almatitle}{}{\par\@almatitle%
+  % \@ifundefined{@almasol}{}{\par\@almasol}%
+  % \@ifundefined{@almashort}{}{\par\@almashort}%
+  % \@ifundefined{@almaskip}{}{\par\@almaskip}%
+  \end{center}\egroup
+}
+% \end{noindent}
+
+\makeatother
+
+\begin{document}
+
+% \maketitle[1]
+
+\section{Alma}
+
+\begin{alma}
+  \almatitle{Alma title}
+  \almasol{Alma sol}
+  \almashort{Alma short}
+  Alma 1
+\end{alma}
+
+\begin{alma}
+  \almatitle{Alma title}
+  \almasol{Alma sol}
+  \almashort{Alma short}
+  Alma 2
+\end{alma}
+
+\listoftoc[Alma]{alma}
+
+% \begin{exercise}{Alma}
+%   Alma
+%   \exsol{Alma}
+% \end{exercise}
+
+% \begin{table}[H]
+%   % \label{table:1}
+%   \caption{Alma}
+% \end{table}
+
+% \begin{figure}[H]
+%   % \label{fig:1}
+%   \caption{Alma}
+% \end{figure}
+
+% \section{Korte}
+
+% \begin{exercise}
+%   Korte
+%   \exsol{Korte}
+% \end{exercise}
+
+% \begin{table}[H]
+%   % \label{table:2}
+%   \caption{Korte}
+% \end{table}
+
+% \begin{figure}[H]
+%   % \label{fig:2}
+%   \caption{Korte}
+% \end{figure}
+
+% \clearpage
+% \tableofcontents
+% \listoffigures
+% \listoftoc[Table]{lot}
+% \listoftoc[Alma]{lox}
+
+\end{document}

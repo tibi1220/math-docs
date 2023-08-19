@@ -57,5 +57,46 @@
 \DeclareMathOperator\artanh{artanh}
 \DeclareMathOperator\arcoth{arcoth}
 
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+
+% Renaming
+\let\cross\times
+
 % Set notation big
-\newcommand{\bigset}[2]{\Big\{\, #1 \,\Big|\, #2 \,\Big\}}
+\newcommand{\bigset}[2]{\Big\{\; #1 \;\Big|\; #2 \;\Big\}}
+
+% Scalar product and norm
+\newcommand{\scalar}[2]{< #1 \, ; \, #2 >}
+\newcommand{\norma}[1]{\left|\left| #1 \right|\right|}
+
+% Definition environment
+\RequirePackage{mdframed}
+\newenvironment{myframe}{%
+  \begin{mdframed}[%
+      backgroundcolor=yellow-base!5,%
+      linecolor=blue-base,%
+      linewidth=1mm,%
+      topline=false,%
+      rightline=false,%
+      bottomline=false,%
+    ]}{\end{mdframed}}
+
+\newcounter{definition}
+\newenvironment{definition}[1][\@nil]{%
+  \refstepcounter{definition}%
+  \begin{myframe}\textbf{Definíció \thedefinition}%
+    \def\tmp{#1}%
+    \ifx\tmp\@nnil\else%
+      \hspace{.5em}[\;#1\;]
+    \fi\par%
+    }{\end{myframe}}
+\newcounter{note}
+\newenvironment{note}[1][\@nil]{%
+  \refstepcounter{note}%
+  \begin{myframe}\textbf{Megjegyzés \thenote}%
+    \def\tmp{#1}%
+    \ifx\tmp\@nnil\else%
+      \hspace{.5em}[\;#1\;]
+    \fi\par%
+    }{\end{myframe}}

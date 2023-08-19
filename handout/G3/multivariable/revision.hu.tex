@@ -1,0 +1,139 @@
+\documentclass[lang=magyar]{math-handout}
+
+\title{Ismétlés}
+\area{Többváltozós analízis}
+\subject{Matematika G3}
+\date{Utoljára frissítve: \today}
+\author{Sándor Tibor}
+\docno{1}
+
+\begin{document}
+\allowdisplaybreaks
+
+\maketitle
+
+\vspace{1em}
+
+\begin{summary}
+  Ebben a leckében a vektoranalízissel kapcsolatos alapfogalmakat fogjuk
+  átismételni. Felelevenítjük a vektortér és lineáris leképezés fogalmát,
+  és kapcsolatot teremtünk a vektorok és mátrixok között.
+\end{summary}
+
+\vspace{-1em}
+
+\section{Elméleti áttekinő}
+
+\vspace{1em}
+
+\begin{definition}[Vektortér]
+  Legyen $V$ egy nemüreshalmaz, és $+; \lambda$ két művelet, $\mathbb T$ test.
+  $(V; +; \lambda)$ a $\mathbb T$ test feletti vektortér, ha az alábbiak
+  teljesülnek:
+  \begin{itemize}
+    \def\arraystretch{1.2}
+    \item $(V; +)$ Abel csoport:\\[1mm]
+          \begin{tabular}{p{45mm} l}
+            -- asszociatív:        &
+            $\rvec a + (\rvec b + \rvec c) = (\rvec a + \rvec b) + \rvec c$,
+            \\
+            -- kommutatív:         &
+            $\rvec a + \rvec b = \rvec b + \rvec a$,
+            \\
+            -- létezik zérus elem: &
+            $\exists \nvec \in V \text{, melyre } \rvec a + \nvec = \rvec a$,
+            \\
+            -- létezik inverz:     &
+            $\forall \rvec a \text{-re } \exists - \rvec a \text{, hogy } \rvec a + (- \rvec a) = \nvec$.
+          \end{tabular}
+    \item $(V; \lambda)$-ra pedig igaz:\\[1mm]
+          \begin{tabular}{p{45mm} l}
+            -- asszociatív:      & $(\alpha \beta) \rvec a = \alpha (\beta \rvec a)$.
+            \\
+            -- egységelem:       & $\varepsilon \in T \text{-re } \varepsilon\rvec a = \rvec a$,
+            \\
+            -- disztributivitás: & $\alpha(\rvec a + \rvec b) = \alpha \rvec a + \alpha \rvec b$,
+            \\
+                                 & $(\alpha + \beta) \rvec a = \alpha \rvec a + \beta \rvec a$.
+          \end{tabular}
+  \end{itemize}
+\end{definition}
+
+\begin{definition}[Lineáris függőség / függetlenség]
+  A $(V; +; \lambda)$ vektortér $\rvec a_1; \rvec a_2; \dots; \rvec a_n$
+  vektorait \textbf{lineárisan függő}nek mondjuk, ha a
+  \[
+    \lambda_1 \rvec a_1 +
+    \lambda_2 \rvec a_2 +
+    \dots +
+    \lambda_n \rvec a_n =
+    \nvec
+  \]
+  vektoregyenletnek létezik a triviálistól különböző megoldása is.
+  \\[2mm]
+  Ellenkező esetben \textbf{lineárisan független}ek.
+\end{definition}
+
+\begin{definition}[Altér]
+  Legyen $(V; +; \lambda)$ a $T$ test feletti vektortér, és
+  $\emptyset \neq L \subset V$. $L$-t altérnek nevezzük $V$-ben, ha
+  $(L; +; \lambda)$ ugyancsak vektortér.
+\end{definition}
+
+\begin{definition}[Generátorrendszer]
+  Legyen $\emptyset \neq G \subset V$. Ekkor $G$ által generált altérnek
+  nevezzük azt a legszűkebb alteret, amely tartalmazza $G$-t. Ha ez az
+  altér maga $V$, akkor $G$ generátorrendszere $V$-nek. ($\mathcal L(G)=V$)
+\end{definition}
+
+\begin{definition}[Bázis]
+  A $V$ vektortér egy lineárisan független generátorrendszerét a $V$ bázisának
+  hívjuk.
+\end{definition}
+
+\begin{definition}[Lineáris leképezés]
+  Legyenek $V_1$ és $V_2$ ugyanazon $\mathbb T$ test feletti vektorterek. Legyen
+  $\varphi: V_1 \rightarrow V_2$ leképezés, melyet lineáris leképezésnek
+  nevezünk, ha
+  \[
+    \varphi ( \alpha \rvec{a} + \beta \rvec{b} )
+    = \alpha \cdot \varphi ( \rvec{a} )
+    + \beta \cdot \varphi ( \rvec{b} )
+  \]
+  bármely $\rvec{a} ; \rvec{b} \in V_1$ és
+  $\alpha; \beta \in \mathbb{T}$ esetén teljesül.
+\end{definition}
+
+\begin{definition}[Homomorfizmus]
+  \vspace{-1em}
+  \[
+    \Hom ( V_1; V_2 ) :=
+    \bigset{\varphi : V_1 \rightarrow V_2}{\varphi \; \text{lineáris}}
+  \]
+\end{definition}
+
+\begin{definition}[Endomorfizmus]
+  \vspace{-1em}
+  \[
+    V_1 = V_2 = V \; \rightarrow \;
+    \Hom ( V; V ) = \End (V)
+  \]
+\end{definition}
+
+\begin{note}[Lineáris leképezések mátrixreprezentációja]
+  Legyen $V_1$ és $V_2$ ugyanazon test feletti vektorterek,
+  $\dim V_1 = n$ és $\dim V_2 = k$. Ekkor a $\varphi: V_1 \rightarrow V_2$
+  leképezést reprezentáló mátrix $n \times k$ dimenziós.
+\end{note}
+
+\section{Feladatok}
+
+\relativeinput{../../../exercise/vector-space/linear-independence.hu}
+
+\relativeinput{../../../exercise/vector-space/vector-space-tf.hu}
+
+\relativeinput{../../../exercise/vector-space/linear-map-tf.hu}
+
+\relativeinput{../../../exercise/vector-space/linear-map.hu}
+
+\end{document}

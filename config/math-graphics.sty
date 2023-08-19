@@ -4,6 +4,11 @@
 % Package name [\usepackage{math-graphics}]
 \ProvidesPackage{math-graphics}
 
+\RequirePackage{float}
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+\RequirePackage{subcaption}
+
 % Color
 \RequirePackage{xcolor}
 
@@ -23,6 +28,7 @@
 
 % TikZ
 \RequirePackage{tikz, pgfplots}
+\RequirePackage{tikzpagenodes}
 \usetikzlibrary{calc}
 \pgfplotsset{compat=1.18}
 \pgfkeys{/pgf/plot/gnuplot call={cd build && gnuplot}}
