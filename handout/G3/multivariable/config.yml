@@ -1,5 +1,4 @@
 root_files:
-  - input: revision.hu
-    variants: true
-  - input: operators.hu
-    variants: true
+  - { input: revision.hu, variants: true }
+  - { input: operators.hu, variants: true }
+  - { input: integral-theorems.hu, variants: true }

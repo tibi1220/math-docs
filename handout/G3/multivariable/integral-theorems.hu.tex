@@ -1,0 +1,85 @@
+\documentclass[lang=magyar]{math-handout}
+
+\title{Integrálátalakító tételek}
+\area{Többváltozós analízis}
+\subject{Matematika G3}
+\date{Utoljára frissítve: \today}
+\author{Sándor Tibor}
+\docno{5}
+
+\begin{document}
+\allowdisplaybreaks
+
+\maketitle
+
+\vspace{1em}
+
+\begin{summary}
+  Bevezetjük a Nabla formális differenciálopertor fogalmát. Megismerkedünk a
+  gradiens, a divergencia és a rotáció fogalmával, bevezetjük a skalár- és a
+  vektorpotenciált, valamint megismerkedünk az ezekkel kapcsolatos alapvető
+  azonosságokkal.
+\end{summary}
+
+\vspace{-1em}
+
+\section{Elméleti áttekinő}
+
+\begin{theorem}[Stokes -- tétel]
+  Legyen $S : [a;b]^2 \rightarrow \mathbb R^3$ irányított,
+  parametrizált felület. Irányítsuk a peremet a jobbkézszabály szerint.
+  Legyen továbbá $\rvec v : \mathbb R^3 \rightarrow \mathbb R^3$ legalább
+  egyszer folytonosan differenciálható vektormező. Ekkor:
+  \[
+    \int \limits_S \scalar{\rot \rvec v}{\diff \rvec S}
+    =
+    \oint \limits_{\partial S} \scalar{\rvec v}{\diff \rvec r}
+    \text.
+  \]
+\end{theorem}
+
+\begin{theorem}[Gauss -- Osztogradszkij -- tétel]
+  Legyen $V : [a;b]^3 \rightarrow \mathbb R^3$ irányított, parametrizált
+  térfogat. Legyen továbbá $\rvec v : \mathbb R^3 \rightarrow \mathbb R^3$
+  legalább egyszer folytonosan differenciálható vektormező. Jelölje
+  $\partial V = S$ a $V$ peremét indukált irányítással. Ekkor:
+  \[
+    \int \limits_V \Div \rvec v \, \diff V
+    =
+    \oint \limits_{\partial V} \scalar{\rvec v}{\diff \rvec S}
+    \text.
+  \]
+\end{theorem}
+
+\begin{theorem}[Green -- tétel asszimetrikus alakja]
+  Legyenek $\varphi; \psi: \mathbb R^3 \rightarrow \mathbb R$ kétszeresen
+  folytonos skalármezők, $V \subset \mathbb R^3$ parametrizált, irányított
+  tértartomány, $\partial V = S$ perem indukált irányítással. Ekkor:
+  \[
+    \int \limits_V
+    \psi \, \Delta \varphi +
+    \scalar{\grad \psi}{\grad \varphi}
+    \diff V
+    =
+    \int \limits_{\partial V} \scalar{\psi \grad \varphi}{\diff \rvec S}
+    \text.
+  \]
+\end{theorem}
+
+\begin{theorem}[Green -- tétel szimmetrikus alakja]
+  Legyenek $\varphi; \psi: \mathbb R^3 \rightarrow \mathbb R$ kétszeresen
+  folytonos skalármezők, $V \subset \mathbb R^3$ parametrizált, irányított
+  tértartomány, $\partial V = S$ perem indukált irányítással. Ekkor:
+  \[
+    \int \limits_V
+    \psi \, \Delta \varphi + \varphi \, \Delta \psi
+    \; \diff V
+    =
+    \int \limits_{\partial V} \scalar{\psi \grad \varphi - \varphi \grad \psi}{\diff \rvec S}
+  \]
+\end{theorem}
+
+
+\section{Feladatok}
+
+\end{document}
