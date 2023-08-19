@@ -34,3 +34,11 @@
 \pgfkeys{/pgf/plot/gnuplot call={cd build && gnuplot}}
 
 % Provided tikz macros
+\newcommand{\circled}[2]{\tikz[baseline=(char.base)]{
+    \node[shape=circle,draw,inner sep=1pt, thick, #2]
+    (char) {#1};
+  }}
+\newcommand{\rected}[2]{\tikz[baseline=(char.base)]{
+    \node[shape=rectangle,draw,inner sep=2pt, thick, #2!40!gray]
+    (char) {{\color{black}#1}};
+  }}

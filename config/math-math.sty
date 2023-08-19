@@ -49,7 +49,13 @@
 \DeclareMathOperator{\adj}{adj}
 \DeclareMathOperator{\defect}{def}
 \DeclareMathOperator{\sgn}{sgn}
-\DeclareMathOperator\grad{grad}
+
+\let\grad\relax
+\let\div\relax
+\DeclareMathOperator{\rot}{rot}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\tr}{tr}
 
 \DeclareMathOperator\arccot{arccot}
 \DeclareMathOperator\arsinh{arsinh}
@@ -70,6 +76,10 @@
 \newcommand{\scalar}[2]{< #1 \, ; \, #2 >}
 \newcommand{\norma}[1]{\left|\left| #1 \right|\right|}
 
+% Transpose and differential operator
+\newcommand{\transpose}{\mathsf{T}}
+\newcommand{\Diff}{\mathbf{D}}
+
 % Definition environment
 \RequirePackage{mdframed}
 \newenvironment{myframe}{%
@@ -80,6 +90,8 @@
       topline=false,%
       rightline=false,%
       bottomline=false,%
+      skipabove=0.25em,%
+      skipbelow=0.25em,%
     ]}{\end{mdframed}}
 
 \newcounter{definition}
@@ -95,6 +107,33 @@
 \newenvironment{note}[1][\@nil]{%
   \refstepcounter{note}%
   \begin{myframe}\textbf{Megjegyzés \thenote}%
+    \def\tmp{#1}%
+    \ifx\tmp\@nnil\else%
+      \hspace{.5em}[\;#1\;]
+    \fi\par%
+    }{\end{myframe}}
+\newcounter{statement}
+\newenvironment{statement}[1][\@nil]{%
+  \refstepcounter{statement}%
+  \begin{myframe}\textbf{Állítás \thestatement}%
+    \def\tmp{#1}%
+    \ifx\tmp\@nnil\else%
+      \hspace{.5em}[\;#1\;]
+    \fi\par%
+    }{\end{myframe}}
+\newcounter{theorem}
+\newenvironment{theorem}[1][\@nil]{%
+  \refstepcounter{theorem}%
+  \begin{myframe}\textbf{Tétel \thetheorem}%
+    \def\tmp{#1}%
+    \ifx\tmp\@nnil\else%
+      \hspace{.5em}[\;#1\;]
+    \fi\par%
+    }{\end{myframe}}
+\newcounter{identities}
+\newenvironment{identities}[1][\@nil]{%
+  \refstepcounter{identities}%
+  \begin{myframe}\textbf{Azonosságok \theidentities}%
     \def\tmp{#1}%
     \ifx\tmp\@nnil\else%
       \hspace{.5em}[\;#1\;]

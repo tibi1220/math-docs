@@ -37,6 +37,7 @@
 \numberwithin{definition}{section}
 \numberwithin{exercise}{section}
 \numberwithin{note}{section}
+\numberwithin{statement}{section}
 \let\section\subsection
 
 % Page layout

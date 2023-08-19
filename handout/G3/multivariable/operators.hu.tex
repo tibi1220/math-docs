@@ -1,0 +1,389 @@
+\documentclass[lang=magyar]{math-handout}
+
+\title{Operátorok}
+\area{Többváltozós analízis}
+\subject{Matematika G3}
+\date{Utoljára frissítve: \today}
+\author{Sándor Tibor}
+\docno{2}
+
+\begin{document}
+\allowdisplaybreaks
+
+\maketitle
+
+\vspace{1em}
+
+\begin{summary}
+  Bevezetjük a Nabla formális differenciálopertor fogalmát. Megismerkedünk a
+  gradiens, a divergencia és a rotáció fogalmával, bevezetjük a skalár- és a
+  vektorpotenciált, valamint megismerkedünk az ezekkel kapcsolatos alapvető
+  azonosságokkal.
+\end{summary}
+
+\vspace{-1em}
+
+\section{Elméleti áttekinő}
+
+\begin{definition}[Lineáris leképezés adjugáltja]
+  $! \; (V; \, \scalar{}{})$ Euklideszi tér, $\varphi: V \rightarrow V$ lineáris
+  leképezés. A $\varphi^{*} : V \rightarrow V$ lineáris leképezést a $\varphi$
+  leképezés adjungáltjának hívjuk, ha $\scalar{\varphi(\rvec{v}_1)}{\rvec{v}_2}
+    \; = \; \scalar{\rvec{v}_1}{\varphi^{*}(\rvec{v}_2)}$ $\forall \; \rvec{v}_1
+    ;\; \rvec{v}_2 \in V$.
+\end{definition}
+
+\begin{note}[Adjugált leképezés mátrix reprezentációja]
+  Reprezentálja $\varphi$-t $\rmat{A}$, $\varphi^{*}$-ot pedig $\rmat{A}^{*}$:
+  \begin{align*}
+    \scalar{\varphi(\rvec{v})}{\rvec{w}}
+    \; & = \;
+    \scalar{\rvec{v}}{\varphi^{*}(\rvec{w})}
+    \text,
+    \\[2mm]
+    \rmat{A}\rvec{v} \cdot \rvec{w}
+       & =
+    \rvec{v} \cdot \rmat{A}^{*} \rvec{w}
+    \text,
+    \\[2mm]
+    \begin{bmatrix}
+      a_{11} & a_{12} \\
+      a_{21} & a_{22}
+    \end{bmatrix}
+    \begin{bmatrix}
+      v_1 \\ v_2
+    \end{bmatrix}
+    \cdot
+    \begin{bmatrix}
+      w_1 \\ w_2
+    \end{bmatrix}
+       & =
+    \begin{bmatrix}
+      v_1 \\ v_2
+    \end{bmatrix}
+    \cdot
+    \begin{bmatrix}
+      a_{11}^{*} & a_{12}^{*} \\
+      a_{21}^{*} & a_{22}^{*}
+    \end{bmatrix}
+    \begin{bmatrix}
+      w_1 \\ w_2
+    \end{bmatrix}
+    \text,
+    \\[2mm]
+    \begin{bmatrix}
+      a_{11} v_1 + a_{12} v_2 \\
+      a_{21} v_1 + a_{22} v_2
+    \end{bmatrix}
+    \cdot
+    \begin{bmatrix}
+      w_1 \\
+      w_2
+    \end{bmatrix}
+       & =
+    \begin{bmatrix}
+      v_1 \\
+      v_2
+    \end{bmatrix}
+    \cdot
+    \begin{bmatrix}
+      a_{11}^{*} w_1 + a_{12}^{*} w_2 \\
+      a_{21}^{*} w_1 + a_{22}^{*} w_2
+    \end{bmatrix}
+    \text,
+  \end{align*}
+  \begin{alignat*}{4}
+    \scalar{\rmat{A}\rvec{v}}{\rvec{w}}
+     & = \circled{$a_{11}$}{green!40!gray} v_1 w_1
+     & + \circled{$a_{12}$}{red!40!gray} v_2 w_1
+     & + \circled{$a_{21}$}{cyan!40!gray} v_1 w_2
+     & + \circled{$a_{22}$}{yellow!40!gray} v_2 w_2
+    \text,
+    \\
+    \scalar{\rmat{A}^{*}\rvec{w}}{\rvec{v}}
+     & = \circled{$a_{11}^{*}$}{green!40!gray} w_1 v_1
+     & + \circled{$a_{12}^{*}$}{cyan!40!gray} w_2 v_2
+     & + \circled{$a_{21}^{*}$}{red!40!gray} w_1 v_2
+     & + \circled{$a_{22}^{*}$}{yellow!40!gray} w_2 v_2
+    \text.
+  \end{alignat*}
+  Megállapthatjuk, hogy $\rmat{A}^{*} = \rmat{A}^\transpose$.
+\end{note}
+
+\begin{statement}[Leképezés felbontása]
+  Legyen $\varphi \in \End V$, ekkor $!\exists$ olyan $\mathcal{A}$ és
+  $\mathcal{S}$ antiszimmetrikus és szimmetrikus leképezés, ahol $\varphi =
+    \mathcal{A} + \mathcal{S}$, melyek az endomorfizmusok vektorterét 2
+  diszjunkt halmazra bontják:
+  \[
+    \mathcal{A} := \frac{\varphi - \varphi^{*}}{2}
+    \text,
+    \hspace{5mm} \text{és} \hspace{5mm}
+    \mathcal{S} := \frac{\varphi + \varphi^{*}}{2}
+    \text.
+  \]
+\end{statement}
+
+\begin{note}
+  Az antiszimmetrikus leképezések és a $V$-beli vektorok között tudunk
+  egy-egyértelmű hozzárendelést találni:
+  \[
+    \rmat{A} \in \mathcal{A}
+    \hspace{2.5mm} \leftrightarrow \hspace{2.5mm}
+    \rvec{v} \in V
+    \text.
+  \]
+  Keressünk egy olyan $\rvec{v}$ vektort,
+  melyre teljesül az alábbi egyenlet:
+  \begin{align*}
+    \rmat{A}\rvec{w}
+     & = \rvec{v} \times \rvec{w}
+    \text,
+    \\[2mm]
+    \begin{bmatrix}
+      0       & a_{12}  & a_{13} \\
+      -a_{12} & 0       & a_{23} \\
+      -a_{13} & -a_{23} & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+      w_1 \\ w_2 \\ w_3
+    \end{bmatrix}
+     & =
+    \begin{bmatrix}
+      v_1 \\ v_2 \\ v_3
+    \end{bmatrix}
+    \times
+    \begin{bmatrix}
+      w_1 \\ w_2 \\ w_3
+    \end{bmatrix}
+    \text,
+    \\[2mm]
+    \begin{bmatrix}
+      \rected{$+a_{12}$}{red}  w_2 \rected{$+a_{13}$}{blue}  w_3 \\
+      \rected{$-a_{12}$}{red}  w_1 \rected{$+a_{23}$}{green} w_3 \\
+      \rected{$-a_{13}$}{blue} w_1 \rected{$-a_{23}$}{green} w_2
+    \end{bmatrix}
+     & =
+    \begin{bmatrix}
+      \rected{$v_2$}{blue}  w_3 \rected{$-v_3$}{red}   w_2 \\
+      \rected{$v_3$}{red}   w_1 \rected{$-v_1$}{green} w_3 \\
+      \rected{$v_1$}{green} w_2 \rected{$-v_2$}{blue}  w_1
+    \end{bmatrix}
+    \text,
+    \hspace{20mm}
+    \\[2mm]
+    \rvec{v}
+     & =
+    \begin{bmatrix}
+      -a_{23} \\ a_{13}  \\ -a_{12}
+    \end{bmatrix}
+    \text.
+  \end{align*}
+\end{note}
+
+\begin{definition}[Vektorinvariáns]
+  Egy antiszimmetrikus lineáris transzformáció mindig leírható egy rögzített
+  vektorral való keresztszorzással. Ez a vektor a leképezés vektorinvariánsa.
+\end{definition}
+
+\begin{statement}[Lineáris leképezés nyoma]
+  Egy lineáris transzformáció főátlójában lévő elemek összege minden
+  koordinátarendszerben ugyanannyi, tehát a koordináta-transzformáció nem
+  befolyásolja. Ezt nevezzük a lineáris leké- pezés nyomának. (trace / spur)
+\end{statement}
+
+\begin{note}[Nabla operátor bevezetése]
+  Legyen $\rvec f: V \rightarrow V$ függvény. Vegyük ennek a deriváltját.
+  \[
+    \Diff\rvec f
+    =
+    \begin{bmatrix}
+      \partial_1 f_1 & \partial_2 f_1 & \dots  & \partial_n f_1 \\
+      \partial_1 f_2 & \partial_2 f_2 & \dots  & \partial_n f_2 \\
+      \vdots         & \vdots         & \ddots & \vdots         \\
+      \partial_1 f_n & \partial_2 f_n & \dots  & \partial_n f_n
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      \grad^\transpose f_1 \\
+      \grad^\transpose f_2 \\
+      \vdots               \\
+      \grad^\transpose f_n \\
+    \end{bmatrix}
+    \in
+    \mathcal M_{n \times n}
+    \text.
+  \]
+  Definiáljuk az alábbi fogalmakat:
+  \begin{itemize}
+    \item rotáció
+          \tabto{2.4cm} – \tabto{3cm}
+          $\rot f := \Diff f - \Diff f ^{*}$,
+
+    \item divergencia
+          \tabto{2.4cm} – \tabto{3cm}
+          $\Div f := \tr \left( \Diff f \right)$.
+  \end{itemize}
+  $V = \mathbb{R}^3$ esetén:
+  \[
+    \rot \rvec f
+    =
+    \begin{bmatrix}
+      0                               &
+      \partial_2 f_1 - \partial_1 f_2 &
+      \partial_3 f_1 - \partial_1 f_3
+      \\
+      \partial_1 f_2 - \partial_2 f_1 &
+      0                               &
+      \partial_3 f_2 - \partial_2 f_3
+      \\
+      \partial_1 f_3 - \partial_3 f_1 &
+      \partial_2 f_3 - \partial_3 f_2 &
+      0
+    \end{bmatrix}
+    \text.
+  \]
+  A mátrix vektorinvariánsa:
+  \[
+    \rvec{v}
+    =
+    \begin{bmatrix}
+      \partial_2 f_3 - \partial_3 f_2 \\
+      \partial_3 f_1 - \partial_1 f_3 \\
+      \partial_1 f_2 - \partial_2 f_1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      \partial_1 \\ \partial_2 \\ \partial_3
+    \end{bmatrix}
+    \times
+    \begin{bmatrix}
+      f_1 \\ f_2 \\ f_3
+    \end{bmatrix}
+    =
+    \nabla \times \rvec f
+    \text,
+  \]
+  ahol $\nabla$ a Nabla operátor (formális differenciálopertor).
+\end{note}
+
+\begin{note}
+  Gradiens, divergencia és rotáció számítása a Nabla operátorral:
+  \[
+    \grad \varphi = \nabla \varphi
+    \text,\hspace{1cm}
+    \Div \rvec v = \scalar{\nabla}{\rvec v}
+    \text,\hspace{1cm}
+    \rot \rvec v = \nabla \times \rvec v
+    \text.
+  \]
+\end{note}
+
+% \begin{note}[Zérusság]
+%   Az alábbi 2 összefüggés mindig teljesül
+%   \[
+%     \Div \rot \rvec v \equiv 0
+%     \text,\hspace{1cm}
+%     \rot \grad \varphi \equiv \nvec
+%   \]
+% \end{note}
+
+\begin{definition}[Skalárpotenciálosság]
+  Egy $\rvec v: V \rightarrow V$ vektormező skalárpotenciálos, ha létezik olyan
+  $\varphi: V \rightarrow \mathbb R$ skalármező, hogy $\rvec v = \grad \varphi$.
+\end{definition}
+
+\begin{definition}[Vektorpotenciálosság]
+  Egy $\rvec v: V \rightarrow V$ vektormező vektorpotenciálos, ha létezik olyan
+  $\rvec u: V \rightarrow V$ vektormező, hogy $\rvec v = \rot \rvec u$.
+\end{definition}
+
+\begin{theorem}
+  Legyen $\rvec v: V \rightarrow V$ mindenhol értelmezett, legalább egyszer
+  differenciálható vektormező. Ekkor:
+  \begin{itemize}
+    \item $\rvec v$ skalárpotenciálos
+          $\;\Leftrightarrow\;$
+          $\rot \rvec v = \nvec$,
+    \item $\rvec v$ vektorpotenciálos
+          $\;\Leftrightarrow\;$
+          $\Div \rvec v = 0$.
+  \end{itemize}
+\end{theorem}
+
+\begin{identities}
+  Legyenek $\varphi, \psi: V \rightarrow \mathbb R$ skalármezők, $\rvec u;
+    \rvec v; \rvec w: V \rightarrow V$ vektormezők, $\lambda; \mu \in \mathbb R$
+  skalárok.
+  \begin{itemize}
+    \item Teljesül a linearitás:\vspace{-.33cm}
+          \begin{align*}
+            \grad \left( \lambda \, \varphi + \mu \, \psi \right)
+             & =
+            \lambda \grad \varphi + \mu \grad \psi
+            \text,
+            \\
+            \Div \left( \lambda \, \rvec v + \mu \, \rvec w \right)
+             & =
+            \lambda \Div \rvec v + \mu \Div \rvec w
+            \text,
+            \\
+            \rot \left( \lambda \, \rvec v + \mu \, \rvec w \right)
+             & =
+            \lambda \rot \rvec v + \mu \rot \rvec w
+            \text.
+          \end{align*}
+    \item Zérusság:\vspace{-.33cm}
+          \begin{align*}
+            \rot \grad \varphi & \equiv \nvec
+            \text,
+            \\
+            \Div \rot \rvec v  & \equiv 0
+            \text.
+          \end{align*}
+    \item Deriválási szabályokhoz hasonlóan:
+          \begin{align*}
+            \grad \left( \varphi \, \psi \right)
+             & =
+            \varphi \, \grad \psi + \psi \, \grad \varphi
+            \text,
+            \\
+            \Div \left( \varphi \, \rvec v \right)
+             & =
+            \varphi \, \Div \rvec v + \scalar{\grad \varphi}{\rvec v}
+            \text,
+            \\
+            \rot \left( \varphi \, \rvec v \right)
+             & =
+            \varphi \, \rot \rvec v + \grad \varphi \times \rvec v
+            \text.
+          \end{align*}
+    \item Egyéb szabályok:\vspace{-.33cm}
+          \begin{align*}
+            \rot \rot \rvec v
+             & =
+            \grad \Div \rvec v - \Delta \rvec v
+            \text,
+            \\
+            \rot \left( \rvec u \times \rvec v \right)
+             & =
+            \rvec u \, \Div \rvec v - \rvec v \, \Div \rvec u
+            + (\Diff \rvec u) \rvec v - (\Diff \rvec v) \rvec u
+            \text,
+            \\
+            \Div \left( \rvec u \times \rvec v \right)
+             & =
+            \scalar{\rvec v}{\rot \rvec u} - \scalar{\rvec u}{\rot \rvec v}
+            \text,
+            \\
+            \grad \left( \scalar{\rvec u}{\rvec v} \right)
+             & =
+            \rvec u \times \rot \rvec v + \rvec v \times \rot \rvec u
+            + (\Diff \rvec u) \rvec v + (\Diff \rvec v) \rvec u
+          \end{align*}
+  \end{itemize}
+\end{identities}
+
+\section{Feladatok}
+
+\end{document}

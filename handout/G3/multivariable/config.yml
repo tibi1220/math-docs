@@ -1,6 +1,5 @@
 root_files:
   - input: revision.hu
-    variants:
-      - solutions: print-solutions
-      - exercises: keep-space
-      - no-space:
+    variants: true
+  - input: operators.hu
+    variants: true
