@@ -1,1 +1,6 @@
 defaultIndent: "  "
+lookForAlignDelims:
+  alignat*:
+    delimiterRegEx: (?<!\\)(&{1,2})
+  alignat:
+    delimiterRegEx: (?<!\\)(&{1,2})
