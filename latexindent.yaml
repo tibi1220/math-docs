@@ -4,3 +4,20 @@ lookForAlignDelims:
     delimiterRegEx: (?<!\\)(&{1,2})
   alignat:
     delimiterRegEx: (?<!\\)(&{1,2})
+specialBeginEnd:
+  displayMath: # \[ ... \]
+    begin: (?<!\\)\\\[
+    end: \\\]
+    lookForThis: 1
+  inlineMath: # \( ... \)
+    begin: (?<!\\)\\\(
+    end: \\\)
+    lookForThis: 1
+  inlineMathTeX: # $ ... $
+    begin: (?<!\$)(?<!\\)\$(?!\$)
+    end: (?<!\\)\$(?!\$)
+    lookForThis: 1
+  displayMathTeX: # $$ ... $$
+    begin: \$\$
+    end: \$\$
+    lookForThis: 1
