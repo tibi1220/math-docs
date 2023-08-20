@@ -1,0 +1,107 @@
+\documentclass[lang=magyar]{math-handout}
+
+\title{Felületmenti integrálok}
+\area{Többváltozós analízis}
+\subject{Matematika G3}
+\date{Utoljára frissítve: \today}
+\author{Sándor Tibor}
+\docno{4}
+
+\begin{document}
+\allowdisplaybreaks
+
+\maketitle
+
+\vspace{1em}
+
+\begin{summary}
+  Ebben a fejezetben megismerkedünk a felületmenti integrálok fogalmával, és
+  azzal, hogy hogyan számíthatjuk ki őket.
+\end{summary}
+
+\vspace{-1em}
+
+\section{Elméleti áttekinő}
+
+\vspace{1em}
+
+\begin{definition}[Reguláris felület]
+  Legyen $S \subset  \mathbb R^3$. Azt mondjuk, hogy az $S$ reguláris felület,
+  ha $\forall \, p \in S$ ponthoz megadható olyan $p$-t tartalmazó $V \subset
+    \mathbb R^3$ nyílt halmaz és $\rvec r : U \subset \mathbb R^2 \rightarrow S
+    \cap V$ leképezés, melyre teljesülnek az alábbiak:
+  \begin{itemize}
+    \item $\rvec r$ differenciálható homeomorfizmus,
+
+    \item $\rvec r$ immerzió (derivált leképezése injektív).
+  \end{itemize}
+  Ha ezek teljesülnek, akkor $\rvec r$-t parametrációnak,
+  $V \cap S$-t  koordinátakörnyezetnek nevezzük.
+\end{definition}
+
+\vfill
+
+\begin{definition}[Elemi felület]
+  Egy $S: T \subseteq \mathbb R^2 \rightarrow \mathbb R^3$ elemi felület, ha
+  $S$ legalább egyszer differenciálható és injektív.
+\end{definition}
+
+\vfill
+
+\begin{definition}[Skalármező skalárérékű felületmenti integrálja]
+  Legyen $\varphi: U \subseteq \mathbb R^3 \rightarrow \mathbb R$ leképezés,
+  $\rvec r: T \subseteq \mathbb R^2 \rightarrow S \subset U$, $t \mapsto
+    \rvec r(t)$ pedig az $S$ felület parametrizált egyenlete. Ekkor az $\varphi$
+  skalármező $S$ felület menti skalárértékű integrálja:
+  \[
+    \int_S \varphi (\rvec r) \, dS =
+    \iint_T \varphi (\rvec r(s; t))
+    \norma{\pdv{\rvec r}{s} \times \pdv{\rvec r}{t}}
+    \, \diff s \, \diff t
+    \text.
+  \]
+  Ha a felület $z = \varPhi(x; y)$ implicit alakban van:
+  \[
+    \int_S \varphi (\rvec r) \, dS =
+    \iint_T \varphi (x; y; \varPhi(x;y))
+    \sqrt{1 + (\partial_x \varPhi)^2 + (\partial_y \varPhi)^2}
+    \, \diff x \, \diff y
+    \text.
+  \]
+\end{definition}
+
+\vfill
+
+\begin{definition}[Vektormező skalár- és vektorértékű felületmenti integrálja]
+  Legyen $\rvec v:  U \subseteq \mathbb R^3 \rightarrow \mathbb R^3$ leképezés,
+  $\rvec r: T \subseteq \mathbb R^2 \rightarrow S \subset U$, $(s;t) \mapsto
+    \rvec r(s;t)$ pedig az $S$ felület parametrizált egyenlete. Ekkor az
+  $\rvec r$ vektormező $S$ felület menti
+  \begin{itemize}
+    \item skalárértékű integrálja:
+          \(
+            \displaystyle
+            \int_S \scalar{\rvec v (\rvec r)}{d \rvec S} =
+            \iint_T \scalar
+            {\rvec v (\rvec r(s; t))}
+            {\left(\pdv{\rvec r}{s} \times \pdv{\rvec r}{t}\right)}
+            \, \diff s \, \diff t
+            \text,
+          \)
+    \item vektorértékű integrálja:
+          \(
+            \displaystyle
+            \int_S \rvec v (\rvec r) \times d \rvec S =
+            \iint_T {\rvec v (\rvec r(s; t))} \times
+            \left(\pdv{\rvec r}{s} \times \pdv{\rvec r}{t}\right)
+            \, \diff s \, \diff t
+            \text.
+          \)
+
+  \end{itemize}
+\end{definition}
+
+\clearpage
+\section{Feladatok}
+
+\end{document}

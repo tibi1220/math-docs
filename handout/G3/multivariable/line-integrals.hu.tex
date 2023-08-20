@@ -1,0 +1,96 @@
+\documentclass[lang=magyar]{math-handout}
+
+\title{Vonalmenti integrálok}
+\area{Többváltozós analízis}
+\subject{Matematika G3}
+\date{Utoljára frissítve: \today}
+\author{Sándor Tibor}
+\docno{3}
+
+\begin{document}
+\allowdisplaybreaks
+
+\maketitle
+
+\vspace{1em}
+
+\begin{summary}
+  Ebben a fejezetben megismerkedünk a vonalmenti integrálok fogalmával, és
+  azzal, hogy hogyan számíthatjuk ki őket.
+\end{summary}
+
+\vspace{-1em}
+
+\section{Elméleti áttekinő}
+
+\vspace{1em}
+
+\begin{definition}[Reguláris görbe]
+  Legyen $I \subset \mathbb R$ nem feltétlenül korlátos intervallum. Ekkor az
+  $\rvec r : I \rightarrow \mathbb R^3$ immerziót reguláris görbének nevezzük.
+\end{definition}
+
+\begin{definition}[Pályasebesség, Ívhossz]
+  A $v: I \rightarrow \mathbb R, t \mapsto \norma{\dot{\rvec r}(t)}$
+  függvényt pályasebességnek hívjuk.
+
+  A pályasebesség $I$ feletti integrálját a görbe ívhosszának nevezzük:
+  \[
+    L(\rvec r) = \int_I \norma{\dot{\rvec r}(t)} \, \diff t
+    \text.
+  \]
+
+\end{definition}
+
+\vfill
+
+\begin{definition}[Irányított görbe]
+  Egy $\rvec r: [a;b] \rightarrow \mathbb R^3$ görbe irányított, ha adott egy
+  rendezés ($\leq$) a paraméterértékeken. Ekkor $t_1 < t_2$ esetén
+  $\rvec r(t_1)$ a görbe korábbi pontja, $\rvec r(t_2)$-höz képest. Ha
+  $\rvec r(a) = \rvec r(b)$, akkor a görbe zárt.
+\end{definition}
+
+\vfill
+
+\begin{definition}[Skalármező görbe menti skalárértékű integrálja]
+  Legyen $\varphi: U \subseteq \mathbb R^3 \rightarrow \mathbb R$ leképezés,
+  $\rvec r: [a;b] \rightarrow \gamma \subset U, t \mapsto \rvec r(t)$ pedig a
+  $\gamma$ görbe parametrizált egyenlete. Ekkor az $\varphi$ skalármező $\gamma$
+  görbe menti skalárértékű integrálja:
+  \[
+    \int_\gamma \varphi(\rvec r) \, \diff s =
+    \int_a^b \varphi(\rvec r(t)) \norma{\dot{\rvec r}(t)} \, \diff t
+    \text.
+  \]
+\end{definition}
+
+\vfill
+
+\begin{definition}[Vektormező görbe menti skalár- és vektorértékű integrálja]
+  Legyen $\rvec v: U \subseteq \mathbb R^3 \rightarrow \mathbb R^3$ vektormező,
+  $\rvec r: [a;b] \rightarrow \gamma \subset U, t \mapsto \rvec r(t)$ pedig a
+  $\gamma$ görbe parametrizált egyenlete. Ekkor az $\rvec v$ vektormező $\gamma$
+  görbe menti
+  \begin{itemize}
+    \item skalárértékű integrálja:
+          \(
+            \displaystyle
+            \int_\gamma \scalar{\rvec v(\rvec r)}{\diff \rvec r} =
+            \int_a^b \scalar{\rvec v(\rvec r(t))}{\dot{\rvec r}(t)} \diff t
+            \text,
+          \)
+    \item vektorértékű integrálja:
+          \(
+            \displaystyle
+            \int_\gamma \rvec v(\rvec r) \times \diff \rvec r =
+            \int_a^b \rvec v(\rvec r(t)) \times \dot{\rvec r}(t) \, \diff t
+            \text.
+          \)
+  \end{itemize}
+\end{definition}
+
+\clearpage
+\section{Feladatok}
+
+\end{document}
