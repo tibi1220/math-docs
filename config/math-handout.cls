@@ -35,6 +35,7 @@
 
 % Counters
 \numberwithin{definition}{section}
+\numberwithin{theorem}{section}
 \numberwithin{exercise}{section}
 \numberwithin{note}{section}
 \numberwithin{statement}{section}
