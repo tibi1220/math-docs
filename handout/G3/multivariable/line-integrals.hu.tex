@@ -93,4 +93,182 @@
 \clearpage
 \section{Feladatok}
 
+\clearpage
+\section{Segédlet}
+
+\subsection{Görbék paraméterezése}
+
+\bgroup
+\newcommandx{\coordsyst}[1][1=1.25]{%
+  \coordinate (O) at (0,0,0);
+  \draw[-to] (O) -- (#1,0,0) node[above left=-.75mm] {$x$};
+  \draw[-to] (O) -- (0,#1,0) node[below left=-.75mm] {$y$};
+  \draw[-to] (O) -- (0,0,#1) node[right] {$z$};
+}
+\def\tscale{1.33}
+\let\tsize\small
+\begin{tabular}{>{\bullet\;\bfseries}p{2.75cm}<{:} p{5.675cm} p{2.75cm} >{\centering\arraybackslash}p{40.25mm}}
+  % \hline
+  % \mdseries Elnevezés
+  %  & Paraméterezés
+  %  & Tartomány
+  %  & Ábra
+  % \\
+  Egyenes
+   & $\rvec r(t) = \rvec r_0 + t \rvec v$
+   & $t \in \mathbb R$
+   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
+       \coordsyst
+       \draw[to-to, thick, red-base] (-1.5,.25) -- coordinate[pos=.15] (T) coordinate[pos=.75] (Q) (1.5,1.25);
+       \draw[-to, draw=yellow-base, ultra thick] (T) -- (Q) node[below left] {$\rvec v$};
+       \draw[-to, draw=blue-base, ultra thick] (0,0) -- (T) node[above] {$\rvec r_0$};
+     \end{tikzpicture}
+  \\[12mm]
+  Szakasz
+   & $\rvec r(t) = \rvec r_0 + t (\rvec r_1 - \rvec r_0)$
+   & $t \in [0;1]$
+   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
+       \coordsyst
+       \draw[|-|, thick, red-base] (-1,.25) coordinate(A) -- (1,1) coordinate(B);
+       \draw[-to, draw=blue-base, ultra thick] (O) -- (A) node[left] {$\rvec r_0$};
+       \draw[-to, draw=yellow-base, ultra thick] (O) -- (B) node[right] {$\rvec r_1$};
+     \end{tikzpicture}
+  \\[12mm]
+  Körvonal
+   & $\rvec r(t) = \begin{bmatrix} r \cos t \\ r \sin t \\ 0 \end{bmatrix}$
+   & $t \in [0;2\pi)$
+   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
+           \draw[-to] (-1.25,0) -- (1.25,0) node[above left=-.75mm] {$x$};
+           \draw[-to] (0,-.9) -- (0,1.1) node[below left=-.75mm] {$y$};
+           \draw[to-to, thick, red-base] (0,0) circle (.6);
+           \node at (.3,.15) {$r$};
+           \node at (-.15,.3) {$r$};
+         \end{tikzpicture}
+  \\[12mm]
+    Ellipszis
+   & $\rvec r(t) = \begin{bmatrix} a \cos t \\ b \sin t \\ 0 \end{bmatrix}$
+   & $t \in [0;2\pi)$
+   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
+         \draw[-to] (-1.25,0) -- (1.25,0) node[above left=-.75mm] {$x$};
+         \draw[-to] (0,-.8) -- (0,1) node[below left=-.75mm] {$y$};
+         \draw[to-to, thick, red-base] (0,0) ellipse (.8 and .6);
+         \node at (.4,.15) {$a$};
+         \node at (-.15,.3) {$b$};
+       \end{tikzpicture}
+  \\[12mm]
+  Spirál
+   & $\rvec r(t) = \begin{bmatrix} a \cos t \\ a \sin t \\ bt \end{bmatrix}$
+   & $t \in \mathbb R$
+   & \begin{tikzpicture}[font=\tsize,x={(220:.85cm)},y={(345:.925cm)},z={(90:1cm)}, baseline, scale=\tscale]
+       \coordsyst
+       \draw[-, thick, draw=yellow-base] (.65,0,0) -- (0,0,0) node[pos=.7, below=-1mm] {$a$};
+       \draw[-, thick, draw=blue-base] (.65,0,0) -- ++(0,0,.325) node[midway, left=-1mm] {$b$};
+       \draw[domain=0:900,smooth,variable=\t, thick, red-base, samples=100]
+       plot ({.65*cos(\t)},{.65*sin(\t)},\t/720*.65);
+     \end{tikzpicture}
+\end{tabular}
+
+\subsection{Koordináta-transzformációk}
+
+\def\arraystretch{1.1}
+\begin{tabular}{>{\bullet\;}m{2.75cm}m{3cm}m{2.25cm}m{2.75cm}>{\centering\arraybackslash}p{40.25mm}}
+  \textbf{Polár:}
+   & $x = r \cos \varphi$ \newline
+  $y = r \sin \varphi$
+   & $r \in [0; R]$ \newline
+  $\varphi \in [0; 2\pi)$
+   & $\det \rmat J = r$
+   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
+           \draw[-to] (-.95,0) -- (1.25,0)
+           node[below left=-.5mm] {$x$};
+           \draw[-to] (0,-.35) -- (0,.9)
+           node[below right=-.5mm] {$y$};
+           \draw[-to, ultra thick, red-base] (0,0) -- (125:1) coordinate(c);
+
+           \draw [decorate, decoration={brace}, draw=blue-base, ultra thick]
+           (-.75mm,-.75mm) -- ++(c)
+           node[below left, midway] {$r$};
+
+           \coordinate (a) at (1,0);
+           \coordinate (b) at (0,0);
+
+           \draw pic[
+               "$\varphi$",
+               draw=yellow-base,
+               angle eccentricity=.5,
+               angle radius=7mm,
+               ultra thick,
+               ->,
+             ] {angle=a--b--c};
+         \end{tikzpicture}
+  \\[10mm]
+    \textbf{Henger:}
+   & $x = r \cos \varphi$ \newline
+  $y = r \sin \varphi$ \newline
+  $z = z$
+   & $r \in [0; R]$ \newline
+  $\varphi \in [0; 2\pi)$ \newline
+    $z \in \mathbb R$
+   & $\det \rmat J = r$
+   & \begin{tikzpicture}[font=\tsize,baseline,x={(250:.75cm)},y={(355:.9cm)},z={(110:.95cm)}, rotate=-20]
+         \coordsyst
+
+         \coordinate (X) at (1,0,0);
+         \coordinate (T) at (.8,.8,0);
+
+         \draw[-to, thick, draw=blue-base] (T) -- ++(0,0,1) node[right] {$z$};
+         \draw[-to, thick, draw=red-base] (O) -- (T) node[above=2mm, xshift=-.75mm, fill=white, inner sep=.25mm] {$r$};
+
+         \draw pic[
+             "$\varphi$",
+             draw=yellow-base,
+             angle eccentricity=.7,
+             angle radius=.8cm,
+             thick,
+             ->,
+           ] {angle=X--O--T};
+       \end{tikzpicture}
+  \\[10mm]
+  \textbf{Gömb:}
+   & $x = r \sin \varphi \cos \vartheta $ \newline
+  $y = r \sin \varphi \sin \vartheta $ \newline
+  $z = r \cos \theta$
+   & $r \in [0; R]$ \newline
+  $\varphi \in [0; \pi]$ \newline
+  $\vartheta \in [0; 2\pi)$
+   & $\det \rmat J = r^2 \sin \varphi$
+   & \begin{tikzpicture}[font=\tsize,baseline]
+       \draw [ball color=gray!10, opacity=.5 ,very thin] (0,0) circle (.85);
+
+       \begin{scope}[x={(220:.9cm)},y={(330:.9cm)},z={(90:.9cm)}]
+      \coordsyst
+
+      \coordinate (X) at (1,0,0);
+      \coordinate (T) at (1,.75,0);
+
+      \coordinate (Z) at (0,0,1);
+      \coordinate (F) at (0,.75,1);
+
+      \draw pic[
+          "$\vartheta$",
+          draw=yellow-base,
+          angle eccentricity=.65,
+          angle radius=.85cm,
+          thick,
+          ->,
+        ] {angle=X--O--T};
+      \draw pic[
+          "$\varphi$",
+          draw=blue-base,
+          angle eccentricity=.65,
+          angle radius=.85cm,
+          thick,
+          <-,
+        ] {angle=F--O--Z};
+    \end{scope}
+     \end{tikzpicture}
+  \\
+\end{tabular}
+\egroup
+
 \end{document}

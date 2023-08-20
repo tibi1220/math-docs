@@ -40,6 +40,7 @@
 \numberwithin{note}{section}
 \numberwithin{statement}{section}
 \let\section\subsection
+\let\subsection\subsubsection
 
 % Page layout
 \ifhandout@@debug
