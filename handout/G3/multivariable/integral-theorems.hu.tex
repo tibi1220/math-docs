@@ -28,31 +28,35 @@
 \vspace{1em}
 
 \begin{theorem}[Stokes -- tétel]
-  Legyen $S : [a;b]^2 \rightarrow \mathbb R^3$ irányított,
-  parametrizált felület. Irányítsuk a peremet a jobbkézszabály szerint.
+  Legyen $S$ egy $\mathbb R^3$-beli irányított, parametrizált felület.
   Legyen továbbá $\rvec v : \mathbb R^3 \rightarrow \mathbb R^3$ legalább
-  egyszer folytonosan differenciálható vektormező. Ekkor:
+  egyszer folytonosan differenciálható vektormező. Jelölje a $\partial S =
+    \gamma$ az $S$ peremét indukált irányítással. Ekkor:
   \[
     \int \limits_S \scalar{\rot \rvec v}{\diff \rvec S}
     =
     \oint \limits_{\partial S} \scalar{\rvec v}{\diff \rvec r}
     \text.
   \]
+  Ha $\rvec v$ skalárpotenciálos, akkor az integrál értéke zérus, hiszen
+  $\rot \rvec v = \rot \grad \varphi = \rvec 0$.
 \end{theorem}
 
 \vfill
 
 \begin{theorem}[Gauss -- Osztogradszkij -- tétel]
-  Legyen $V : [a;b]^3 \rightarrow \mathbb R^3$ irányított, parametrizált
-  térfogat. Legyen továbbá $\rvec v : \mathbb R^3 \rightarrow \mathbb R^3$
-  legalább egyszer folytonosan differenciálható vektormező. Jelölje
-  $\partial V = S$ a $V$ peremét indukált irányítással. Ekkor:
+  Legyen $V$ egy $\mathbb R^3$-beli irányított, parametrizált térfogat. Legyen
+  továbbá $\rvec v : \mathbb R^3 \rightarrow \mathbb R^3$ legalább egyszer
+  folytonosan differenciálható vektormező. Jelölje $\partial V = S$ a $V$
+  peremét indukált irányítással. Ekkor:
   \[
     \int \limits_V \Div \rvec v \, \diff V
     =
     \oint \limits_{\partial V} \scalar{\rvec v}{\diff \rvec S}
     \text.
   \]
+  Ha $\rvec v$ vektorpotenciálos, akkor az integrál értéke zérus, hiszen
+  $\Div \rvec v = \Div \rot \rvec \varphi = 0$.
 \end{theorem}
 
 \vfill
