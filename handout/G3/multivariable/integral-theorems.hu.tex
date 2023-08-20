@@ -15,15 +15,17 @@
 \vspace{1em}
 
 \begin{summary}
-  Bevezetjük a Nabla formális differenciálopertor fogalmát. Megismerkedünk a
-  gradiens, a divergencia és a rotáció fogalmával, bevezetjük a skalár- és a
-  vektorpotenciált, valamint megismerkedünk az ezekkel kapcsolatos alapvető
-  azonosságokkal.
+  Megismerkedünk a többváltozós integrálátalakító tételekkel. A Stokes-tétel
+  segítségével a felületi integrálok számítását visszavezetjük a peremre, a
+  Gauss-Osz\-to\-grad\-szkij-tétel segítségével a térfogati integrálok számítását
+  visszavezetjük a térfogat peremére.
 \end{summary}
 
 \vspace{-1em}
 
 \section{Elméleti áttekinő}
+
+\vspace{1em}
 
 \begin{theorem}[Stokes -- tétel]
   Legyen $S : [a;b]^2 \rightarrow \mathbb R^3$ irányított,
@@ -38,6 +40,8 @@
   \]
 \end{theorem}
 
+\vfill
+
 \begin{theorem}[Gauss -- Osztogradszkij -- tétel]
   Legyen $V : [a;b]^3 \rightarrow \mathbb R^3$ irányított, parametrizált
   térfogat. Legyen továbbá $\rvec v : \mathbb R^3 \rightarrow \mathbb R^3$
@@ -51,6 +55,8 @@
   \]
 \end{theorem}
 
+\vfill
+
 \begin{theorem}[Green -- tétel asszimetrikus alakja]
   Legyenek $\varphi; \psi: \mathbb R^3 \rightarrow \mathbb R$ kétszeresen
   folytonos skalármezők, $V \subset \mathbb R^3$ parametrizált, irányított
@@ -61,10 +67,12 @@
     \scalar{\grad \psi}{\grad \varphi}
     \diff V
     =
-    \int \limits_{\partial V} \scalar{\psi \grad \varphi}{\diff \rvec S}
+    \oint \limits_{\partial V} \scalar{\psi \grad \varphi}{\diff \rvec S}
     \text.
   \]
 \end{theorem}
+
+\vfill
 
 \begin{theorem}[Green -- tétel szimmetrikus alakja]
   Legyenek $\varphi; \psi: \mathbb R^3 \rightarrow \mathbb R$ kétszeresen
@@ -75,11 +83,35 @@
     \psi \, \Delta \varphi + \varphi \, \Delta \psi
     \; \diff V
     =
-    \int \limits_{\partial V} \scalar{\psi \grad \varphi - \varphi \grad \psi}{\diff \rvec S}
+    \oint \limits_{\partial V}
+    \scalar{\psi \grad \varphi - \varphi \grad \psi}{\diff \rvec S}
   \]
 \end{theorem}
 
-
+\clearpage
 \section{Feladatok}
+
+\begin{exercise}{A Stokes-tétel alkalmazása}
+  Adott az $\rvec F(x;y;z) = y \uvec i + z \uvec j + x^3 \uvec k$ függvény.
+  Számítsuk ki az $\rvec F$ skalármező $x = 0$ síkon elhelyezkedő, 2 egység
+  sugarú körön vett vonalmenti integrálját.
+
+  \exsol{%
+    Megoldás a Stokes-tétel segítségével:\\[2mm]
+    Először számítsuk ki a $\rot \rvec F$ rotációt:
+    \[
+      \rot \rvec F = \begin{bmatrix}
+        \partial_x \\ \partial_y \\ \partial_z
+      \end{bmatrix} \times \begin{bmatrix}
+        y \\ z \\ x^3
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        -1 \\ -3x^2 \\ -1
+      \end{bmatrix}
+      \text.
+    \]
+  }
+\end{exercise}
 
 \end{document}

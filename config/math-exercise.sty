@@ -67,14 +67,14 @@
   \inside@@exercisetrue%
   \refstepcounter{exercise}%
   \@ifclassloaded{beamer}{%
-    \begin{block}{\#\theexercise\ #1}
+    \begin{block}{\#\theexercise . #1}
   }{%
     \begin{tcolorbox}[%
         colback=\@@cb,%
         colframe=\@@cf,%
         coltitle=\@@ct,%
         breakable,%
-        title={\#\theexercise\ #1},%
+        title={\#\theexercise . #1},%
         enhanced,
         underlay={\@@ul},
       ]%

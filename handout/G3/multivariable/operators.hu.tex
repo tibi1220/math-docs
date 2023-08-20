@@ -386,4 +386,233 @@
 
 \section{Feladatok}
 
+\begin{exercise}{%
+    Számítsuk ki az alábbi vektormezők divergenciáját és rotációját!
+  }
+  \begin{enumerate}[a)]
+    \item $\rvec f(x;y;z) = (yz) \,\uvec i + (xz) \,\uvec j + (xy) \,\uvec k$
+    \item $\rvec f(x;y;z) = (3xy + z^2) \,\uvec i + (6 e^z) \,\uvec j + (-5x^y) \,\uvec k$
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $\rvec g(x;y;z) = (yz) \,\uvec i + (xz) \,\uvec j + (xy) \,\uvec k$
+            \vspace{3mm}
+            \begin{itemize}
+              \item A divergencia:\\[3mm]
+                    \(
+                    \displaystyle
+                    \Div \rvec f
+                    = \scalar{\nabla}{\rvec f}
+                    = \pdv{yz}{x} + \pdv{xz}{y} + \pdv{xy}{z}
+                    = 0 + 0 + 0
+                    = 0
+                    \text.
+                    \)
+              \item A rotáció:\\[3mm]
+                    \(
+                    \displaystyle
+                    \rot \rvec f
+                    = \nabla \times \rvec f
+                    = \begin{bmatrix}
+                      \partial_x \\ \partial_y \\ \partial_z
+                    \end{bmatrix} \times \begin{bmatrix}
+                      yz \\ xz \\ xy
+                    \end{bmatrix} = \begin{bmatrix}
+                      0 - 0 \\ 0 - 0 \\ 0 - 0
+                    \end{bmatrix} = \begin{bmatrix}
+                      0 \\ 0 \\ 0
+                    \end{bmatrix}
+                    \text.
+                    \)
+            \end{itemize}
+
+      \item $\rvec g(x;y;z) = (3xy + z^2) \,\uvec i + (6 e^z) \,\uvec j + (-5x^y) \,\uvec k$
+            \vspace{3mm}
+            \begin{itemize}
+              \item A divergencia:\\[3mm]
+                    \(
+                    \displaystyle
+                    \Div \rvec g
+                    = \scalar{\nabla}{\rvec g}
+                    = \pdv{(3xy + z^2)}{x} + \pdv{(6 e^z)}{y} + \pdv{(-5x^y)}{z}
+                    = 3y + 0 + 0
+                    = 3y
+                    \text.
+                    \)
+              \item A rotáció:\\[3mm]
+                    \(
+                    \displaystyle
+                    \rot \rvec g
+                    = \nabla \times \rvec g
+                    = \begin{bmatrix}
+                      \partial_x \\ \partial_y \\ \partial_z
+                    \end{bmatrix} \times \begin{bmatrix}
+                      3xy + z^2 \\ 6e^z \\ -5x^y
+                    \end{bmatrix} = \begin{bmatrix}
+                      -5 x^y \ln x - 6 e^z \\
+                      2z + 5 y x^{y-1}     \\
+                      -3x
+                    \end{bmatrix}
+                    \text.
+                    \)
+            \end{itemize}
+    \end{enumerate}
+  }
+\end{exercise}
+
+\begin{exercise}{Számítsuk ki az alábbi skalármezők gradiensét!}
+  \begin{enumerate}[a)]
+    \item $f(x;y;z) = xyz$
+    \item $g(x;y;z) = 6x^y + \sin e^z$
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $f(x;y;z) = xyz$
+            \vspace{3mm}
+            \begin{itemize}
+              \item A gradiens:\\[3mm]
+                    \(
+                    \displaystyle
+                    \grad f
+                    = \nabla f
+                    = \begin{bmatrix}
+                      \partial_x \\ \partial_y \\ \partial_z
+                    \end{bmatrix} f
+                    = \begin{bmatrix}
+                      yz \\ xz \\ xy
+                    \end{bmatrix}
+                    \text.
+                    \)
+            \end{itemize}
+
+      \item $g(x;y;z) = 6x^y + \sin e^z$
+            \vspace{3mm}
+            \begin{itemize}
+              \item A gradiens:\\[3mm]
+                    \(
+                    \displaystyle
+                    \grad g
+                    = \nabla g
+                    = \begin{bmatrix}
+                      \partial_x \\ \partial_y \\ \partial_z
+                    \end{bmatrix} f
+                    = \begin{bmatrix}
+                      6 y x^{y - 1} \\
+                      6 x^y \ln x   \\
+                      e^z \cos e^z
+                    \end{bmatrix}
+                    \text.
+                    \)
+            \end{itemize}
+    \end{enumerate}
+  }
+\end{exercise}
+
+\begin{exercise}{Adjuk meg azon skalármezőket, melyek gradiensei az alábbiak!}
+  \begin{enumerate}[a)]
+    \item $\rvec F(x;y;z) = \ijk{y \sin xy}{x \sin xy}{3}$
+    \item $\rvec G(x;y;z) = \ijk{y/x}{\ln x}{2/z^{2}}$
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $\rvec F(x;y;z) = \ijk{y \sin xy}{x \sin xy}{3}$
+
+            \vspace{3mm}
+            A gradiens tulajdonságai alapján:
+            \[
+              \pdv{f}{x} = y \sin xy
+              \text,\hspace{1cm}
+              \pdv{f}{y} = x \sin xy
+              \text,\hspace{1cm}
+              \pdv{f}{z} = 3
+              \text.
+            \]
+            Integráljuk a parciális deriváltakat:
+            \begin{alignat*}{9}
+              f_1 &  = \int \pdv{f}{x} \,\diff x
+                  && = \int y \sin xy \,\diff x
+                  && = - \cos xy
+                  && + C_1(y;z)
+              \\
+              f_2 &  = \int \pdv{f}{y} \,\diff y
+                  && = \int x \sin xy \,\diff y
+                  && = - \cos xy
+                  && + C_2(x;z)
+              \\
+              f_3 &  = \int \pdv{f}{z} \,\diff z
+                  && = \int 3 \,\diff z
+                  && = 3z
+                  && + C_3(x;y)
+            \end{alignat*}
+            Tudjuk, hogy $f = f_1 = f_2 = f_3$, a konstansok tehát:
+            \[
+              C_1(y;z) = 3z + C
+              \text,\hspace{1cm}
+              C_2(x;z) = 3z + C
+              \text,\hspace{1cm}
+              C_3(x;y) = - \cos xy + C
+              \text.
+            \]
+            Az eredeti függvény tehát:
+            \[
+              f(x;y;z) = 3z - \cos xy + C
+              \text.
+            \]
+
+      \item $\rvec G(x;y;z) = \ijk{y/x}{\ln x}{2/z^{2}}$
+
+            \vspace{3mm}
+            A gradiens tulajdonságai alapján:
+            \[
+              \pdv{f}{x} = \frac{y}{x}
+              \text,\hspace{1cm}
+              \pdv{f}{y} = \ln x
+              \text,\hspace{1cm}
+              \pdv{f}{z} = \frac{2}{z^2}
+              \text.
+            \]
+            Integráljuk a parciális deriváltakat:
+            \begin{alignat*}{9}
+              g_1 &  = \int \pdv{g}{x} \,\diff x
+                  && = \int \frac{y}{x} \,\diff x
+                  && = y \ln x
+                  && + C_1(y;z)
+              \\
+              g_2 &  = \int \pdv{g}{y} \,\diff y
+                  && = \int \ln x \,\diff y
+                  && = y \ln x
+                  && + C_2(x;z)
+              \\
+              g_3 &  = \int \pdv{g}{z} \,\diff z
+                  && = \int \frac{2}{z^2} \,\diff z
+                  && = - \frac{2}{z}
+                  && + C_3(x;y)
+            \end{alignat*}
+            Tudjuk, hogy $g = g_1 = g_2 = g_3$, a konstansok tehát:
+            \[
+              C_1(y;z) = - \frac{2}{z} + C
+              \text,\hspace{1cm}
+              C_2(x;z) = - \frac{2}{z} + C
+              \text,\hspace{1cm}
+              C_3(x;y) = y \ln x + C
+              \text.
+            \]
+            Az eredeti függvény tehát:
+            \[
+              g(x;y;z) = y \ln x - \frac{2}{z} + C
+            \]
+    \end{enumerate}
+  }
+\end{exercise}
+
+\begin{exercise}{%
+    Vizsgáljuk meg, hogy az alábbi vektormezők skalár- illetve
+    vektorpotenciálisak-e. Amennyiben igen, adjuk meg a potenciálfüggvényeket!
+  }
+  TBD
+\end{exercise}
+
 \end{document}

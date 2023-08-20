@@ -32,7 +32,7 @@
 \newcommand{\rvec}[1]{\mathbfit{#1}}
 
 % Unit vector
-\newcommand{\uvec}[1]{\widehat{\mathbfit{#1}}}
+\newcommand{\uvec}[1]{\hat{\mathbfit{#1}}}
 
 % Regular matrix
 \newcommand{\rmat}[1]{\mathbf{#1}}
@@ -81,6 +81,8 @@
 \newcommand{\Diff}{\mathbf{D}}
 \newcommand{\diff}{\mathrm{d}}
 
+\newcommand\ijk[3]{\left(#1\right) \, \uvec i + \left(#2\right) \, \uvec j + \left(#3\right) \, \uvec k}
+
 % Definition environment
 \RequirePackage{mdframed}
 \newenvironment{myframe}{%
@@ -98,7 +100,7 @@
 \newcounter{definition}
 \newenvironment{definition}[1][\@nil]{%
   \refstepcounter{definition}%
-  \begin{myframe}\textbf{Definíció \thedefinition}%
+  \begin{myframe}\textbf{Definíció \thedefinition.}%
     \def\tmp{#1}%
     \ifx\tmp\@nnil\else%
       \hspace{.5em}[\;#1\;]
@@ -107,7 +109,7 @@
 \newcounter{note}
 \newenvironment{note}[1][\@nil]{%
   \refstepcounter{note}%
-  \begin{myframe}\textbf{Megjegyzés \thenote}%
+  \begin{myframe}\textbf{Megjegyzés \thenote.}%
     \def\tmp{#1}%
     \ifx\tmp\@nnil\else%
       \hspace{.5em}[\;#1\;]
@@ -116,7 +118,7 @@
 \newcounter{statement}
 \newenvironment{statement}[1][\@nil]{%
   \refstepcounter{statement}%
-  \begin{myframe}\textbf{Állítás \thestatement}%
+  \begin{myframe}\textbf{Állítás \thestatement.}%
     \def\tmp{#1}%
     \ifx\tmp\@nnil\else%
       \hspace{.5em}[\;#1\;]
@@ -125,7 +127,7 @@
 \newcounter{theorem}
 \newenvironment{theorem}[1][\@nil]{%
   \refstepcounter{theorem}%
-  \begin{myframe}\textbf{Tétel \thetheorem}%
+  \begin{myframe}\textbf{Tétel \thetheorem.}%
     \def\tmp{#1}%
     \ifx\tmp\@nnil\else%
       \hspace{.5em}[\;#1\;]
@@ -134,7 +136,7 @@
 \newcounter{identities}
 \newenvironment{identities}[1][\@nil]{%
   \refstepcounter{identities}%
-  \begin{myframe}\textbf{Azonosságok \theidentities}%
+  \begin{myframe}\textbf{Azonosságok \theidentities.}%
     \def\tmp{#1}%
     \ifx\tmp\@nnil\else%
       \hspace{.5em}[\;#1\;]
