@@ -28,14 +28,14 @@
 \begin{definition}[Reguláris felület]
   Legyen $S \subset  \mathbb R^3$. Azt mondjuk, hogy az $S$ reguláris felület,
   ha $\forall \, p \in S$ ponthoz megadható olyan $p$-t tartalmazó $V \subset
-    \mathbb R^3$ nyílt halmaz és $\rvec r : U \subset \mathbb R^2 \rightarrow S
-    \cap V$ leképezés, melyre teljesülnek az alábbiak:
+    \mathbb R^3$ nyílt halmaz és $\rvec \varrho : U \subset \mathbb R^2
+    \rightarrow S \cap V$ leképezés, melyre teljesülnek az alábbiak:
   \begin{itemize}
-    \item $\rvec r$ differenciálható homeomorfizmus,
+    \item $\rvec \varrho$ differenciálható homeomorfizmus,
 
-    \item $\rvec r$ immerzió (derivált leképezése injektív).
+    \item $\rvec \varrho$ immerzió (derivált leképezése injektív).
   \end{itemize}
-  Ha ezek teljesülnek, akkor $\rvec r$-t parametrációnak,
+  Ha ezek teljesülnek, akkor $\rvec \varrho$-t parametrációnak,
   $V \cap S$-t  koordinátakörnyezetnek nevezzük.
 \end{definition}
 
@@ -50,13 +50,13 @@
 
 \begin{definition}[Skalármező skalárérékű felületmenti integrálja]
   Legyen $\varphi: U \subseteq \mathbb R^3 \rightarrow \mathbb R$ leképezés,
-  $\rvec r: T \subseteq \mathbb R^2 \rightarrow S \subset U$, $t \mapsto
-    \rvec r(t)$ pedig az $S$ felület parametrizált egyenlete. Ekkor az $\varphi$
-  skalármező $S$ felület menti skalárértékű integrálja:
+  $\rvec \varrho: T \subseteq \mathbb R^2 \rightarrow S \subset U$, $t \mapsto
+    \rvec \varrho(t)$ pedig az $S$ felület parametrizált egyenlete. Ekkor a
+  $\varphi$ skalármező $S$ felület menti skalárértékű integrálja:
   \[
     \int_S \varphi (\rvec r) \, dS =
-    \iint_T \varphi (\rvec r(s; t))
-    \norma{\pdv{\rvec r}{s} \times \pdv{\rvec r}{t}}
+    \iint_T \varphi (\rvec \varrho(s; t))
+    \norma{\pdv{\rvec \varrho}{s} \times \pdv{\rvec \varrho}{t}}
     \, \diff s \, \diff t
     \text.
   \]
@@ -74,17 +74,17 @@
 
 \begin{definition}[Vektormező skalár- és vektorértékű felületmenti integrálja]
   Legyen $\rvec v:  U \subseteq \mathbb R^3 \rightarrow \mathbb R^3$ leképezés,
-  $\rvec r: T \subseteq \mathbb R^2 \rightarrow S \subset U$, $(s;t) \mapsto
-    \rvec r(s;t)$ pedig az $S$ felület parametrizált egyenlete. Ekkor az
-  $\rvec r$ vektormező $S$ felület menti
+  $\rvec \varrho T \subseteq \mathbb R^2 \rightarrow S \subset U$, $(s;t)
+    \mapsto \rvec \varrho(s;t)$ pedig az $S$ felület parametrizált egyenlete.
+  Ekkor az $\rvec v$ vektormező $S$ felület menti
   \begin{itemize}
     \item skalárértékű integrálja:
           \(
             \displaystyle
             \int_S \scalar{\rvec v (\rvec r)}{d \rvec S} =
             \iint_T \scalar
-            {\rvec v (\rvec r(s; t))}
-            {\left(\pdv{\rvec r}{s} \times \pdv{\rvec r}{t}\right)}
+            {\rvec \varrho (\rvec r(s; t))}
+            {\left(\pdv{\rvec \varrho}{s} \times \pdv{\rvec \varrho}{t}\right)}
             \, \diff s \, \diff t
             \text,
           \)
@@ -92,8 +92,8 @@
           \(
             \displaystyle
             \int_S \rvec v (\rvec r) \times d \rvec S =
-            \iint_T {\rvec v (\rvec r(s; t))} \times
-            \left(\pdv{\rvec r}{s} \times \pdv{\rvec r}{t}\right)
+            \iint_T {\rvec \varrho (\rvec r(s; t))} \times
+            \left(\pdv{\rvec \varrho}{s} \times \pdv{\rvec \varrho}{t}\right)
             \, \diff s \, \diff t
             \text.
           \)
@@ -103,5 +103,132 @@
 
 \clearpage
 \section{Feladatok}
+
+\clearpage
+\section{Segédlet}
+
+\subsection{Felületek paraméterezése}
+
+\bgroup
+\newcommandx{\coordsyst}[1][1=1.25]{%
+  \coordinate (O) at (0,0,0);
+  \draw[-to] (O) -- (#1,0,0) node[above left=-.75mm] {$x$};
+  \draw[-to] (O) -- (0,#1,0) node[below left=-.75mm] {$y$};
+  \draw[-to] (O) -- (0,0,#1) node[right] {$z$};
+}
+\def\tscale{1.4}
+\let\tsize\normalsize
+\def\tskip{14mm}
+\begin{tabular}{>{\bullet\;\bfseries}p{3.25cm}<{:} p{5cm} m{2.75cm} c}
+  Körlap
+   & $\rvec \varrho (s;t) = \begin{bmatrix} s \cos t \\ s \sin t \\ 0 \end{bmatrix}$
+   & $s \in [0;r]$ \newline $t \in [0, 2\pi)$
+   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
+           \draw[-to] (-1.25,0) -- (1.25,0) node[above left=-.75mm] {$x$};
+           \draw[-to] (0,-.9) -- (0,1.1) node[below left=-.75mm] {$y$};
+           \draw[to-to, thick, blue-base] (0,0) circle (.6);
+           \node at (.3,.15) {\scriptsize$r$};
+           \node at (-.15,.3) {\scriptsize$r$};
+         \end{tikzpicture}
+  \\[\tskip]
+    Ellipszislap
+   & $\rvec \varrho (s;t) = \begin{bmatrix} a \, s \cos t \\ b \, s \sin t \\ 0 \end{bmatrix}$
+   & $s \in [0;1]$ \newline $t \in [0, 2\pi)$
+   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
+         \draw[-to] (-1.25,0) -- (1.25,0) node[above left=-.75mm] {$x$};
+         \draw[-to] (0,-.8) -- (0,1) node[below left=-.75mm] {$y$};
+         \draw[to-to, thick, blue-base] (0,0) ellipse (.8 and .6);
+         \node at (.4,.15) {\scriptsize$a$};
+         \node at (-.15,.3) {\scriptsize$b$};
+       \end{tikzpicture}
+  \\[\tskip]
+  Hengerfelület
+   & $\rvec \varrho (s;t) = \rvec r_0(s) + t \rvec n$
+   & $s \in \mathcal D_{\rvec r_0}$ \newline $t \in [0, T]$
+   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
+       \coordinate (A) at (0,-.15);
+       \coordinate (B) at (.6,-.2);
+       \coordinate (C) at (.5,.5);
+       \coordinate (D) at (0,.35);
+       \coordinate (E) at (-.66,.45);
+       \coordinate (F) at (-.75,-.35);
+
+       \foreach \c in {A,B,C,D,E,F} {
+           \coordinate (\c-) at ($(\c) + (.5,.5)$);
+           \coordinate (\c+) at ($(\c) - (.375,.375)$);
+
+           \draw[opacity=.1] (\c-) -- (\c+) coordinate[pos=.25] (\c75);
+         }
+
+
+       \draw[smooth cycle, thick, blue-base, fill=white] plot coordinates {
+           (A+) (B+) (C+) (D+) (E+) (F+)
+         };
+       \draw[smooth cycle, thick, yellow-base, opacity=.25] plot[xshift=1cm] coordinates {
+           (A-) (B-) (C-) (D-) (E-) (F-)
+         };
+
+       \draw[-to, draw=red-base, thick] (E+) -- (E75) node[below left, xshift=-3mm] {\scriptsize$\rvec n$};
+       \node[above left=-1mm] at (A+) {\scriptsize$\rvec r_0(s)$};
+     \end{tikzpicture}
+  \\[\tskip]
+  Forgásfelület
+   & $\rvec \varrho (s;t) = \begin{bmatrix} s \cos t \\ s \sin t \\ f(s) \end{bmatrix}$
+   & $s \in [0;2\pi)$ \newline $t \in \mathcal D_f$
+   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
+           \draw[-to] (-1.25,-.4) -- ++(2.5,0) node[above left=-.75mm] {$x$};
+           \draw[-to] (0,-.8) -- (0,1) node[below left=-.75mm] {$z$};
+
+           \draw [thick,draw=blue-base, yshift=-4mm]
+           plot [domain=-1:1, samples=100]
+           (\x,1.4*\x*\x - 0.6*\x*\x*\x*\x);
+
+           \node at (0,0) {\scriptsize $\;\;z = f(x)$};
+
+           \draw[to-to, thick, blue-base] (0,.4) ellipse (1 and .2);
+         \end{tikzpicture}
+  \\[\tskip]
+    Gömbfelület
+   & $\rvec \varrho (s;t) = \begin{bmatrix} R \sin s \cos t \\ R \sin s \sin t \\ R \cos s \end{bmatrix}$
+   & $s \in [0;\pi]$ \newline $t \in [0, 2\pi)$
+   &
+  \\[\tskip]
+  Ellipszoid
+   & $\rvec \varrho (s;t) = \begin{bmatrix} a \sin s \cos t \\ b \sin s \sin t \\ c \cos s \end{bmatrix}$
+   & $s \in [0;\pi]$ \newline $t \in [0, 2\pi)$
+   &
+  \\[\tskip]
+    Тórusz
+   & $\rvec \varrho (s;t) = \begin{bmatrix} (R + r \cos s) \cos t \\ (R + r \cos s) \sin t \\ r \sin s \end{bmatrix}$
+   & $s \in [0;2\pi)$ \newline $t \in [0, 2\pi)$
+   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
+         \draw[-to] (-1.25,0) -- ++(2.5,0) node[above left=-.75mm] {$x$};
+         \draw[-to] (-.6,-.6) -- ++(0,1.2) node[below left=-.75mm] {$z$};
+
+         \draw[gray] (.65,0) coordinate(C) -- ++(0,-.5) coordinate[pos=.8] (A);
+         \coordinate (O) at (-.6,0);
+
+         \draw [thick,draw=blue-base] (.65, 0) circle (.25);
+         \draw [thick,fill=red-base, draw=red-base] (.65, 0) circle (.04);
+
+         \draw[to-to, draw=yellow-base, thick] (A) -- (A -| O) node[midway, above] {\scriptsize$R$};
+         \draw[draw=yellow-base, thick, -to] (C) -- ++(150:.6) -- ++(150:-.35) node[pos=.75, above] {\scriptsize$r$};
+       \end{tikzpicture}
+  \\[\tskip]
+  Kúp
+   & $\rvec \varrho (s;t) = \begin{bmatrix} s \cos t \\ s \sin t \\ s \end{bmatrix}$
+   & $s \in [0;U]$ \newline $t \in [0, 2\pi)$
+   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
+       \draw[-to] (-1.25,-.6) -- ++(2.5,0) node[above left=-.75mm] {$x$};
+       \draw[-to] (0,-.8) -- (0,1) node[below left=-.75mm] {$z$};
+
+       \draw[thick,draw=blue-base] (-1,.4) -- ++(1,-1) -- ++(1,1);
+
+       \draw[to-to, thick, blue-base] (0,.4) ellipse (1 and .15);
+
+       \node at (0,0) {\scriptsize $z = x$};
+     \end{tikzpicture}
+\end{tabular}
+\egroup
 
 \end{document}
