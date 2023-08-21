@@ -1,0 +1,38 @@
+\documentclass[graphics]{math-standalone}
+
+\begin{document}
+\begin{tikzpicture}[
+    3d view={135}{35.26},
+    baseline,
+  ]
+  % Origin coordinate
+  \coordinate (O) at (0,0,0);
+
+  % Helper coordinates
+  \foreach \a in {0,15,...,345} {
+      \foreach \loc in {0,10} {
+          \coordinate (\a-\loc) at
+          ({\loc*cos(\a)/10},{\loc*sin(\a)/10},1.4*\loc*\loc/100 - 0.6*\loc*\loc*\loc*\loc/10000);
+        }
+    }
+
+  % Draw surface in bg
+  \foreach \x\y in {120/135,135/150,150/165,165/180,180/195,195/210,210/225,225/240,240/255,255/270,270/285,285/300,300/315,315/330} {
+      \foreach \i/\j in {0/10} {
+          \fill[thick, draw=red-base, fill=red-base!20, rounded corners=.1pt] (\x-\i) -- (\y-\i) -- (\y-\j) -- (\x-\j) -- cycle;
+        }
+    }
+
+  % Coordinate system
+  \draw[-to] (O) -- ++(1.25,0,0) node[anchor=south east] {$x$};
+  \draw[-to] (O) -- ++(0,1.25,0) node[anchor=south west] {$y$};
+  \draw[-to] (O) -- ++(0,0,2.15) node[anchor=north east] {$z$};
+
+  % Draw surface in fg
+  \foreach \x/\y in {330/345,345/0,0/15,15/30,75/90,90/105,105/120,45/60,30/45,60/75} {
+      \foreach \i/\j in {0/10} {
+          \fill[thick, draw=red-base, fill=red-base!20, rounded corners=.1pt] (\x-\i) -- (\y-\i) -- (\y-\j) -- (\x-\j) -- cycle;
+        }
+    }
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,39 @@
+\documentclass[graphics]{math-standalone}
+
+\begin{document}
+\begin{tikzpicture}[
+    baseline,
+  ]
+  % Random potato coordinates
+  \coordinate (A) at (0,-.15);
+  \coordinate (B) at (.6,-.2);
+  \coordinate (C) at (.5,.5);
+  \coordinate (D) at (0,.35);
+  \coordinate (E) at (-.66,.45);
+  \coordinate (F) at (-.75,-.35);
+
+  % + is in the foreground, - is in the background
+  \foreach \c in {A,B,C,D,E,F} {
+      \coordinate (\c-) at ($(\c) + (.5,.5)$);
+      \coordinate (\c+) at ($(\c) - (.375,.375)$);
+
+      % Connect + and - with a line
+      \draw[opacity=0.25,red-base] (\c-) -- (\c+) coordinate[pos=.25] (\c75);
+    }
+
+
+  % Connect the dots
+  \draw[smooth cycle, thick, red-base, fill=white] plot coordinates {
+      (A+) (B+) (C+) (D+) (E+) (F+)
+    };
+  \draw[smooth cycle, thick, yellow-base, opacity=.25] plot[xshift=1cm] coordinates {
+      (A-) (B-) (C-) (D-) (E-) (F-)
+    };
+
+  % Draw the normal vector
+  \draw[-to, draw=blue-base, thick] (E+) -- (E75) node[below left, xshift=-3mm] {\scriptsize$\rvec n$};
+
+  % Label the curve
+  \node[above left=-1mm] at (A+) {\scriptsize$\rvec r_0(s)$};
+\end{tikzpicture}
+\end{document}

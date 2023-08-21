@@ -1,0 +1,10 @@
+root_files:
+  - { input: circle }
+  - { input: cone }
+  - { input: cylinder }
+  - { input: ellipse }
+  - { input: ellipsoid }
+  - { input: revolution }
+  - { input: sphere }
+  - { input: torus }
+lang: false

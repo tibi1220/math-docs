@@ -1,0 +1,43 @@
+\documentclass[graphics]{math-standalone}
+
+\begin{document}
+\begin{tikzpicture}[
+    3d view={135}{35.26},
+    % 3d view={110}{20},
+    baseline,
+  ]
+  % Origin coordinate
+  \coordinate (O) at (0,0,0);
+
+  % Helper coordinates
+  \foreach \s in {0,30,...,360} {
+      \foreach \t in {0,30,...,330} {
+          \coordinate (\s-\t) at
+          (
+          {sin(\s/2)*cos(\t)},
+          {sin(\s/2)*sin(\t)},
+          {cos(\s/2)}
+          );
+        }
+    }
+
+  % Draw surface in bg
+  \foreach \x/\y in {330/360,300/330,270/300,240/270,210/240,180/210,150/180,120/150,90/120,60/90,30/60,0/30} {
+      \foreach \i/\j in {150/180,180/210,210/240,240/270,270/300,300/330,330/0,120/150,90/120}{
+          \fill[thick, draw=red-base, fill=red-base!20, rounded corners=.1pt] (\x-\i) -- (\y-\i) -- (\y-\j) -- (\x-\j) -- cycle;
+        }
+    }
+
+  % Coordinate system
+  \draw[-to] (O) -- ++(1.75,0,0) node[anchor=south east] {$x$};
+  \draw[-to] (O) -- ++(0,1.75,0) node[anchor=south west] {$y$};
+  \draw[-to] (O) -- ++(0,0,1.75) node[anchor=north east] {$z$};
+
+  % Draw surface in fg
+  \foreach \x/\y in {330/360,300/330,270/300,240/270,210/240,180/210,150/180,120/150,90/120,60/90,30/60,0/30} {
+      \foreach \i/\j in {0/30,30/60,60/90} {
+          \fill[thick, draw=red-base, fill=red-base!20, rounded corners=.1pt] (\x-\i) -- (\y-\i) -- (\y-\j) -- (\x-\j) -- cycle;
+        }
+    }
+\end{tikzpicture}
+\end{document}

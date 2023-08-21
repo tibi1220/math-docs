@@ -21,3 +21,7 @@ specialBeginEnd:
     begin: \$\$
     end: \$\$
     lookForThis: 1
+  draw:
+    begin: \\draw
+    end: ;
+    lookForThis: 1

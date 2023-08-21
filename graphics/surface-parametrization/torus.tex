@@ -1,0 +1,60 @@
+\documentclass[graphics]{math-standalone}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+      axis equal image,
+      hide axis,
+      % z buffer = sort,
+      view={110}{20},
+      xmax=2.5,
+      ymax=2.5,
+      zmax=2.25,
+      scale=.75,
+    ]
+
+    \draw[-to] (axis cs:0,0,0) -- (axis cs:1.25,0,0);
+    \draw[-to] (axis cs:0,0,0) -- (axis cs:0,1.25,0);
+
+    \addplot3[
+      surf,
+      faceted color=red-base,
+      fill=red-base!20,
+      ultra thin,
+      samples=15,
+      samples y=48,
+      domain=0:2*pi,
+      domain y=0:2*pi,
+      z buffer=sort,
+    ](
+    {(1.25+0.25*sin(deg(\x)))*cos(deg(\y))},
+    {(1.25+0.25*sin(deg(\x)))*sin(deg(\y))},
+    {0.25*cos(deg(\x))}
+    );
+
+    \draw[-to] (axis cs:0,0,0) -- (axis cs:0,0,2) node[anchor=north east] {$z$};
+
+    \draw[-to] (axis cs:1.5,0,0) -- (axis cs:2.25,0,0) node[anchor=north] {$x$};
+    \draw[-to] (axis cs:0,1.5,0) -- (axis cs:0,2.25,0) node[anchor=north] {$y$};
+
+    \coordinate (C) at (axis cs:0,1.25,1.25);
+    \coordinate (T) at (axis cs:0,1.25,1.65);
+    \coordinate (T+) at (axis cs:0,1.25,1.75);
+    \coordinate (Z) at (axis cs:0,0,1.65);
+  \end{axis}
+
+  \begin{scope}[3d view={110}{20},canvas is yz plane at x=0]
+    \draw[red-base, fill=red-base!20] (C) circle (0.33);
+    \draw[red-base, fill=red-base, ultra thick] (C) circle (0.02);
+
+    \draw[gray] (C) -- (T+);
+    \draw[to-to, thick, draw=blue-base]
+    (Z) -- (T)
+    node[midway, anchor=north] {\scriptsize$R$};
+    \draw[-to, thick, draw=blue-base]
+    (C) -- ++(0.75*0.8,0.75*0.6) -- ($(C)+(0.33*0.8,0.33*0.6)$)
+    node[midway, anchor=south, inner sep=.5mm, font=\scriptsize] {$r$};
+  \end{scope}
+\end{tikzpicture}
+
+\end{document}
