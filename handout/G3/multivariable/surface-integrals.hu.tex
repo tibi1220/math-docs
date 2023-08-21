@@ -74,7 +74,7 @@
 
 \begin{definition}[Vektormező skalár- és vektorértékű felületmenti integrálja]
   Legyen $\rvec v:  U \subseteq \mathbb R^3 \rightarrow \mathbb R^3$ leképezés,
-  $\rvec \varrho T \subseteq \mathbb R^2 \rightarrow S \subset U$, $(s;t)
+  $\rvec \varrho: T \subseteq \mathbb R^2 \rightarrow S \subset U$, $(s;t)
     \mapsto \rvec \varrho(s;t)$ pedig az $S$ felület parametrizált egyenlete.
   Ekkor az $\rvec v$ vektormező $S$ felület menti
   \begin{itemize}
@@ -83,7 +83,7 @@
             \displaystyle
             \int_S \scalar{\rvec v (\rvec r)}{d \rvec S} =
             \iint_T \scalar
-            {\rvec \varrho (\rvec r(s; t))}
+            {\rvec v (\rvec \varrho(s; t))}
             {\left(\pdv{\rvec \varrho}{s} \times \pdv{\rvec \varrho}{t}\right)}
             \, \diff s \, \diff t
             \text,
@@ -92,7 +92,7 @@
           \(
             \displaystyle
             \int_S \rvec v (\rvec r) \times d \rvec S =
-            \iint_T {\rvec \varrho (\rvec r(s; t))} \times
+            \iint_T {\rvec v (\rvec \varrho(s; t))} \times
             \left(\pdv{\rvec \varrho}{s} \times \pdv{\rvec \varrho}{t}\right)
             \, \diff s \, \diff t
             \text.
@@ -118,7 +118,7 @@
 }
 \def\tscale{1.4}
 \let\tsize\normalsize
-\def\tskip{14mm}
+\def\tskip{16mm}
 \begin{tabular}{>{\bullet\;\bfseries}p{3.25cm}<{:} p{5cm} m{2.75cm} c}
   Körlap
    & $\rvec \varrho (s;t) = \begin{bmatrix} s \cos t \\ s \sin t \\ 0 \end{bmatrix}$
