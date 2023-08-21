@@ -1,0 +1,39 @@
+\documentclass[graphics]{math-standalone}
+
+\begin{document}
+\begin{tikzpicture}[
+    3d view={110}{20},
+    baseline,
+  ]
+  % Origin coordinate
+  \coordinate (O) at (0,0,0);
+
+  % Coordinate system
+  \draw[-to] (O) -- ++(1.75,0,0) node[anchor=west] {$x$};
+  \draw[-to] (O) -- ++(0,1.75,0) node[anchor=south east] {$y$};
+  \draw[-to] (O) -- ++(0,0,1.75) node[anchor=north east] {$z$};
+
+  \draw[%
+    domain=0:866,% 2.5 revolutions
+    samples=100, % More samples -> smoother curve
+    smooth,      % Nicer curve
+    variable=\t, % Use \t because of convention
+    thick,
+    red-base,
+  ] plot (
+  {cos(\t)},
+  {sin(\t)},
+  {\t/900}
+  );
+
+  \begin{scope}[font=\scriptsize]
+    \draw[thick, draw=blue-base, inner sep=1mm]
+    (O) -- (1,0,0)
+    node[anchor=west, pos=.6] {$a$};
+
+    \draw[thick, draw=blue-base, inner sep=0.5mm]
+    (1,0,0) -- ++(0,0,1/2.5)
+    node[anchor=east, pos=.5] {$b$};
+  \end{scope}
+\end{tikzpicture}
+\end{document}

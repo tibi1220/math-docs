@@ -107,65 +107,36 @@
 }
 \def\tscale{1.33}
 \let\tsize\small
-\begin{tabular}{>{\bullet\;\bfseries}p{2.75cm}<{:} p{5.675cm} p{2.75cm} >{\centering\arraybackslash}p{40.25mm}}
-  % \hline
-  % \mdseries Elnevezés
-  %  & Paraméterezés
-  %  & Tartomány
-  %  & Ábra
-  % \\
+\begin{tabular}{
+  >{\bullet\;\bfseries}p{2.75cm}<{:}
+  p{5.675cm}
+  p{2.75cm}
+  >{\centering\arraybackslash}m{4cm}
+  }
   Egyenes
    & $\rvec r(t) = \rvec r_0 + t \rvec v$
    & $t \in \mathbb R$
-   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
-       \coordsyst
-       \draw[to-to, thick, red-base] (-1.5,.25) -- coordinate[pos=.15] (T) coordinate[pos=.75] (Q) (1.5,1.25);
-       \draw[-to, draw=yellow-base, ultra thick] (T) -- (Q) node[below left] {$\rvec v$};
-       \draw[-to, draw=blue-base, ultra thick] (0,0) -- (T) node[above] {$\rvec r_0$};
-     \end{tikzpicture}
+   & \relativestandalone{../../../graphics/curve-parametrization/line}
   \\[12mm]
   Szakasz
    & $\rvec r(t) = \rvec r_0 + t (\rvec r_1 - \rvec r_0)$
    & $t \in [0;1]$
-   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
-       \coordsyst
-       \draw[|-|, thick, red-base] (-1,.25) coordinate(A) -- (1,1) coordinate(B);
-       \draw[-to, draw=blue-base, ultra thick] (O) -- (A) node[left] {$\rvec r_0$};
-       \draw[-to, draw=yellow-base, ultra thick] (O) -- (B) node[right] {$\rvec r_1$};
-     \end{tikzpicture}
-  \\[12mm]
+   & \relativestandalone{../../../graphics/curve-parametrization/line-segment}
+  \\[14mm]
   Körvonal
    & $\rvec r(t) = \begin{bmatrix} r \cos t \\ r \sin t \\ 0 \end{bmatrix}$
    & $t \in [0;2\pi)$
-   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
-           \draw[-to] (-1.25,0) -- (1.25,0) node[above left=-.75mm] {$x$};
-           \draw[-to] (0,-.9) -- (0,1.1) node[below left=-.75mm] {$y$};
-           \draw[to-to, thick, red-base] (0,0) circle (.6);
-           \node at (.3,.15) {$r$};
-           \node at (-.15,.3) {$r$};
-         \end{tikzpicture}
+   & \relativestandalone{../../../graphics/curve-parametrization/circle}
   \\[12mm]
     Ellipszis
    & $\rvec r(t) = \begin{bmatrix} a \cos t \\ b \sin t \\ 0 \end{bmatrix}$
    & $t \in [0;2\pi)$
-   & \begin{tikzpicture}[font=\tsize, baseline, scale=\tscale]
-         \draw[-to] (-1.25,0) -- (1.25,0) node[above left=-.75mm] {$x$};
-         \draw[-to] (0,-.8) -- (0,1) node[below left=-.75mm] {$y$};
-         \draw[to-to, thick, red-base] (0,0) ellipse (.8 and .6);
-         \node at (.4,.15) {$a$};
-         \node at (-.15,.3) {$b$};
-       \end{tikzpicture}
+   & \relativestandalone{../../../graphics/curve-parametrization/ellipse}
   \\[12mm]
   Spirál
    & $\rvec r(t) = \begin{bmatrix} a \cos t \\ a \sin t \\ bt \end{bmatrix}$
    & $t \in \mathbb R$
-   & \begin{tikzpicture}[font=\tsize,x={(220:.85cm)},y={(345:.925cm)},z={(90:1cm)}, baseline, scale=\tscale]
-       \coordsyst
-       \draw[-, thick, draw=yellow-base] (.65,0,0) -- (0,0,0) node[pos=.7, below=-1mm] {$a$};
-       \draw[-, thick, draw=blue-base] (.65,0,0) -- ++(0,0,.325) node[midway, left=-1mm] {$b$};
-       \draw[domain=0:900,smooth,variable=\t, thick, red-base, samples=100]
-       plot ({.65*cos(\t)},{.65*sin(\t)},\t/720*.65);
-     \end{tikzpicture}
+   & \relativestandalone{../../../graphics/curve-parametrization/spiral}
 \end{tabular}
 
 \subsection{Koordináta-transzformációk}

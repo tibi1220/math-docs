@@ -1,0 +1,24 @@
+\documentclass[graphics]{math-standalone}
+
+\begin{document}
+\begin{tikzpicture}[
+    3d view={110}{20},
+    baseline,
+  ]
+  % Origin coordinate
+  \coordinate (O) at (0,0,0);
+
+  % Circle
+  \draw[fill=red-base!50!white, fill opacity=.75] (O) circle (1);
+
+  % Coordinate system
+  \draw[-to] (O) -- ++(1.75,0,0) node[anchor=west] {$x$};
+  \draw[-to] (O) -- ++(0,1.75,0) node[anchor=south east] {$y$};
+  \draw[-to] (O) -- ++(0,0,1.25) node[anchor=north east] {$z$};
+
+  % Radius
+  \draw[-to, thick, draw=blue-base]
+  (O) -- (0.6*1.75,0.8*1.75,0) -- (0.6,0.8,0)
+  node[midway, anchor=north east, inner sep=.5mm] {$r$};
+\end{tikzpicture}
+\end{document}

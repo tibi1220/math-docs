@@ -1,0 +1,35 @@
+\documentclass[graphics]{math-standalone}
+
+\begin{document}
+\begin{tikzpicture}[
+    3d view={110}{20},
+    baseline,
+  ]
+  % Origin coordinate
+  \coordinate (O) at (0,0,0);
+
+  % Coordinate system
+  \draw[-to] (O) -- ++(1.75,0,0) node[anchor=south] {$x$};
+  \draw[-to] (O) -- ++(0,1.75,0) node[anchor=north east] {$y$};
+  \draw[-to] (O) -- ++(0,0,1.75) node[anchor=north west] {$z$};
+
+  % Line
+  \draw[to-to, thick, red-base]
+  (2,-0.75,1.25) -- ++(-1,3,0.75)
+  coordinate[pos=.2] (A)
+  coordinate[pos=.8] (B)
+  ;
+
+  % v vector
+  \draw[-to, draw=yellow-base, ultra thick]
+  (A) -- (B)
+  node[anchor=north east] {$\rvec v$}
+  ;
+
+  % r_0 vector
+  \draw[-to, draw=blue-base, ultra thick]
+  (O) -- (A)
+  node[anchor=south] {$\rvec r_0$}
+  ;
+\end{tikzpicture}
+\end{document}
