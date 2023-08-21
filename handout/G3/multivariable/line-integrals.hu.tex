@@ -98,15 +98,6 @@
 
 \subsection{Görbék paraméterezése}
 
-\bgroup
-\newcommandx{\coordsyst}[1][1=1.25]{%
-  \coordinate (O) at (0,0,0);
-  \draw[-to] (O) -- (#1,0,0) node[above left=-.75mm] {$x$};
-  \draw[-to] (O) -- (0,#1,0) node[below left=-.75mm] {$y$};
-  \draw[-to] (O) -- (0,0,#1) node[right] {$z$};
-}
-\def\tscale{1.33}
-\let\tsize\small
 \begin{tabular}{
   >{\bullet\;\bfseries}p{2.75cm}<{:}
   p{5.675cm}
@@ -171,7 +162,7 @@
   \textbf{Gömb:}
    & $x = r \sin \varphi \cos \vartheta $ \newline
   $y = r \sin \varphi \sin \vartheta $ \newline
-  $z = r \cos \theta$
+  $z = r \cos \varphi$
    & $r \in [0; R]$ \newline
   $\varphi \in [0; \pi]$ \newline
   $\vartheta \in [0; 2\pi)$
@@ -179,6 +170,5 @@
    & \relativestandalone{../../../graphics/coordinate-systems/spherical}
   \\
 \end{tabular}
-\egroup
 
 \end{document}
