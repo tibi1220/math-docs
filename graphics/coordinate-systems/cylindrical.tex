@@ -1,0 +1,33 @@
+\documentclass[graphics]{math-standalone}
+
+\begin{document}
+\tdplotsetmaincoords{70}{110}
+\begin{tikzpicture}[
+    % 3d view={110}{20},
+    baseline,
+    tdplot_main_coords,
+  ]
+  % Origin coordinate
+  \coordinate (O) at (0,0,0);
+
+  % Coordinate system
+  \draw[-to] (O) -- ++(1.75,0,0) node[anchor=south] {$x$};
+  \draw[-to] (O) -- ++(0,1.75,0) node[anchor=north east] {$y$};
+  \draw[-to] (O) -- ++(0,0,1.75) node[anchor=north west] {$z$};
+
+  % Helper coordinates
+  \coordinate (T) at (0.8,1.2,0);
+
+  % r and z
+  \draw[-to, thick, draw=blue-base]
+  (T) -- ++(0,0,1)
+  node[anchor=north west] {$z$};
+  \draw[-to, thick, draw=red-base]
+  (O) -- (T)
+  node[anchor=south west, pos=.4, fill=white, inner sep=2pt] {$r$};
+
+  \tdplotdrawarc[yellow-base, thick, -to]
+  {(O)}{1.2}{0}{56}
+  {anchor=south east,font=\scriptsize, inner sep=2pt, black}{$\varphi$};
+\end{tikzpicture}
+\end{document}

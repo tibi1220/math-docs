@@ -1,0 +1,52 @@
+\documentclass[graphics]{math-standalone}
+
+\begin{document}
+\tdplotsetmaincoords{55}{110}
+\begin{tikzpicture}[
+    % 3d view={130}{35.26},
+    baseline,
+    tdplot_main_coords,
+  ]
+  % Origin coordinate
+  \coordinate (O) at (0,0,0);
+  \def\s{1.25}
+
+  % Coordinate system
+  \draw[-to] (O) -- ++(1.75,0,0) node[anchor=south] {$x$};
+  \draw[-to] (O) -- ++(0,1.75,0) node[anchor=south] {$y$};
+  \draw[-to] (O) -- ++(0,0,1.75) node[anchor=north west] {$z$};
+
+  % Helper square
+  \draw[gray,dashed]
+  (\s,\s,0) coordinate(A) --
+  (0,\s,0) coordinate(B) --
+  (0,\s,\s) coordinate(C) --
+  (\s,\s,\s) coordinate(c) --
+  cycle
+  ;
+
+  % Helper lines
+  \draw[gray]
+  (O) -- (C)
+  (O) -- (A)
+  ;
+
+  % r
+  \draw[thick,draw=red-base,-to]
+  (O) -- ++(\s,\s,\s)
+  node[pos=.5, anchor=south west, font=\scriptsize, inner sep=2pt]{$r$};
+
+  % phi
+  \tdplotgetpolarcoords{0.001}{1}{1}
+  \tdplotsetthetaplanecoords{\tdplotresphi}
+
+  \tdplotdrawarc[tdplot_rotated_coords, blue-base, thick, -to]
+  {(O)}{1}{0}{45}
+  {anchor=north east,font=\scriptsize, inner sep=2pt, black}{$\varphi$}
+
+  % theta
+  \tdplotdrawarc[yellow-base, thick, -to]
+  {(O)}{1}{0}{45}
+  {anchor=south,font=\scriptsize, inner sep=2pt, black}{$\vartheta$};
+\end{tikzpicture}
+\end{document}

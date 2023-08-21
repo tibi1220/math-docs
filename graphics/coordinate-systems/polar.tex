@@ -1,0 +1,34 @@
+\documentclass[graphics]{math-standalone}
+
+\begin{document}
+\begin{tikzpicture}
+  % Coordinate system
+  \draw[-to] (-1.2,0) -- (1.5,0) node[anchor=north east] {$x$};
+  \draw[-to] (0,-0.5) -- (0,1.4) node[anchor=north west] {$y$};
+
+  % Radius
+  \draw[-to, thick, draw=red-base]
+  (0,0) -- (125:1.5) coordinate(c)
+  node[anchor=north east, midway, inner sep=2pt] {$r$}
+  ;
+
+  % Radius
+  % \draw [decorate, decoration={brace}, draw=blue-base, thick]
+  % (-.75mm,-.75mm) -- ++(c)
+  % node[below left, midway] {$r$};
+
+  % Angle helpers
+  \coordinate (a) at (1,0);
+  \coordinate (b) at (0,0);
+
+  % Angle
+  \draw pic[
+      "$\varphi$",
+      draw=yellow-base,
+      angle eccentricity=.5,
+      angle radius=7mm,
+      thick,
+      ->,
+    ] {angle=a--b--c};
+\end{tikzpicture}
+\end{document}
