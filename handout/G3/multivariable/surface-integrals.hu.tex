@@ -110,14 +110,6 @@
 \subsection{Felületek paraméterezése}
 
 \bgroup
-\newcommandx{\coordsyst}[1][1=1.25]{%
-  \coordinate (O) at (0,0,0);
-  \draw[-to] (O) -- (#1,0,0) node[above left=-.75mm] {$x$};
-  \draw[-to] (O) -- (0,#1,0) node[below left=-.75mm] {$y$};
-  \draw[-to] (O) -- (0,0,#1) node[right] {$z$};
-}
-\def\tscale{1.4}
-\let\tsize\normalsize
 \def\tskip{15mm}
 \begin{tabular}{
   >{\bullet\;}p{3.5cm}
@@ -145,22 +137,22 @@
    & $s \in [0;2\pi)$ \newline $t \in \mathcal D_f$
    & \relativestandalone{../../../graphics/surface-parametrization/revolution}
   \\[\tskip]
-    Gömbfelület
+    \textbf{Gömbfelület:}
    & $\rvec \varrho (s;t) = \begin{bmatrix} R \sin s \cos t \\ R \sin s \sin t \\ R \cos s \end{bmatrix}$
    & $s \in [0;\pi]$ \newline $t \in [0, 2\pi)$
    & \relativestandalone{../../../graphics/surface-parametrization/sphere}
   \\[\tskip]
-  Ellipszoid
+  \textbf{Ellipszoid:}
    & $\rvec \varrho (s;t) = \begin{bmatrix} a \sin s \cos t \\ b \sin s \sin t \\ c \cos s \end{bmatrix}$
    & $s \in [0;\pi]$ \newline $t \in [0, 2\pi)$
    & \relativestandalone{../../../graphics/surface-parametrization/ellipsoid}
   \\[\tskip]
-    Тórusz
+    \textbf{Тórusz:}
    & $\rvec \varrho (s;t) = \begin{bmatrix} (R + r \cos s) \cos t \\ (R + r \cos s) \sin t \\ r \sin s \end{bmatrix}$
    & $s \in [0;2\pi)$ \newline $t \in [0, 2\pi)$
    & \relativestandalone{../../../graphics/surface-parametrization/torus}
   \\[\tskip]
-  Kúp
+  \textbf{Kúp:}
    & $\rvec \varrho (s;t) = \begin{bmatrix} s \cos t \\ s \sin t \\ s \end{bmatrix}$
    & $s \in [0;U]$ \newline $t \in [0, 2\pi)$
    & \relativestandalone{../../../graphics/surface-parametrization/cone}
