@@ -1,0 +1,227 @@
+\documentclass[lang=magyar]{math-handout}
+
+\title{Összefoglalás}
+\area{Többváltozós analízis}
+\subject{Matematika G3}
+\date{Utoljára frissítve: \today}
+\author{Sándor Tibor}
+\docno{6}
+
+\begin{document}
+\allowdisplaybreaks
+
+\maketitle
+
+\vspace{1em}
+
+\begin{summary}
+  Ebben a leckében összefoglaljuk az eddig tanult fogalmakat.
+\end{summary}
+
+\vspace{-1em}
+\section{Elméleti áttekinő}
+% \vspace{1em}
+
+\vfill
+
+\begin{block}[\underline{Rotáció, Divergencia, Gradiens}]
+  \vspace*{-1em}
+  \begin{center}
+    \def\arraystretch{1.5}
+    \newenvironment{bm}{\bgroup\renewcommand*{\arraystretch}{1.1}\begin{bmatrix}}{\end{bmatrix}\egroup}
+    \newcommand{\dspl}[3]{\begin{bm}#1\\#2\\#3\end{bm}}
+    \newcommand\nablavec{\dspl{\partial_x}{\partial_y}{\partial_z}}
+
+    \begin{tabular}{l|*{3}{>{\centering\arraybackslash}p{3.5cm}}|}
+      \def\arraystretch{1}
+       & Rotáció
+       & Divergencia
+       & Gradiens
+      \\
+      \hline\hline
+      Jelölés
+       & $\rot \rvec v$
+       & $\Div \rvec v$
+       & $\grad \varphi$
+      \\
+      Operátor
+       & $\nabla \times \rvec v$
+       & $\scalar{\nabla}{\rvec v}$
+       & $\nabla \cdot \varphi$
+      \\
+      Számítás
+       & $\nablavec \times \dspl{v_x}{v_y}{v_z}$
+       & $\scalar{\nablavec}{\dspl{v_x}{v_y}{v_z}}$
+       & $\dspl{\partial_x \varphi}{\partial_y \varphi}{\partial_z \varphi}$
+      \\
+      Ért. tart.
+       & $\mathcal D_{\rvec v} = \mathbb R^3$
+       & $\mathcal D_{\rvec v} = \mathbb R^3$
+       & $\mathcal D_{\varphi} = \mathbb R^3$
+      \\
+      Ért. készl.
+       & $\mathcal R_{\rvec v} = \mathbb R^3$
+       & $\mathcal R_{\rvec v} = \mathbb R^3$
+       & $\mathcal R_{\varphi} = \mathbb R$
+      \\
+      Ért. készl.
+       & $\mathcal R_{\rot \rvec v} = \mathbb R^3$
+       & $\mathcal R_{\Div \rvec v} = \mathbb R$
+       & $\mathcal R_{\grad \varphi} = \mathbb R^3$
+      \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{block}
+
+\vfill
+
+\begin{block}[\underline{Integrálszámítás}]
+  \vspace*{-2em}
+  \begin{align*}
+    \int_\gamma \varphi(\rvec r) \, \diff s
+     & =
+    \int_a^b \varphi(\rvec r(t)) \norma{\dot{\rvec r}(t)} \, \diff t
+    \\
+    \int_\gamma \scalar{\rvec v(\rvec r)}{\diff \rvec r}
+     & =
+    \int_a^b \scalar{\rvec v(\rvec r(t))}{\dot{\rvec r}(t)} \diff t
+    \\
+    \int_\gamma \rvec v(\rvec r) \times \diff \rvec r
+     & =
+    \int_a^b \rvec v(\rvec r(t)) \times \dot{\rvec r}(t) \, \diff t
+    \\[3mm]
+    \int_S \varphi (\rvec r) \, \diff S
+     & =
+    \iint_T \varphi (\rvec \varrho(s; t))
+    \norma{\pdv{\rvec \varrho}{s} \times \pdv{\rvec \varrho}{t}}
+    \, \diff s \, \diff t
+    \\
+    \int_S \scalar{\rvec v (\rvec r)}{\diff \rvec S}
+     & =
+    \iint_T \scalar
+    {\rvec v (\rvec \varrho(s; t))}
+    {\left(\pdv{\rvec \varrho}{s} \times \pdv{\rvec \varrho}{t}\right)}
+    \, \diff s \, \diff t
+    \\
+    \int_S \rvec v (\rvec r) \times \diff \rvec S
+     & =
+    \iint_T {\rvec v (\rvec \varrho(s; t))} \times
+    \left(\pdv{\rvec \varrho}{s} \times \pdv{\rvec \varrho}{t}\right)
+    \, \diff s \, \diff t
+    \\[3mm]
+    \int_V \varphi (\rvec r) \, \diff V
+     & =
+    \iiint_D \varphi (\rvec Z(s; t; u))
+    \left\langle\pdv{\rvec Z}{s}\pdv{\rvec Z}{t}\pdv{\rvec Z}{u}\right\rangle
+    \, \diff s \, \diff t \, \diff u
+  \end{align*}
+\end{block}
+
+\clearpage
+\newcommand{\bitem}[1]{\bullet\; \textbf{{#1}}}
+
+\begin{block}[\underline{Azonosságok, Potenciálosság}]
+  \bitem{Skalárpotenciálosság:}
+
+  Egy $\rvec v: V \rightarrow V$ vektormező skalárpotenciálos, ha létezik olyan
+  $\varphi: V \rightarrow \mathbb R$ skalármező, hogy $\rvec v = \grad \varphi$.
+  \[
+    \rot \grad \varphi \equiv \nvec
+  \]
+
+  \bitem{Vektorpotenciálosság:}
+
+  Egy $\rvec v: V \rightarrow V$ vektormező vektorpotenciálos, ha létezik olyan
+  $\rvec u: V \rightarrow V$ vektormező, hogy $\rvec v = \rot \rvec u$.
+  \[
+    \Div \rot \rvec v \equiv 0
+  \]
+
+  \bitem{További azonosságok:}
+  \begin{align*}
+    \grad \left( \lambda \, \varphi + \mu \, \psi \right)
+     & =
+    \lambda \grad \varphi + \mu \grad \psi
+    \\
+    \Div \left( \lambda \, \rvec v + \mu \, \rvec w \right)
+     & =
+    \lambda \Div \rvec v + \mu \Div \rvec w
+    \\
+    \rot \left( \lambda \, \rvec v + \mu \, \rvec w \right)
+     & =
+    \lambda \rot \rvec v + \mu \rot \rvec w
+    \\[
+    5mm
+    ]
+    \grad \left( \varphi \, \psi \right)
+     & =
+    \varphi \, \grad \psi + \psi \, \grad \varphi
+    \\
+    \Div \left( \varphi \, \rvec v \right)
+     & =
+    \varphi \, \Div \rvec v + \scalar{\grad \varphi}{\rvec v}
+    \\
+    \rot \left( \varphi \, \rvec v \right)
+     & =
+    \varphi \, \rot \rvec v + \grad \varphi \times \rvec v
+    \\[
+    5mm
+    ]
+    \rot \rot \rvec v
+     & =
+    \grad \Div \rvec v - \Delta \rvec v
+    \\
+    \rot \left( \rvec u \times \rvec v \right)
+     & =
+    \rvec u \, \Div \rvec v - \rvec v \, \Div \rvec u
+    + (\Diff \rvec u) \rvec v - (\Diff \rvec v) \rvec u
+    \\
+    \Div \left( \rvec u \times \rvec v \right)
+     & =
+    \scalar{\rvec v}{\rot \rvec u} - \scalar{\rvec u}{\rot \rvec v}
+    \\
+    \grad \left( \scalar{\rvec u}{\rvec v} \right)
+     & =
+    \rvec u \times \rot \rvec v + \rvec v \times \rot \rvec u
+    + (\Diff \rvec u) \rvec v + (\Diff \rvec v) \rvec u
+  \end{align*}
+\end{block}
+
+\vfill
+
+\begin{block}[\underline{Integrálási tételek}]
+  \bitem{Stokes-tétel:}
+  \[
+    \int_S \scalar{\rot \rvec v}{\diff \rvec S}
+    =
+    \oint_{\partial S} \scalar{\rvec v}{\diff \rvec r}
+  \]
+  A tételből következik, hogy skalárpotenciálos vektormező bármely zárt görbén
+  vett integrálja zérus.
+
+  \bitem{Gauss-Osztogradszkij-tétel:}
+  \[
+    \int_V \Div \rvec v \, \diff V
+    =
+    \oint_{\partial V} \scalar{\rvec v}{\diff \rvec S}
+  \]
+  A tételből következik, hogy vektorpotenciálos vektormező bármely zárt
+  felületre vett integrálja zérus.
+
+  \bitem{Gradiens-tétel:}
+  \[
+    \int_\gamma \scalar{\grad \varphi}{\diff \rvec r}
+    =
+    \varphi(\rvec r_1) - \varphi(\rvec r_0)
+  \]
+  Vagyis ha egy vektormező előáll egy skalármező gradienseként, akkor annak
+  bármely zárt görbe mentén vett integrálja csak a kezdő- és végpontoktól függ.
+\end{block}
+
+\clearpage
+
+\clearpage
+\section{Feladatok}
+
+\end{document}

@@ -142,3 +142,10 @@
       \hspace{.5em}[\;#1\;]
     \fi\par%
     }{\end{myframe}}
+\newenvironment{block}[1][\@nil]{%
+  \begin{myframe}%
+    \def\tmp{#1}%
+    \ifx\tmp\@nnil\else%
+      \textbf{#1}
+    \fi\par%
+    }{\end{myframe}}

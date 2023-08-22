@@ -4,3 +4,4 @@ root_files:
   - { input: line-integrals.hu, variants: true }
   - { input: surface-integrals.hu, variants: true }
   - { input: integral-theorems.hu, variants: true }
+  - { input: summary-theorems.hu, variants: true }
