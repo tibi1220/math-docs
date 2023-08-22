@@ -1,0 +1,5 @@
+root_files:
+  - { input: curl-rot-calc.hu }
+  - { input: find-potential.hu }
+  - { input: grad-calc.hu }
+  - { input: inverse-grad.hu }

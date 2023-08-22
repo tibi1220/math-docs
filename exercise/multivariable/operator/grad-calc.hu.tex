@@ -1,0 +1,52 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{Számítsuk ki az alábbi skalármezők gradiensét!}
+  \begin{enumerate}[a)]
+    \item $f(x;y;z) = xyz$
+    \item $g(x;y;z) = 6x^y + \sin e^z$
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $f(x;y;z) = xyz$
+            \vspace{3mm}
+            \begin{itemize}
+              \item A gradiens:\\[3mm]
+                    \(
+                      \displaystyle
+                      \grad f
+                      = \nabla f
+                      = \begin{bmatrix}
+                        \partial_x \\ \partial_y \\ \partial_z
+                      \end{bmatrix} f
+                      = \begin{bmatrix}
+                        yz \\ xz \\ xy
+                      \end{bmatrix}
+                      \text.
+                    \)
+            \end{itemize}
+
+      \item $g(x;y;z) = 6x^y + \sin e^z$
+            \vspace{3mm}
+            \begin{itemize}
+              \item A gradiens:\\[3mm]
+                    \(
+                      \displaystyle
+                      \grad g
+                      = \nabla g
+                      = \begin{bmatrix}
+                        \partial_x \\ \partial_y \\ \partial_z
+                      \end{bmatrix} f
+                      = \begin{bmatrix}
+                        6 y x^{y - 1} \\
+                        6 x^y \ln x   \\
+                        e^z \cos e^z
+                      \end{bmatrix}
+                      \text.
+                    \)
+            \end{itemize}
+    \end{enumerate}
+  }
+\end{exercise}
+\end{document}

@@ -1,0 +1,142 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{Adjuk meg azon skalármezőket, melyek gradiensei az alábbiak!}
+  \begin{enumerate}[a)]
+    \item $\rvec F(x;y;z) = \ijk{y \sin xy}{x \sin xy}{3}$
+    \item $\rvec G(x;y;z) = \ijk{y/x}{\ln x}{2/z^{2}}$
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $\rvec F(x;y;z) = \ijk{y \sin xy}{x \sin xy}{3}$
+
+            \vspace{3mm}
+            A gradiens tulajdonságai alapján:
+            \[
+              F_x = \pdv{f}{x} = y \sin xy
+              \text,\hspace{1cm}
+              F_y = \pdv{f}{y} = x \sin xy
+              \text,\hspace{1cm}
+              F_z = \pdv{f}{z} = 3
+              \text.
+            \]
+            % Integráljuk a parciális deriváltakat:
+            % \begin{alignat*}{9}
+            %   f_1 &  = \int \pdv{f}{x} \,\diff x
+            %       && = \int y \sin xy \,\diff x
+            %       && = - \cos xy
+            %       && + C_1(y;z)
+            %   \\
+            %   f_2 &  = \int \pdv{f}{y} \,\diff y
+            %       && = \int x \sin xy \,\diff y
+            %       && = - \cos xy
+            %       && + C_2(x;z)
+            %   \\
+            %   f_3 &  = \int \pdv{f}{z} \,\diff z
+            %       && = \int 3 \,\diff z
+            %       && = 3z
+            %       && + C_3(x;y)
+            % \end{alignat*}
+            % Tudjuk, hogy $f = f_1 = f_2 = f_3$, a konstansok tehát:
+            % \[
+            %   C_1(y;z) = 3z + C
+            %   \text,\hspace{1cm}
+            %   C_2(x;z) = 3z + C
+            %   \text,\hspace{1cm}
+            %   C_3(x;y) = - \cos xy + C
+            %   \text.
+            % \]
+            Az eredeti függvény az alábbi alakban írható fel:
+            \[
+              f(\rvec r) =
+              \int_0^x F_x(\xi; y; z) \,\diff \xi +
+              \int_0^y F_y(0; \eta; z) \,\diff \eta +
+              \int_0^z F_z(0; 0; \zeta) \,\diff \zeta
+              \text.
+            \]
+            Végezzük el az integrálást:
+            \begin{align*}
+              f(\rvec r)
+               & =
+              \int_0^x y \sin \xi y \,\diff \xi +
+              \int_0^y 0 \,\diff \eta +
+              \int_0^z 3 \,\diff \zeta
+              \\
+               & =
+              1 - \cos xy + 0 + 3z + C
+              \text.
+            \end{align*}
+            Az eredeti függvény tehát:
+            \[
+              f(x;y;z) = 3z - \cos xy + C
+              \text.
+            \]
+
+      \item $\rvec G(x;y;z) = \ijk{y/x}{\ln x}{2/z^{2}}$
+
+            \vspace{3mm}
+            A gradiens tulajdonságai alapján:
+            \[
+              G_x = \pdv{g}{x} = \frac{y}{x}
+              \text,\hspace{1cm}
+              G_y = \pdv{g}{y} = \ln x
+              \text,\hspace{1cm}
+              G_z = \pdv{g}{z} = \frac{2}{z^2}
+              \text.
+            \]
+            % Integráljuk a parciális deriváltakat:
+            % \begin{alignat*}{9}
+            %   g_1 &  = \int \pdv{g}{x} \,\diff x
+            %       && = \int \frac{y}{x} \,\diff x
+            %       && = y \ln x
+            %       && + C_1(y;z)
+            %   \\
+            %   g_2 &  = \int \pdv{g}{y} \,\diff y
+            %       && = \int \ln x \,\diff y
+            %       && = y \ln x
+            %       && + C_2(x;z)
+            %   \\
+            %   g_3 &  = \int \pdv{g}{z} \,\diff z
+            %       && = \int \frac{2}{z^2} \,\diff z
+            %       && = - \frac{2}{z}
+            %       && + C_3(x;y)
+            % \end{alignat*}
+            % Tudjuk, hogy $g = g_1 = g_2 = g_3$, a konstansok tehát:
+            % \[
+            %   C_1(y;z) = - \frac{2}{z} + C
+            %   \text,\hspace{1cm}
+            %   C_2(x;z) = - \frac{2}{z} + C
+            %   \text,\hspace{1cm}
+            %   C_3(x;y) = y \ln x + C
+            %   \text.
+            % \]
+            Az eredeti függvény az alábbi alakban írható fel:
+            \[
+              g(\rvec r) =
+              \int_0^x G_x(\xi; 0; 0) \,\diff \xi +
+              \int_0^y G_y(x; \eta; 0) \,\diff \eta +
+              \int_0^z G_z(x; y; \zeta) \,\diff \zeta
+              \text.
+            \]
+            Végezzük el az integrálást:
+            \begin{align*}
+              g(\rvec r)
+               & =
+              \int_0^x 0 \,\diff \xi +
+              \int_0^y \ln x \,\diff \eta +
+              \int_0^z \frac{2}{\zeta^2} \,\diff \zeta
+              \\
+               & =
+              0 + y \ln x - \frac{2}{z} + C
+              \text.
+            \end{align*}
+            Az eredeti függvény tehát:
+            \[
+              g(x;y;z) = y \ln x - \frac{2}{z} + C
+            \]
+    \end{enumerate}
+  }
+\end{exercise}
+
+\end{document}
