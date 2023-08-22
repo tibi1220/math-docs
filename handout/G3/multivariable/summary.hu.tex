@@ -32,44 +32,45 @@
     \newcommand{\dspl}[3]{\begin{bm}#1\\#2\\#3\end{bm}}
     \newcommand\nablavec{\dspl{\partial_x}{\partial_y}{\partial_z}}
 
-    \begin{tabular}{l|*{3}{>{\centering\arraybackslash}p{3.5cm}}|}
+    \begin{tabular}{*{3}{>{\centering\arraybackslash}p{3.5cm}}}
       \def\arraystretch{1}
-       & Rotáció
-       & Divergencia
-       & Gradiens
+      % &
+      \bfseries Rotáció
+       & \bfseries Divergencia
+       & \bfseries Gradiens
       \\
-      \hline\hline
-      Jelölés
-       & $\rot \rvec v$
+      \hline
+      % Jelölés & 
+      $\rot \rvec v$
        & $\Div \rvec v$
        & $\grad \varphi$
       \\
-      Operátor
-       & $\nabla \times \rvec v$
+      % Operátor & 
+      $\nabla \times \rvec v$
        & $\scalar{\nabla}{\rvec v}$
        & $\nabla \cdot \varphi$
       \\
-      Számítás
-       & $\nablavec \times \dspl{v_x}{v_y}{v_z}$
+      % Számítás &
+      $\nablavec \times \dspl{v_x}{v_y}{v_z}$
        & $\scalar{\nablavec}{\dspl{v_x}{v_y}{v_z}}$
        & $\dspl{\partial_x \varphi}{\partial_y \varphi}{\partial_z \varphi}$
       \\
-      Ért. tart.
-       & $\mathcal D_{\rvec v} = \mathbb R^3$
+      % Ért. tart. & 
+      $\mathcal D_{\rvec v} = \mathbb R^3$
        & $\mathcal D_{\rvec v} = \mathbb R^3$
        & $\mathcal D_{\varphi} = \mathbb R^3$
       \\
-      Ért. készl.
-       & $\mathcal R_{\rvec v} = \mathbb R^3$
+      % Ért. készl. &
+      $\mathcal R_{\rvec v} = \mathbb R^3$
        & $\mathcal R_{\rvec v} = \mathbb R^3$
        & $\mathcal R_{\varphi} = \mathbb R$
       \\
-      Ért. készl.
-       & $\mathcal R_{\rot \rvec v} = \mathbb R^3$
+      % Ért. készl. &
+      $\mathcal R_{\rot \rvec v} = \mathbb R^3$
        & $\mathcal R_{\Div \rvec v} = \mathbb R$
        & $\mathcal R_{\grad \varphi} = \mathbb R^3$
       \\
-      \hline
+      % \hline
     \end{tabular}
   \end{center}
 \end{block}
@@ -112,9 +113,9 @@
     \\[3mm]
     \int_V \varphi (\rvec r) \, \diff V
      & =
-    \iiint_D \varphi (\rvec Z(s; t; u))
-    \left\langle\pdv{\rvec Z}{s}\pdv{\rvec Z}{t}\pdv{\rvec Z}{u}\right\rangle
-    \, \diff s \, \diff t \, \diff u
+    \iiint_D \varphi (\rvec Z(t; u; v))
+    \left\langle\pdv{\rvec Z}{t}\pdv{\rvec Z}{u}\pdv{\rvec Z}{v}\right\rangle
+    \, \diff t \, \diff u \, \diff v
   \end{align*}
 \end{block}
 
@@ -191,6 +192,15 @@
 \vfill
 
 \begin{block}[\underline{Integrálási tételek}]
+  \bitem{Gradiens-tétel:}
+  \[
+    \int_\gamma \scalar{\grad \varphi}{\diff \rvec r}
+    =
+    \varphi(\rvec r(b)) - \varphi(\rvec r(a))
+  \]
+  Vagyis ha egy vektormező előáll egy skalármező gradienseként, akkor annak
+  bármely zárt görbe mentén vett integrálja csak a kezdő- és végpontoktól függ.
+
   \bitem{Stokes-tétel:}
   \[
     \int_S \scalar{\rot \rvec v}{\diff \rvec S}
@@ -208,15 +218,6 @@
   \]
   A tételből következik, hogy vektorpotenciálos vektormező bármely zárt
   felületre vett integrálja zérus.
-
-  \bitem{Gradiens-tétel:}
-  \[
-    \int_\gamma \scalar{\grad \varphi}{\diff \rvec r}
-    =
-    \varphi(\rvec r_1) - \varphi(\rvec r_0)
-  \]
-  Vagyis ha egy vektormező előáll egy skalármező gradienseként, akkor annak
-  bármely zárt görbe mentén vett integrálja csak a kezdő- és végpontoktól függ.
 \end{block}
 
 \clearpage
