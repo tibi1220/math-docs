@@ -1,0 +1,36 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{Számítsuk ki az alábbi vektormezők vektorértékű integrálját az adott götbék mentén!}
+  \begin{enumerate}[a)]
+    \item $\rvec v(\rvec r) = \ijk{-yz}{xz}{x^2 + y^2}, \;\; \rvec r(t) = \ijk{\cos t}{\sin t}{2t}, \;\; t \in [0; 2]$
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $\rvec v(\rvec r) = \ijk{-yz}{xz}{x^2 + y^2}, \;\; \rvec r(t) = \ijk{\cos t}{\sin t}{2t}, \;\; t \in [0; 2]$
+            \begin{align*}
+              \int_\gamma \scalar{\rvec v(\rvec r)}{\diff \rvec r}
+               & = \int_0^2 \scalar{\rvec v(\rvec r(t))}{\dot{\rvec r}(t)} \diff t
+              = \int_0^2
+              \begin{bmatrix}
+                -2t \sin t \\
+                2t \cos t  \\
+                \cos^2 t + \sin^2 t
+              \end{bmatrix}^\transpose
+              \begin{bmatrix}
+                - \sin t \\
+                \cos t   \\
+                2
+              \end{bmatrix} \diff t
+              \\
+               & = \int_0^2 2t ( \sin^2 t + \cos^2 t ) + 2 ( \cos^2 t + \sin^2 t ) \, \diff t
+              \\
+               & = \int_0^2 2t + 2 \, \diff t
+              = \left[ t^2 + 2t \right]_0^2
+              = 8
+            \end{align*}
+    \end{enumerate}
+  }
+\end{exercise}
+\end{document}

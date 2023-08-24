@@ -1,0 +1,128 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{Számítsuk ki az alábbi vektormezők skalárértékű integrálját az adott götbék mentén!}
+  \begin{enumerate}[a)]
+    \item $\rvec u(\rvec r) = \ijk{y + z}{x + z}{x + y}, \;\; \rvec r(t) = \ijk{t}{t^2}{t^3}, \;\; t \in [0; 1]$
+    \item $\rvec v(\rvec r) = \ijk{-yz}{xz}{x^2 + y^2}, \;\; \rvec r(t) = \ijk{\cos t}{\sin t}{2t}, \;\; t \in [0; 2]$
+    \item $\rvec w(\rvec r) = \ijz{y}{x}, \;\;$ az $(1;0)$ pontból a $(0;2)$ pontba
+          \begin{multicols}{2}
+            \begin{itemize}
+              \item Egyenes szakasz mentén
+              \item Origó középpontú ellipszis mentén
+            \end{itemize}
+          \end{multicols}
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $\rvec u(\rvec r) = \ijk{y + z}{x + z}{x + y}, \;\; \rvec r(t) = \ijk{t}{t^2}{t^3}, \;\; t \in [0; 1]$
+            \begin{align*}
+              \int_\gamma \scalar{\rvec u(\rvec r)}{\diff \rvec r}
+               & = \int_0^1 \scalar{\rvec u(\rvec r(t))}{\dot{\rvec r}(t)} \diff t
+              = \int_0^1
+              \begin{bmatrix}
+                t^2 + t^3 \\
+                t + t^3   \\
+                t + t^2
+              \end{bmatrix}^\transpose
+              \begin{bmatrix}
+                1  \\
+                2t \\
+                3t^2
+              \end{bmatrix} \diff t
+              \\
+               & = \int_0^1 (t^2 + t^3 + 2t^2 + 2t^4 + 3t^3 + 3t^4) \, \diff t
+              \\
+               & = \int_0^1 (3t^2 + 4t^3 + 5t^4) \, \diff t
+              = \left[ t^3 + t^4 + t^5 \right]_0^1
+              = 3
+            \end{align*}
+
+      \item $\rvec v(\rvec r) = \ijk{-yz}{xz}{x^2 + y^2}, \;\; \rvec r(t) = \ijk{\cos t}{\sin t}{2t}, \;\; t \in [0; 2]$
+            \begin{align*}
+              \int_\gamma \scalar{\rvec v(\rvec r)}{\diff \rvec r}
+               & = \int_0^2 \scalar{\rvec v(\rvec r(t))}{\dot{\rvec r}(t)} \diff t
+              = \int_0^2
+              \begin{bmatrix}
+                -2t \sin t \\
+                2t \cos t  \\
+                \cos^2 t + \sin^2 t
+              \end{bmatrix}^\transpose
+              \begin{bmatrix}
+                - \sin t \\
+                \cos t   \\
+                2
+              \end{bmatrix} \diff t
+              \\
+               & = \int_0^2 2t ( \sin^2 t + \cos^2 t ) + 2 ( \cos^2 t + \sin^2 t ) \, \diff t
+              \\
+               & = \int_0^2 2t + 2 \, \diff t
+              = \left[ t^2 + 2t \right]_0^2
+              = 8
+            \end{align*}
+
+      \item $\rvec w(\rvec r) = \ijz{y}{x}$
+            \begin{itemize}[i)]
+              \item Az egyenes szakasz mentén:
+                    \[
+                      \rvec r(t) = \begin{bmatrix}
+                        1 \\ 0
+                      \end{bmatrix} + t \begin{bmatrix}
+                        0 - 1 \\ 2 - 0
+                      \end{bmatrix} = \begin{bmatrix}
+                        1 - t \\ 2t
+                      \end{bmatrix}
+                      \text, \quad
+                      t \in [0;1]
+                      \text, \quad
+                      \dot{\rvec r}(t) = \begin{bmatrix}
+                        -1 \\ 2
+                      \end{bmatrix}
+                    \]
+                    \[
+                      % \int_0^1 \scalar{\rvec w(\rvec r(t))}{\dot{\rvec r}(t)} \diff t
+                      \int_0^1 \begin{bmatrix}
+                        2t \\ 1 - t
+                      \end{bmatrix}^\transpose
+                      \begin{bmatrix}
+                        -1 \\ 2
+                      \end{bmatrix}
+                      \diff t
+                      = \int_0^1 (-2t + 2 - 2t) \diff t
+                      = \int_0^1 2 \, \diff t
+                      = 2
+                    \]
+
+              \item Az ellipszis mentén:
+                    \[
+                      \rvec r(t) = \begin{bmatrix}
+                        \cos t \\ 2 \sin t
+                      \end{bmatrix}
+                      \text,\quad
+                      t \in [0; \pi/2]
+                      \text,\quad
+                      \dot{\rvec r}(t) = \begin{bmatrix}
+                        - \sin t \\ 2 \cos t
+                      \end{bmatrix}
+                    \]
+                    \[
+                      % \int_{\pi / 2}^0 \scalar{\rvec w(\rvec r(t))}{\dot{\rvec r}(t)} \diff t
+                      \hspace{-2.2cm}
+                      \int_0^{\pi / 2} \begin{bmatrix}
+                        2 \sin t \\ \cos t
+                      \end{bmatrix}^\transpose
+                      \begin{bmatrix}
+                        - \sin t \\ 2 \cos t
+                      \end{bmatrix}
+                      \diff t
+                      = 2 \int_0^{\pi / 2} (\cos^2 t - \sin^2 t) \, \diff t
+                      = 2 \int_0^{\pi / 2} \cos 2t \, \diff t
+                      = 2 \left[ \frac{\sin 2t}{2} \right]_0^{\pi / 2}
+                      = 0
+                    \]
+            \end{itemize}
+    \end{enumerate}
+  }
+\end{exercise}
+\end{document}

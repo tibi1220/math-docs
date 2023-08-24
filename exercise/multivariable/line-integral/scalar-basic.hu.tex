@@ -1,0 +1,116 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{Integráljuk a saklármezőket a megadott görbék mentén!}
+  \begin{enumerate}[a)]
+    \item $f(\rvec r) = \sqrt{1 + 4x^2 + 16yz}, \quad \rvec r(t) = \ijk{t}{t^2}{t^4}, \quad t \in [0; 1]$
+    \item $g(\rvec r) = 2x, \quad$ a $(3;0)$ és $(0;4)$ pontokat összekötő szakasz mentén
+    \item $h(\rvec r) = x^2 + y^2, \quad$ első síknegyedbeli egységköríven, óramutató járásával ellentétesen
+    \item $i(\rvec r) = x^2 + y^2, \quad$ $r = 2$ sugarú, origó középpontú, pozitív irányítású körön
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $f(\rvec r) = \sqrt{1 + 4x^2 + 16yz}, \quad \rvec r(t) = \ijk{t}{t^2}{t^4}, \quad t \in [0; 1]$
+            \begin{align*}
+              \int_\gamma f(\rvec r) \, \diff s
+               & = \int_0^1 f(\rvec r(t)) \norma{\dot{\rvec r}(t)} \, \diff t
+              = \int_0^1 \sqrt{1 + 4t^2 + 16t^6} \sqrt{1^2 + (2t)^2 + (4t^3)^2} \, \diff t
+              \\
+               & = \int_0^1 1 + 4t^2 + 16t^6 \, \diff t
+              = \left[ t + \frac{4}{3} t^3 + \frac{16}{7} t^7 \right]_0^1
+              = 1 + \frac{4}{3} + \frac{16}{7}
+              = \frac{97}{21}
+            \end{align*}
+
+      \item $g(\rvec r) = 2x, \quad$ a $(3;0)$ és $(0;4)$ pontokat összekötő szakasz mentén\\[3mm]
+            A szakasz paraméteres egyenlete és annak deriváltja:
+            \[
+              \rvec r(t) = \begin{bmatrix}
+                3 \\ 0
+              \end{bmatrix} + t \begin{bmatrix}
+                0 - 3 \\ 4 - 0
+              \end{bmatrix} = \begin{bmatrix}
+                3 - 3t \\ 4t
+              \end{bmatrix}
+              \text, \quad
+              t \in [0,1]
+              \text, \quad
+              \dot{\rvec r} (t) = \begin{bmatrix}
+                -3 \\ 4
+              \end{bmatrix}
+              \text, \quad
+              \norma{\dot{\rvec r}(t)}
+              = 5
+              \text.
+            \]
+            Végezzük el az integrálást:
+            \[
+              \int_\gamma g(\rvec r) \, \diff s
+              = \int_0^1 g(\rvec r(t)) \norma{\rvec r} \, \diff t
+              = \int_0^1 2 (3 - 3t) \cdot 5 \, \diff t
+              % = 30 \int_0^1 (1 - t) \, \diff t
+              = 30 \left[ t - \frac{t^2}{2} \right]_0^1
+              = 15
+              \text.
+            \]
+
+      \item $h(\rvec r) = x^2 + y^2, \quad$ első síknegyedbeli egységköríven, óramutató járásával ellentétesen\\[3mm]
+            A görbe paraméteres egyenlete és annak deriváltja:
+            \[
+              \rvec r(t) = \begin{bmatrix}
+                \cos t \\ sin t
+              \end{bmatrix}
+              \text, \quad
+              t \in [0, \pi/2]
+              \text, \quad
+              \dot{\rvec r}(t) = \begin{bmatrix}
+                -\sin t \\ \cos t
+              \end{bmatrix}
+              \text, \quad
+              \norma{\dot{\rvec r}(t)}
+              = 1
+              \text.
+            \]
+            Végezzük el az integrálást:
+            \[
+              \int_\gamma h(\rvec r) \, \diff s
+              = \int_0^{\pi/2} h(\rvec r(t)) \norma{\dot{\rvec r}(t)} \, \diff t
+              = \int_0^{\pi/2} (\cos^2 t + \sin^2 t) \, \diff t
+              = \int_0^{\pi/2} \diff t
+              % = \left[ t \right]_0^{\pi/2}
+              = \frac{\pi}{2}
+              \text.
+            \]
+
+      \item $i(\rvec r) = x^2 + y^2, \quad$ $r = 2$ sugarú, origó középpontú, pozitív irányítású körön\\[3mm]
+            A görbe paraméteres egyenlete és annak deriváltja:
+            \[
+              \rvec r(t) = \begin{bmatrix}
+                2 \cos t \\ 2 sin t
+              \end{bmatrix}
+              \text, \quad
+              t \in [0, 2 \pi]
+              \text, \quad
+              \dot{\rvec r}(t) = \begin{bmatrix}
+                -2 \sin t \\ 2 \cos t
+              \end{bmatrix}
+              \text, \quad
+              \norma{\dot{\rvec r}(t)}
+              = 2
+              \text.
+            \]
+            Végezzük el az integrálást:
+            \[
+              \int_\gamma i(\rvec r) \, \diff s
+              = \int_0^{2\pi} h(\rvec r(t)) \norma{\dot{\rvec r}(t)} \, \diff t
+              = \int_0^{2\pi} (4 \cos^2 t + 4 \sin^2 t) \cdot 2 \, \diff t
+              = \int_0^{2\pi} 8 \, \diff t
+              % = \left[ t \right]_0^{\pi/2}
+              = 16 \pi
+              \text.
+            \]
+    \end{enumerate}
+  }
+\end{exercise}
+\end{document}

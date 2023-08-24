@@ -1,0 +1,15 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{Integráljuk a saklármezőket a megadott görbék mentén!}
+  \begin{enumerate}[a)]
+    \item $f(\rvec r) = , quad \rvec r(t) = \ijk{t}{t^2}{t^4}, \quad t \in [0, 1]$
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $f(\rvec r) = , quad \rvec r(t) = \ijk{t}{t^2}{t^4}, \quad t \in [0, 1]$
+    \end{enumerate}
+  }
+\end{exercise}
+\end{document}
