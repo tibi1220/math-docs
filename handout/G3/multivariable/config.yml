@@ -1,7 +1,8 @@
 root_files:
-  - { input: revision.hu, variants: true }
-  - { input: operators.hu, variants: true }
-  - { input: line-integrals.hu, variants: true }
-  - { input: surface-integrals.hu, variants: true }
-  - { input: integral-theorems.hu, variants: true }
-  - { input: summary.hu, variants: true }
+  - { input: 01-revision.hu, variants: true }
+  - { input: 02-operators.hu, variants: true }
+  - { input: 03-potential.hu, variants: true }
+  - { input: 04-line-integrals.hu, variants: true }
+  - { input: 05-surface-integrals.hu, variants: true }
+  - { input: 06-integral-theorems.hu, variants: true }
+  - { input: 07-summary.hu, variants: true }

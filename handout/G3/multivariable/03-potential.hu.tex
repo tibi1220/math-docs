@@ -1,0 +1,95 @@
+\documentclass[lang=magyar]{math-handout}
+
+\title{Potenciálosság}
+\area{Többváltozós analízis}
+\subject{Matematika G3}
+\date{Utoljára frissítve: \today}
+\author{Sándor Tibor}
+\docno{3}
+
+\begin{document}
+\allowdisplaybreaks
+
+\maketitle
+
+\vspace{1em}
+
+\begin{summary}
+  Bevezetjük a skalár- és vektorpotenciálosság fogalmát, valamint megtanuljuk,
+  hogy hogyan lehet kiszámítani egy vektormező potenciálfüggvényeit.
+\end{summary}
+
+\vspace{-1em}
+
+\section{Elméleti áttekinő}
+
+\begin{definition}[Skalárpotenciálosság]
+  Egy $\rvec v: V \rightarrow V$ vektormező skalárpotenciálos, ha létezik olyan
+  $\varphi: V \rightarrow \mathbb R$ skalármező, hogy $\rvec v = \grad \varphi$.
+\end{definition}
+
+\begin{definition}[Vektorpotenciálosság]
+  Egy $\rvec v: V \rightarrow V$ vektormező vektorpotenciálos, ha létezik olyan
+  $\rvec u: V \rightarrow V$ vektormező, hogy $\rvec v = \rot \rvec u$.
+\end{definition}
+
+\begin{theorem}
+  Legyen $\rvec v: V \rightarrow V$ mindenhol értelmezett, legalább egyszer
+  differenciálható vektormező. Ekkor:
+  \begin{itemize}
+    \item $\rvec v$ skalárpotenciálos
+          $\;\Leftrightarrow\;$
+          $\rot \rvec v = \nvec$,
+          hiszen $\rot \grad \varphi \equiv \nvec$,
+    \item $\rvec v$ vektorpotenciálos
+          $\;\Leftrightarrow\;$
+          $\Div \rvec v = 0$,
+          hiszen $\Div \rot \rvec u \equiv 0$.
+  \end{itemize}
+\end{theorem}
+
+\begin{note}[Potenciálfüggvények számítása]
+  Legyen $\varphi$ skalármező $\rvec v$ vektormező skalárpotenciálja. Ebben
+  az esetben tudjuk, hogy $\rvec v = \grad \varphi$, vagyis
+  \[
+    \rvec v = \left(
+    \pdv{\varphi}{x_1};
+    \pdv{\varphi}{x_2};
+    \dots;
+    \pdv{\varphi}{x_n}
+    \right)^\transpose
+    \text.
+  \]
+  Ilyen esetben a potenciálfüggvény az alábbi módon számítható:
+  \[
+    \varphi (\rvec r)
+    = \int_0^{x_1} \rvec v(\xi; x_2; \dots; x_n) \,\diff \xi
+    + \int_0^{x_2} \rvec v(0; \xi; \dots; x_n) \,\diff \xi
+    + \dots
+    + \int_0^{x_n} \rvec v(0; 0; \dots; \xi) \,\diff \xi
+    \text.
+  \]
+
+  Legyen $\rvec u$ vektormező $\rvec v$ vektormező vektorpotenciálja.
+  A potenciál számtalan alakban előállhat, ezért keressük ezt az alábbi alakban:
+  \[
+    \rvec u = \left( u_x; u_y; 0 \right)^\transpose
+  \]
+  A potenciál komponensei az alábbi módon számíthatóak:
+  \[
+    u_x = \int_0^z v_y(x; y; \zeta) \,\diff \zeta
+    \text,
+    \qquad
+    u_y = \int_0^x v_z(\xi; y; 0) \,\diff \xi
+    - \int_0^z v_x(x; y; \zeta) \,\diff \zeta
+    \text.
+  \]
+\end{note}
+
+\clearpage
+\section{Feladatok}
+
+\relativeinclude{../../../exercise/multivariable/operator/inverse-grad.hu}
+\relativeinclude{../../../exercise/multivariable/operator/find-potential.hu}
+
+\end{document}
