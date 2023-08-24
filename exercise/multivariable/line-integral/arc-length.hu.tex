@@ -1,0 +1,54 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{Számítsuk ki a megadott görbék ívhosszát az adott intervallumon!}
+  \begin{enumerate}[a)]
+    \item $\rvec r(t) = \ijk{t}{3t^2 / 2}{t^3}, \quad t \in [0,2]$
+    \item $\rvec r(t) = \ijz{t \cos t}{t \sin t}, \quad t \in [0; 1]$
+    \item $\rvec r(t) = \ijk{e^t \cos t}{e^t \sin t}{e^t}, \quad t \in [0; 2\pi]$
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $\rvec r(t) = \ijk{t}{t^2}{t^3}, \quad t \in [0,2]$
+            \[
+              L
+              = \int_0^2 \norma{\dot{\rvec r}(t)} \, dt
+              = \int_0^2 \sqrt{1 + 6t^2 + 9t^4} \, dt
+              = \int_0^2 1 + 3t^2 \, dt
+              = \left[ t + t^3 \right]_0^2
+              = 10
+            \]
+
+      \item $\rvec r(t) = \ijz{t \cos t}{t \sin t}, \quad t \in [0; 1]$
+            \begin{align*}
+              L
+               & = \int_0^{1} \norma{\dot{\rvec r}(t)} \, dt
+              = \int_0^{1} \sqrt{(\cos t - t \sin t)^2 + (\sin t + t \cos t)^2} \, dt
+              = \int_0^{1} \sqrt{1 + t^2} \, dt
+              \\
+               & = \int_0^{1} \cosh u \sqrt{1 + \sinh^2 u} \, du
+              = \int_0^{1} \cosh^2 u \, du
+              = \int_{u_1}^{u_2} \frac{1 + \cosh 2u}{2} \, du
+              \\
+               & = \left[ \frac{u}{2} + \frac{\sinh 2u}{4} \right]_{u_1}^{u_2}
+              = \left[ \frac{\arsinh t}{2} + \frac{x \sqrt{x^2 + 1}}{2} \right]_0^{1}
+              = \frac{\arsinh 1 + \sqrt{2}}{2}
+              \approx 1,1478
+            \end{align*}
+
+      \item $\rvec r(t) = \ijk{e^t \cos t}{e^t \sin t}{e^t}, \quad t \in [0; 2\pi]$
+            \begin{align*}
+              L
+               & = \int_0^{2\pi} \norma{\dot{\rvec r}(t)} \, dt
+              = \int_0^{2\pi} \sqrt{e^{2t} (\cos t - \sin t) + e^{2t} (\sin t + \cos t) + e^{4t}} \, dt
+              \\
+               & = \int_0^{2\pi} \sqrt{3} e^t \, dt
+              = \left[ \sqrt{3} e^t \right]_0^{2\pi}
+              = \sqrt{3} (e^{2\pi} - 1)
+              \approx 925,7667
+            \end{align*}
+    \end{enumerate}
+  }
+\end{exercise}
+\end{document}

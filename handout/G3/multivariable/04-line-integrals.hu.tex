@@ -1,6 +1,6 @@
 \documentclass[lang=magyar]{math-handout}
 
-\title{Vonalmenti integrálok}
+\title{Görbementi integrálok}
 \area{Többváltozós analízis}
 \subject{Matematika G3}
 \date{Utoljára frissítve: \today}
@@ -93,6 +93,8 @@
 \clearpage
 \section{Feladatok}
 
+\relativeinclude{../../../exercise/multivariable/line-integral/arc-length.hu}
+
 \clearpage
 \section{Segédlet}
 
@@ -116,12 +118,12 @@
   \\[14mm]
   Körvonal
    & $\rvec r(t) = \begin{bmatrix} r \cos t \\ r \sin t \\ 0 \end{bmatrix}$
-   & $t \in [0;2\pi)$
+   & $t \in [0;2\pi]$
    & \relativestandalone{../../../graphics/curve-parametrization/circle}
   \\[14mm]
-    Ellipszis
+  Ellipszis
    & $\rvec r(t) = \begin{bmatrix} a \cos t \\ b \sin t \\ 0 \end{bmatrix}$
-   & $t \in [0;2\pi)$
+   & $t \in [0;2\pi]$
    & \relativestandalone{../../../graphics/curve-parametrization/ellipse}
   \\[14mm]
   Spirál
@@ -154,18 +156,18 @@
   $y = r \sin \varphi$ \newline
   $z = z$
    & $r \in [0; R]$ \newline
-  $\varphi \in [0; 2\pi)$ \newline
-    $z \in \mathbb R$
+  $\varphi \in [0; 2\pi]$ \newline
+  $z \in \mathbb R$
    & $\det \rmat J = r$
    & \relativestandalone{../../../graphics/coordinate-systems/cylindrical}
   \\[12mm]
-  \textbf{Gömb:}
+    \textbf{Gömb:}
    & $x = r \sin \varphi \cos \vartheta $ \newline
   $y = r \sin \varphi \sin \vartheta $ \newline
   $z = r \cos \varphi$
    & $r \in [0; R]$ \newline
   $\varphi \in [0; \pi]$ \newline
-  $\vartheta \in [0; 2\pi)$
+  $\vartheta \in [0; 2\pi]$
    & $\det \rmat J = r^2 \sin \varphi$
    & \relativestandalone{../../../graphics/coordinate-systems/spherical}
   \\
