@@ -71,16 +71,16 @@ jobs:
           name: generate
           path: generate/
 
-      - name: Setup standalone file cache
-        uses: actions/cache@v3
-        with:
-          key:
-            ${{ runner.os }}-LaTeX-standalone-${{ steps.get-date.outputs.date }}
-          path: |
-            exercise
-            graphics
-          restore-keys: |
-            ${{ runner.os }}-LaTeX-standalone-
+      # - name: Setup standalone file cache
+      #   uses: actions/cache@v3
+      #   with:
+      #     key:
+      #       ${{ runner.os }}-LaTeX-standalone-${{ steps.get-date.outputs.date }}
+      #     path: |
+      #       exercise
+      #       graphics
+      #     restore-keys: |
+      #       ${{ runner.os }}-LaTeX-standalone-
 
       - name: Link cls and sty files
         run: ./link.sh
@@ -136,15 +136,15 @@ jobs:
           name: generate
           path: generate/
 
-      - name: Setup root file cache
-        uses: actions/cache@v3
-        with:
-          key: ${{ runner.os }}-LaTeX-root-${{ steps.get-date.outputs.date }}
-          path: |
-            book
-            handout
-          restore-keys: |
-            ${{ runner.os }}-LaTeX-root-
+      # - name: Setup root file cache
+      #   uses: actions/cache@v3
+      #   with:
+      #     key: ${{ runner.os }}-LaTeX-root-${{ steps.get-date.outputs.date }}
+      #     path: |
+      #       book
+      #       handout
+      #     restore-keys: |
+      #       ${{ runner.os }}-LaTeX-root-
 
       - name: Link cls and sty files
         run: ./link.sh
