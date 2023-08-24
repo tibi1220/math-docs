@@ -1,0 +1,150 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{
+    Számítsuk ki az alábbi skalármezők gradiensét! Hattassuk a függvényekre
+    a Laplace-operátort is!
+  }
+  \begin{multicols}{2}
+    \begin{enumerate}[a)]
+      \item $f(\rvec r) = xyz$
+      \item $g(\rvec r) = 6x^y + \sin e^z$
+      \item $h(\rvec r) = \rvec r^2 / 2$
+      \item $i(\rvec r) = yz + xz + yz$
+      \item $j(\rvec r) = 2 x^2 y + x z^2 + 6 y$
+    \end{enumerate}
+  \end{multicols}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $f(\rvec r) = xyz$
+            \[
+              \grad f
+              =
+              \nabla f
+              =
+              \left(
+              \pdv{f}{x}; \pdv{f}{y}; \pdv{f}{z}
+              \right)^\transpose
+              =
+              \begin{bmatrix}
+                yz \\ xz \\ xy
+              \end{bmatrix}
+            \]
+            \[
+              \laplacian f
+              =
+              \Div \grad f
+              =
+              \pdv{yz}{x} + \pdv{xz}{y} + \pdv{xy}{z}
+              =
+              0
+            \]
+
+      \item $g(\rvec r) = 6x^y + \sin e^z$
+            \[
+              \grad g
+              =
+              \nabla g
+              =
+              \left(
+              \pdv{g}{x}; \pdv{g}{y}; \pdv{g}{z}
+              \right)^\transpose
+              = \begin{bmatrix}
+                6 y x^{y - 1} \\
+                6 x^y \ln x   \\
+                e^z \cos e^z
+              \end{bmatrix}
+            \]
+            \begin{align*}
+              \laplacian g
+               & =
+              \Div \grad g
+              =
+              \pdv{6 y x^{y - 1}}{x} +
+              \pdv{6 x^y \ln x}{y} +
+              \pdv{e^z \cos e^z}{z}
+              \\
+               & =
+              6 y (y - 1) x^{y - 2} + 6 x^y \ln^2 x + e^z \cos e^z - e^{2z} \sin e^z
+            \end{align*}
+
+      \item $h(\rvec r) = \rvec r^2 / 2 = (x^2 + y^2 + z^2) / 2$
+            \[
+              \grad h
+              =
+              \nabla h
+              =
+              \left(
+              \pdv{h}{x}; \pdv{h}{y}; \pdv{h}{z}
+              \right)
+              =
+              \begin{bmatrix}
+                x \\ y \\ z
+              \end{bmatrix}
+              =
+              \rvec r
+            \]
+            \[
+              \laplacian h
+              =
+              \Div \grad h
+              =
+              \pdv{x}{x} + \pdv{y}{y} + \pdv{z}{z}
+              =
+              3
+            \]
+
+      \item $i(\rvec r) = yz + xz + yz$
+            \[
+              \grad i
+              =
+              \nabla i
+              =
+              \left(
+              \pdv{i}{x}; \pdv{i}{y}; \pdv{i}{z}
+              \right)
+              =
+              \begin{bmatrix}
+                0 \\ 0 \\ 0
+              \end{bmatrix}
+            \]
+            \[
+              \laplacian i
+              =
+              \Div \grad i
+              =
+              \pdv{0}{x} + \pdv{0}{y} + \pdv{0}{z}
+              =
+              0
+            \]
+
+      \item $j(\rvec r) = 2 x^2 y + x z^2 + 6 y$
+            \[
+              \grad j
+              =
+              \nabla j
+              =
+              \left(
+              \pdv{j}{x}; \pdv{j}{y}; \pdv{j}{z}
+              \right)
+              =
+              \begin{bmatrix}
+                4 x y + z^2 \\
+                2 x^2 + 6   \\
+                2 x z
+              \end{bmatrix}
+            \]
+            \[
+              \laplacian j
+              =
+              \Div \grad j
+              =
+              \pdv{4 x y + z^2}{x} + \pdv{2 x^2 + 6}{y} + \pdv{2 x z}{z}
+              =
+              4 y + 2 x
+            \]
+    \end{enumerate}
+  }
+\end{exercise}
+\end{document}

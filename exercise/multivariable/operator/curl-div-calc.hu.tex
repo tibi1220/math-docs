@@ -1,0 +1,87 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{%
+    Számítsuk ki az alábbi vektormezők divergenciáját és rotációját!
+    Hol lesznek forrásmentesek, illetve forgásmentesek?
+  }
+  \begin{enumerate}[a)]
+    \item $\rvec u(\rvec r) = \rvec r$
+    \item $\rvec v(\rvec r) = (yz) \,\uvec i + (xz) \,\uvec j + (xy) \,\uvec k$
+    \item $\rvec w(\rvec r) = (3xy + z^2) \,\uvec i + (6 e^z) \,\uvec j + (-5x^y) \,\uvec k$
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $\rvec u(\rvec r) = \rvec r = \ijk{x}{y}{z}$
+            \begin{align*}
+              \Div \rvec u
+               & = \scalar{\nabla}{\rvec u}
+              = \pdv{x}{x} + \pdv{y}{y} + \pdv{z}{z}
+              = 1 + 1 + 1 = 3
+              \\
+              \rot \rvec u
+               & = \nabla \times \rvec u
+              = \begin{bmatrix}
+                  \partial_x \\ \partial_y \\ \partial_z
+                \end{bmatrix} \times \begin{bmatrix}
+                                       x \\ y \\ z
+                                     \end{bmatrix} = \begin{bmatrix}
+                                                       0 - 0 \\ 0 - 0 \\ 0 - 0
+                                                     \end{bmatrix} = \begin{bmatrix}
+                                                                       0 \\ 0 \\ 0
+                                                                     \end{bmatrix}
+            \end{align*}
+            A vektormező sehol sem forrásmentes, de örvénymentes az egész
+            értelmezési tartományán.
+
+      \item $\rvec v(\rvec r) = (yz) \,\uvec i + (xz) \,\uvec j + (xy) \,\uvec k$
+            \begin{align*}
+              \Div \rvec v
+               & = \scalar{\nabla}{\rvec v}
+              = \pdv{yz}{x} + \pdv{xz}{y} + \pdv{xy}{z}
+              = 0 + 0 + 0
+              = 0
+              \\
+              \rot \rvec v
+               & = \nabla \times \rvec v
+              = \begin{bmatrix}
+                  \partial_x \\ \partial_y \\ \partial_z
+                \end{bmatrix} \times \begin{bmatrix}
+                                       yz \\ xz \\ xy
+                                     \end{bmatrix} = \begin{bmatrix}
+                                                       0 - 0 \\ 0 - 0 \\ 0 - 0
+                                                     \end{bmatrix} = \begin{bmatrix}
+                                                                       0 \\ 0 \\ 0
+                                                                     \end{bmatrix}
+            \end{align*}
+            A vektormező az egész értelmezési tartományán örvény- és
+            forgásmentes.
+
+      \item $\rvec w(\rvec r) = (3xy + z^2) \,\uvec i + (6 e^z) \,\uvec j + (-5x^y) \,\uvec k$
+            \begin{align*}
+              \Div \rvec w
+               & = \scalar{\nabla}{\rvec w}
+              = \pdv{(3xy + z^2)}{x} + \pdv{(6 e^z)}{y} + \pdv{(-5x^y)}{z}
+              = 3y + 0 + 0
+              = 3y
+              \\
+              \rot \rvec w
+               & = \nabla \times \rvec w
+              = \begin{bmatrix}
+                  \partial_x \\ \partial_y \\ \partial_z
+                \end{bmatrix} \times \begin{bmatrix}
+                                       3xy + z^2 \\ 6e^z \\ -5x^y
+                                     \end{bmatrix} = \begin{bmatrix}
+                                                       -5 x^y \ln x - 6 e^z \\
+                                                       2z + 5 y x^{y-1}     \\
+                                                       -3x
+                                                     \end{bmatrix}
+            \end{align*}
+            A vektormező forrásmentes az $y = 0$ síkon, de sehol sem
+            örvénymentes. ($z$ koordináta: $x = 0$, $x$ koordináta: $x \neq 0$,
+            ez ellentmondás.)
+    \end{enumerate}
+  }
+\end{exercise}
+\end{document}

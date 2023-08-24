@@ -25,3 +25,7 @@ specialBeginEnd:
     begin: \\draw
     end: ;
     lookForThis: 1
+  # paired:
+  #   begin: (\\left)
+  #   end: (\\right)
+  #   lookForThis: 1

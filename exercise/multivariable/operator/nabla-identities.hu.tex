@@ -1,0 +1,83 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{%
+    Bizonyítsuk be a következő azonosságokat, amennyiben $\varphi, \psi$
+    skalármezők, $\rvec v, \rvec w$ pedig vektormezők.
+  }
+  \begin{enumerate}[a)]
+    \item $\grad (\varphi \psi) = \varphi \grad \psi + \psi \grad \varphi$
+    \item $\laplacian (\varphi \psi) = (\laplacian \varphi) \psi + 2 \grad \varphi \grad \psi + \psi (\laplacian \varphi)$
+    \item $\Div (\varphi \rvec v) = \scalar{\grad \varphi}{\rvec v} + \varphi \Div \rvec v$
+    \item $\rot (\varphi \rvec v) = \grad \varphi \times \rvec v + \varphi \rot \rvec v$
+    \item $\Div (\rvec v \times \rvec w) = \scalar{\rot \rvec v}{\rvec w} - \scalar{\rvec v}{\rot \rvec w}$
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $\grad (\varphi \psi) = \varphi \grad \psi + \psi \grad \varphi$
+            \[
+              ( \grad (\varphi \psi) )_i
+              = \pdv{\varphi \psi}{x_i}
+              = \pdv{\varphi}{x_i} \psi + \varphi \pdv{\psi}{x_i}
+              = ( \varphi \grad \psi )_i + ( \psi \grad \varphi )_i
+            \]
+
+      \item $\laplacian (\varphi \psi) = (\laplacian \varphi) \psi + 2 \grad \varphi \grad \psi + \psi (\laplacian \varphi)$
+            \[
+              \laplacian (\varphi \psi)
+              = \sum_{i = 1}^n \pdv[order=2]{\varphi \psi}{x_i}
+              = \sum_{i = 1}^m \left(
+              \pdv[order=2]{\varphi}{x_i} +
+              1 \pdv{\varphi}{x_i} \pdv{\psi}{x_i} +
+              \varphi \pdv[order=2]{\psi}{x_i}
+              \right)
+              = (\laplacian \varphi) \psi + 2 \nabla \varphi \nabla \psi + \psi (\laplacian \varphi)
+            \]
+
+
+      \item $\Div (\varphi \rvec v) = \scalar{\grad \varphi}{\rvec v} + \varphi \Div \rvec v$
+            \[
+              \Div (\varphi \rvec v)
+              = \sum_{i = 1}^n \pdv{\varphi v_i}{x_i}
+              = \sum_{i = 1}^n \left( \pdv{\varphi}{x_i} v_i + \varphi \pdv{v_i}{x_i} \right)
+              = \scalar{\grad \varphi}{\rvec v} + \varphi \Div \rvec v
+            \]
+
+      \item $\rot (\varphi \rvec v) = \grad \varphi \times \rvec v + \varphi \rot \rvec v$
+            \[
+              \rot (\varphi \rvec v)
+              = \sum_{i = 1}^n \epsilon_{ijk} \pdv{\varphi v_k}{x_j} \rvec e_i
+              = \sum_{i = 1}^n \left( \epsilon_{ijk} \pdv{\varphi}{x_j} v_k + \epsilon_{ijk} \varphi \pdv{v_k}{x_j} \right) \rvec e_i
+              = \grad \varphi \times \rvec v + \varphi \rot \rvec v
+            \]
+
+      \item $\Div (\rvec v \times \rvec w) = \scalar{\rot \rvec v}{\rvec w} - \scalar{\rvec v}{\rot \rvec w}$
+            \begin{align*}
+              \Div (\rvec v \times \rvec w)
+               & = \pdv{(v_y w_z - v_z w_y)}{x}
+              + \pdv{(v_z w_x - v_x w_z)}{y}
+              + \pdv{(v_x w_y - v_y w_x)}{z}
+              \\
+               & = \pdv{v_y}{x} w_z  - \pdv{v_z}{x} w_y
+              + \pdv{v_z}{y} w_x  - \pdv{v_x}{y} w_z
+              + \pdv{v_x}{z} w_y  - \pdv{v_y}{z} w_x
+              \\
+               & + \pdv{w_z}{x} v_y - \pdv{w_y}{x} v_z
+              + \pdv{w_x}{y} v_z - \pdv{w_z}{y} v_x
+              + \pdv{w_y}{z} v_x - \pdv{w_x}{z} v_y
+              \\
+               & = \left( \pdv{v_z}{y} - \pdv{v_y}{z} \right) w_x
+              + \left( \pdv{v_x}{z} - \pdv{v_z}{x} \right) w_y
+              + \left( \pdv{v_y}{x} - \pdv{v_x}{y} \right) w_z
+              \\
+               & - \left( \pdv{w_z}{y} - \pdv{w_y}{z} \right) v_x
+              - \left( \pdv{w_x}{z} - \pdv{w_z}{x} \right) v_y
+              - \left( \pdv{w_y}{x} - \pdv{w_x}{y} \right) v_z
+              \\
+               & = \scalar{\rot \rvec v}{\rvec w} - \scalar{\rvec v}{\rot \rvec w}
+            \end{align*}
+    \end{enumerate}
+  }
+\end{exercise}
+\end{document}
