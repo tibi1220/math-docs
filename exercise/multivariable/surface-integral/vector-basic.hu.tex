@@ -1,0 +1,165 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{%
+    Integráljuk a vektormezőket a megadott felületeken!
+    A normális kifele mutató legyen!
+  }
+  \begin{enumerate}[a)]
+    \item $\rvec u = \ijk{x + y}{x - y}{z^2}, \,\, \surfv (s;t) = \ijk{s + t}{s - t}{s^2 - t^2}, \,\, (s;t) \in [0;1]^2$
+    \item $\rvec v = \ijk{y^2 + z^2}{x^2 + z^2}{x^2 + y^2}, \,\,$ az $\,\,r = 2\,\,$ sugarú, $\,\,x = 2\,\,$ síkon lévő körön
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $\rvec u = \ijk{x + y}{x - y}{z^2}, \,\, \surfv (s;t) = \ijk{s + t}{s - t}{s^2 - t^2}, \,\, (s;t) \in [0;1]^2$
+
+            A parciális deriváltak és a felületi normális:
+            \[
+              \pdv{\surfv}{s}
+              =
+              \begin{bmatrix}
+                1 \\ 1 \\ 2s
+              \end{bmatrix}
+              \text,
+              \qquad
+              \pdv{\surfv}{t}
+              =
+              \begin{bmatrix}
+                1 \\ -1\\ -2t
+              \end{bmatrix}
+              \text,
+              \qquad
+              \rvec n
+              =
+              \pdv{\surfv}{s} \times \pdv{\surfv}{t}
+              =
+              \begin{bmatrix}
+                2(s - t) \\ 2(s + t) \\ - 2
+              \end{bmatrix}
+              \text.
+            \]
+            A függvény átparaméterezése:
+            \[
+              \rvec u (\surfv (s;t))
+              =
+              \begin{bmatrix}
+                2\,s \\ 2\,t \\ (s^2 - t^2)^2
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+                2\,s \\ 2\,t \\ s^4 - 2\,s^2\,t^2 + t^4
+              \end{bmatrix}
+              \text.
+            \]
+            Az integrál:
+            \begin{align*}
+              \int_S \scalar{\rvec u(\coordv)}{\diff \rvec S}
+               & =
+              \int_0^1\int_0^1
+              \begin{bmatrix}
+                2\,s \\ 2\,t \\ s^4 - 2\,s^2\,t^2 + t^4
+              \end{bmatrix}^\transpose
+              \begin{bmatrix}
+                2 (s - t) \\ 2 (s + t) \\ -2
+              \end{bmatrix}
+              \,\diff s \,\diff t
+              \\
+               & =
+              \int_0^1\int_0^1
+              4 s^2  + 4 t^2  - 2 s^4 + 4 s^2 t^2 - 2 t^4
+              \,\diff s \,\diff t
+              \\
+               & =
+              \frac43 + \frac43 - \frac25 + \frac49 - \frac25
+              =
+              \frac{104}{45}
+              \approx
+              2,3111
+            \end{align*}
+
+      \item $\rvec v = \ijk{y^2 + z^2}{x^2 + z^2}{x^2 + y^2}, \,\,$ az $\,\,r = 2\,\,$ sugarú, $\,\,x = 2\,\,$ síkon lévő körön
+
+            A felület paraméterezése és a felületi normális:
+            \[
+              \surfv(s;t)
+              =
+              \begin{bmatrix}
+                2 \\ s \cos t \\ s \sin t
+              \end{bmatrix}
+              \text,
+              \qquad
+              \begin{matrix}
+                s \in [0;2] \text, \\
+                t \in [0;2\pi] \text,
+              \end{matrix}
+              \qquad
+              \rvec n
+              =
+              \pdv{\surfv}{s} \times \pdv{\surfv}{t}
+              =
+              \begin{bmatrix}
+                0 \\ \cos t \\ \sin t
+              \end{bmatrix}
+              \times
+              \begin{bmatrix}
+                0 \\ - s \sin t \\ s \cos t
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+                s \\ 0 \\ 0
+              \end{bmatrix}
+              \text.
+            \]
+
+            A függvény átparaméterezése:
+            \[
+              \rvec v (\surfv (s;t))
+              =
+              \begin{bmatrix}
+                s^2 \cos^2 t + s^2 \sin^2 t \\
+                4 + s^2 \cos^2 t            \\
+                4 + s^2 \sin^2 t
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+                s^2              \\
+                4 + s^2 \cos^2 t \\
+                4 + s^2 \sin^2 t
+              \end{bmatrix}
+              \text.
+            \]
+
+            Az integrál:
+            \begin{align*}
+              \int_S \scalar{\rvec v(\coordv)}{\diff \rvec S}
+               & =
+              \int_0^{2\pi}\int_0^2
+              \begin{bmatrix}
+                s^2              \\
+                4 + s^2 \cos^2 t \\
+                4 + s^2 \sin^2 t
+              \end{bmatrix}^\transpose
+              \begin{bmatrix}
+                s \\ 0 \\ 0
+              \end{bmatrix}
+              \,\diff s \,\diff t
+              \\
+               & =
+              \int_0^{2\pi}\int_0^2
+              s^3
+              \,\diff s \,\diff t
+              =
+              \int_0^{2\pi}
+              \frac12 \cdot 2^4
+              \,\diff t
+              \\
+               & =
+              16 \pi
+              \approx
+              50,2655
+            \end{align*}
+    \end{enumerate}
+  }
+\end{exercise}
+\end{document}

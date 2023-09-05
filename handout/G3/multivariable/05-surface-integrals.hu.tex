@@ -105,6 +105,10 @@
 \clearpage
 \section{Feladatok}
 
+\relativeinclude{../../../exercise/multivariable/surface-integral/surface-area.hu}
+\relativeinclude{../../../exercise/multivariable/surface-integral/scalar-basic.hu}
+\relativeinclude{../../../exercise/multivariable/surface-integral/vector-basic.hu}
+
 \clearpage
 \section{Segédlet}
 
@@ -120,12 +124,12 @@
   }
   \textbf{Körlap:} \newline \phantom{1} ($xy$ sík)
    & $\rvec \varrho (s;t) = \begin{bmatrix} s \cos t \\ s \sin t \\ 0 \end{bmatrix}$
-   & $s \in [0;r]$ \newline $t \in [0, 2\pi)$
+   & $s \in [0;r]$ \newline $t \in [0, 2\pi]$
    & \relativestandalone{../../../graphics/surface-parametrization/circle}
   \\[\tskip]
-    \textbf{Ellipszislap:} \newline \phantom{1} ($xy$ sík)
+  \textbf{Ellipszislap:} \newline \phantom{1} ($xy$ sík)
    & $\rvec \varrho (s;t) = \begin{bmatrix} a \, s \cos t \\ b \, s \sin t \\ 0 \end{bmatrix}$
-   & $s \in [0;1]$ \newline $t \in [0, 2\pi)$
+   & $s \in [0;1]$ \newline $t \in [0, 2\pi]$
    & \relativestandalone{../../../graphics/surface-parametrization/ellipse}
   \\[\tskip]
   \textbf{Hengerfelület:}
@@ -135,27 +139,27 @@
   \\[\tskip]
   \textbf{Forgásfelület:} \newline \phantom{1} ($z$ tengely körül) \newline \phantom{1} ($z = f(x)$)
    & $\rvec \varrho (s;t) = \begin{bmatrix} s \cos t \\ s \sin t \\ f(s) \end{bmatrix}$
-   & $s \in [0;2\pi)$ \newline $t \in \mathcal D_f$
+   & $s \in [0;2\pi]$ \newline $t \in \mathcal D_f$
    & \relativestandalone{../../../graphics/surface-parametrization/revolution}
   \\[\tskip]
-    \textbf{Gömbfelület:}
+  \textbf{Gömbfelület:}
    & $\rvec \varrho (s;t) = \begin{bmatrix} R \sin s \cos t \\ R \sin s \sin t \\ R \cos s \end{bmatrix}$
-   & $s \in [0;\pi]$ \newline $t \in [0, 2\pi)$
+   & $s \in [0;\pi]$ \newline $t \in [0, 2\pi]$
    & \relativestandalone{../../../graphics/surface-parametrization/sphere}
   \\[\tskip]
   \textbf{Ellipszoid:}
    & $\rvec \varrho (s;t) = \begin{bmatrix} a \sin s \cos t \\ b \sin s \sin t \\ c \cos s \end{bmatrix}$
-   & $s \in [0;\pi]$ \newline $t \in [0, 2\pi)$
+   & $s \in [0;\pi]$ \newline $t \in [0, 2\pi]$
    & \relativestandalone{../../../graphics/surface-parametrization/ellipsoid}
   \\[\tskip]
-    \textbf{Тórusz:}
+  \textbf{Тórusz:}
    & $\rvec \varrho (s;t) = \begin{bmatrix} (R + r \cos s) \cos t \\ (R + r \cos s) \sin t \\ r \sin s \end{bmatrix}$
-   & $s \in [0;2\pi)$ \newline $t \in [0, 2\pi)$
+   & $s \in [0;2\pi]$ \newline $t \in [0, 2\pi]$
    & \relativestandalone{../../../graphics/surface-parametrization/torus}
   \\[\tskip]
   \textbf{Kúp:}
    & $\rvec \varrho (s;t) = \begin{bmatrix} s \cos t \\ s \sin t \\ s \end{bmatrix}$
-   & $s \in [0;U]$ \newline $t \in [0, 2\pi)$
+   & $s \in [0;U]$ \newline $t \in [0, 2\pi]$
    & \relativestandalone{../../../graphics/surface-parametrization/cone}
 \end{tabular}
 \egroup

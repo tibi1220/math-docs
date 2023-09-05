@@ -1,0 +1,104 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{Integráljuk a skalármezőket a megadott felületeken!}
+  \begin{enumerate}[a)]
+    \item $f(\coordv) = x^2 + y^2, \;\;$ az egységgömb $z > 0$ részén
+    \item $g(\coordv) = x + y + z, \;\;$ a $\;\;x + 2y + 4z = 4\;\;$ sík $\;\;x;y;z \geq 0\;\;$ térnyolcadba tartozó részén
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $f(\coordv) = x^2 + y^2, \;\;$ az egységgömb $z > 0$ részén
+
+            Az egységgömb paraméterezése:
+            \[
+              \surfv(s;t) = \begin{bmatrix}
+                \sin s \cos t \\
+                \sin s \sin t \\
+                \cos s
+              \end{bmatrix}
+              \text,
+              \qquad
+              s \in \left[0; \pi/2\right]
+              \text,
+              \qquad
+              t \in [0; 2\pi]
+              \text,
+              \qquad
+              \rvec n = \norma{\pdv{\surfv}{s} \times \pdv{\surfv}{t}} = \sin s
+              \text.
+            \]
+            A függvény átparaméterezése:
+            \[
+              f(s; t) = (\sin s \cos t)^2 + (\sin s \sin t)^2 = \sin^2 s \; (\cos^2 t + \sin^2 t) = \sin^2 s
+            \]
+            Az integrál:
+            \begin{align*}
+              \int_S f \, \diff S
+               & = \int_0^{\pi/2} \int_0^{2\pi} \sin^2 s \sin s \, \diff t \, \diff s
+              = 2\pi \int_0^{\pi/2} (1 - \cos^2 s) \sin s \, \diff s
+              \\
+               & = 2\pi \int_{0}^{1} (1 - u^2) \, \diff u
+              = 2\pi \left[ u - \frac{u^3}{3} \right]_{0}^{1}
+              = \frac{4\pi}{3}
+            \end{align*}
+
+      \item $g(\coordv) = x + y + z, \;\;$ a $\;\;2x + 2y + z = 4\;\;$ sík $\;\;x;y;z \geq 0\;\;$ térnyolcadba tartozó részén
+
+            Rendezzük a sír egyenletét $z = 4 - 2x - 2y$ alakra.
+
+            A felületi normális nagysága:
+            \[
+              \norma{\rvec n} = \sqrt{1 + (\partial_x z)^2 + (\partial_y z)^2} = \sqrt{1 + 4 + 4} = 3
+            \]
+
+            A függvény átparaméterezése:
+            \[
+              f(x; y; z(x;y)) = x + y + 4 - 2x - 2y = 4 - x - y
+            \]
+
+            A tartomány paraméterezése:
+            \begin{center}
+              \begin{tikzpicture}
+                % Origin coordinate
+                \coordinate (O) at (0,0,0);
+
+                \begin{scope}[3d view={110}{40}]
+                  % Coordinate system
+                  \draw[-to] (O) -- ++(1.5,0,0) node[anchor=south, inner sep=2mm] {$x$};
+                  \draw[-to] (O) -- ++(0,1.5,0) node[anchor=north east] {$y$};
+                  \draw[-to] (O) -- ++(0,0,2.5) node[anchor=north west] {$z$};
+
+                  % Plane
+                  \draw[fill=red-base, fill opacity=.2, thick, draw opacity=1, draw=red-base]
+                  (0,0,2) -- (0,1,0) -- (1,0,0) -- cycle;
+
+                  \draw[font=\scriptsize]
+                  (0,0,2) node[anchor=east] {$4$}
+                  (0,1,0) node[anchor=south west] {$2$}
+                  (1,0,0) node[anchor=north west] {$2$};
+                \end{scope}
+
+                \node[anchor=west] at (3.25,1.00) {$y \in [0;2]$};
+                \node[anchor=west] at (3.25,0.25) {$x \in [0;y-2]$};
+              \end{tikzpicture}
+            \end{center}
+
+            Az integrál:
+            \begin{align*}
+              \int_S g \, \diff S
+               & = \int_0^2 \int_0^{y-2} 3 (4 - x - y) \, \diff x \, \diff y
+              = 3 \int_0^2 \left[ 4x - \frac{x^2}{2} - xy \right]_0^{y-2} \, \diff y
+              \\
+               & = 3 \int_0^2 \left( 4(y - 2) - \frac{(y-2)^2}{2} - y (y - 2) \right) \, \diff y
+              = \int_0^2 \left( \frac{-9y^2}{2} + 24y - 30 \right) \, \diff y
+              \\
+               & = \left[ \frac{-3y^3}{2} + 12y^2 - 30y \right]_0^2
+              = -12 + 48 - 60
+              = -24
+            \end{align*}
+    \end{enumerate}
+  }
+\end{exercise}
+\end{document}

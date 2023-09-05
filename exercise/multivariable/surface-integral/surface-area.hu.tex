@@ -1,0 +1,110 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{Számítsuk ki a megadott felületek felszínét!}
+  \begin{enumerate}[a)]
+    \item $z = x^2 + y^2$ forgásparaboloid $z = 1$ és $z = 4$ síkok közé eső része
+    \item $\surfv(s;t) = \ijk{e^s \cos t}{e^s \sin t}{s}, \;\; s \in (-\infty; 0], \;\; t \in [0; 2\pi]$
+  \end{enumerate}
+
+  \exsol{%
+    \begin{enumerate}[a)]
+      \item $z = x^2 + y^2$ forgásparaboloid $z = 1$ és $z = 4$ síkok közé eső része
+
+            A megadott forásparaboloid az $z = f(x) = x^2$ függvény $z$ tengely
+            körüli forgatásával kapott felület, paraméterezése tehát:
+            \[
+              \surfv(s; t) = \begin{bmatrix}
+                s \cos t \\
+                s \sin t \\
+                s^2
+              \end{bmatrix}
+              \text,\qquad
+              s \in [1; 2]
+              \text,\qquad
+              t \in [0; 2\pi]
+              \text.
+            \]
+
+            A parciális deriváltak, és a felületi normális:
+            \[
+              \pdv{\surfv}{s} = \begin{bmatrix}
+                \cos t \\
+                \sin t \\
+                2 s
+              \end{bmatrix}
+              \text,\qquad
+              \pdv{\surfv}{t} = \begin{bmatrix}
+                -s \sin t \\
+                s \cos t  \\
+                0
+              \end{bmatrix}
+              \text,\qquad
+              \rvec n = \pdv{\surfv}{s} \times \pdv{\surfv}{t} = \begin{bmatrix}
+                -2 s^2 \cos t \\
+                -2 s^2 \sin t \\
+                s
+              \end{bmatrix}
+              \text.
+            \]
+
+            A keresett felszín:
+            \begin{align*}
+              A
+               & = \int_S \diff S
+              = \int_1^2 \int_0^{2\pi}  \norma{\rvec n} \, \diff t \, \diff s
+              = \int_1^2 \int_0^{2\pi}  \sqrt{4 s^4 + s^2} \, \diff t \, \diff s
+              \\
+               & = 2\pi \int_1^2 \sqrt{4 s^4 + s^2} \, \diff s
+              = 2\pi \int_1^2 s \, \sqrt{4 s^2 + 1} \, \diff s
+              = 2\pi \int_{u_1}^{u_2} \frac{1}{8} \, \sqrt{u} \, \diff u
+              \\
+               & = \frac{\pi}{4} \left[ \frac{2}{3} u^{3/2} \right]_{u_1}^{u_2}
+              = \left[ \frac{\pi (4s^2 + 1)^{3/2}}{6} \right]_{1}^{2}
+              = \frac{\pi}{6} \cdot (17^{3/2} - 5^{3/2}) \approx 4,9094
+            \end{align*}
+
+      \item $\surfv(s;t) = \ijk{e^s \cos t}{e^s \sin t}{e^s}, \;\; s \in (-\infty; 0], \;\; t \in [0; 2\pi]$
+
+            A parcális deriváltak, és a felületi normális:
+            \[
+              \pdv{\surfv}{s} = \begin{bmatrix}
+                e^s \cos t \\
+                e^s \sin t \\
+                1
+              \end{bmatrix}
+              \text,\qquad
+              \pdv{\surfv}{t} = \begin{bmatrix}
+                -e^s \sin t \\
+                e^s \cos t  \\
+                0
+              \end{bmatrix}
+              \text,\qquad
+              \rvec n = \pdv{\surfv}{s} \times \pdv{\surfv}{t} = \begin{bmatrix}
+                -e^{s} \cos t \\
+                -e^{s} \sin t \\
+                e^{2s}
+              \end{bmatrix}
+            \]
+            A keresett felszín:
+            \begin{align*}
+              A
+               & = \int_S \diff S
+              % = \int_{-\infty}^{0} \int_0^{2\pi}  \norma{\rvec n} \, \diff t \, \diff s
+              = \int_{-\infty}^{0} \int_0^{2\pi} \sqrt{e^{2s} + e^{4s}} \, \diff t \, \diff s
+              = 2\pi \int_{-\infty}^{0} e^s \sqrt{1 + e^{2s}} \, \diff s
+              \\
+               & = 2\pi \int_{0}^{1} \sqrt{1 + u^2} \, \diff u
+              % = 2\pi \int_{0}^{\arsinh 1} \cosh v \sqrt{1 + \sinh^2 v} \, \diff v
+              = 2\pi \int_{0}^{\arsinh 1} \cosh^2 v \, \diff v
+              = 2\pi \int_{0}^{\arsinh 1} \frac{1 + \cosh 2v}{2} \, \diff v
+              \\
+               & = 2\pi \left[ \frac{v}{2} + \frac{\sinh 2v}{4} \right]_{0}^{\arsinh 1}
+              = \pi \arsinh 1 + \sqrt 2 \pi
+              \approx 7,2118
+              \hspace{3cm}
+            \end{align*}
+    \end{enumerate}
+  }
+\end{exercise}
+\end{document}
