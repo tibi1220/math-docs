@@ -15,10 +15,8 @@
 \vspace{1em}
 
 \begin{summary}
-  Megismerkedünk a többváltozós integrálátalakító tételekkel. A Stokes-tétel
-  segítségével a felületi integrálok számítását visszavezetjük a peremre, a
-  Gauss-Osz\-to\-grad\-szkij-tétel segítségével a térfogati integrálok számítását
-  visszavezetjük a térfogat peremére.
+  Megismerkedünk a többváltozós integrálszámítással kapcsolatos tételekkel,
+  melyek segítségével a feladatokat sok esetben egyszerűbb alakra hozhatjuk.
 \end{summary}
 
 \vspace{-1em}
@@ -26,6 +24,34 @@
 \section{Elméleti áttekinő}
 
 \vspace{1em}
+
+\begin{theorem}[Gradiens -- tétel]
+  Legyen $\varphi : U \subseteq \mathbb R^3 \rightarrow \mathbb R$
+  differenciálható skalármező, $\arcv : [a;b] \rightarrow \gamma \subseteq U,
+    \, t \mapsto \arcv(t)$ folytonos görbe, $\arcv(a) = \rvec p$, $\arcv(b) =
+    \rvec q$ pedig a görbe kezdő és végpontja. Ekkor:
+  \[
+    \int_\gamma \scalar{\grad \varphi(\coordv)}{\diff \rvec r}
+    =
+    \varphi(\rvec q) - \varphi(\rvec p)
+    \text.
+  \]
+  Vagyis, ha egy vektormező valamely skalármező gradiense, akkor annak bármely
+  folytonos görbe mentén vett integrálja csak a kezdő- és végpontoktól függ.
+\end{theorem}
+
+\vfill
+
+\begin{note}[Körintegrál jelölése]
+  Ha $\gamma$ zárt görbe, akkor az ő mentén vett integrált a következőképpen
+  szokás jelölni:
+  \[
+    \oint_\gamma \scalar{\grad \varphi(\coordv)}{\diff \rvec r}
+    \text.
+  \]
+\end{note}
+
+\vfill
 
 \begin{theorem}[Stokes -- tétel]
   Legyen $S$ egy $\mathbb R^3$-beli irányított, parametrizált felület.
@@ -56,66 +82,68 @@
     \text.
   \]
   Ha $\rvec v$ vektorpotenciálos, akkor az integrál értéke zérus, hiszen
-  $\Div \rvec v = \Div \rot \rvec \varphi = 0$.
+  $\Div \rvec v = \Div \rot \rvec u = 0$.
 \end{theorem}
 
-\vfill
-
-\begin{theorem}[Green -- tétel asszimetrikus alakja]
-  Legyenek $\varphi; \psi: \mathbb R^3 \rightarrow \mathbb R$ kétszeresen
-  folytonos skalármezők, $V \subset \mathbb R^3$ parametrizált, irányított
-  tértartomány, $\partial V = S$ perem indukált irányítással. Ekkor:
-  \[
-    \int \limits_V
-    \psi \, \Delta \varphi +
-    \scalar{\grad \psi}{\grad \varphi}
-    \diff V
-    =
-    \oint \limits_{\partial V} \scalar{\psi \grad \varphi}{\diff \rvec S}
-    \text.
-  \]
-\end{theorem}
-
-\vfill
-
-\begin{theorem}[Green -- tétel szimmetrikus alakja]
-  Legyenek $\varphi; \psi: \mathbb R^3 \rightarrow \mathbb R$ kétszeresen
-  folytonos skalármezők, $V \subset \mathbb R^3$ parametrizált, irányított
-  tértartomány, $\partial V = S$ perem indukált irányítással. Ekkor:
-  \[
-    \int \limits_V
-    \psi \, \Delta \varphi + \varphi \, \Delta \psi
-    \; \diff V
-    =
-    \oint \limits_{\partial V}
-    \scalar{\psi \grad \varphi - \varphi \grad \psi}{\diff \rvec S}
-  \]
-\end{theorem}
+% \vfill
+%
+% \begin{theorem}[Green -- tétel asszimetrikus alakja]
+%   Legyenek $\varphi; \psi: \mathbb R^3 \rightarrow \mathbb R$ kétszeresen
+%   folytonos skalármezők, $V \subset \mathbb R^3$ parametrizált, irányított
+%   tértartomány, $\partial V = S$ perem indukált irányítással. Ekkor:
+%   \[
+%     \int \limits_V
+%     \psi \, \Delta \varphi +
+%     \scalar{\grad \psi}{\grad \varphi}
+%     \diff V
+%     =
+%     \oint \limits_{\partial V} \scalar{\psi \grad \varphi}{\diff \rvec S}
+%     \text.
+%   \]
+% \end{theorem}
+%
+% \vfill
+%
+% \begin{theorem}[Green -- tétel szimmetrikus alakja]
+%   Legyenek $\varphi; \psi: \mathbb R^3 \rightarrow \mathbb R$ kétszeresen
+%   folytonos skalármezők, $V \subset \mathbb R^3$ parametrizált, irányított
+%   tértartomány, $\partial V = S$ perem indukált irányítással. Ekkor:
+%   \[
+%     \int \limits_V
+%     \psi \, \Delta \varphi + \varphi \, \Delta \psi
+%     \; \diff V
+%     =
+%     \oint \limits_{\partial V}
+%     \scalar{\psi \grad \varphi - \varphi \grad \psi}{\diff \rvec S}
+%   \]
+% \end{theorem}
 
 \clearpage
 \section{Feladatok}
 
-\begin{exercise}{A Stokes-tétel alkalmazása}
-  Adott az $\rvec F(x;y;z) = y \uvec i + z \uvec j + x^3 \uvec k$ függvény.
-  Számítsuk ki az $\rvec F$ skalármező $x = 0$ síkon elhelyezkedő, 2 egység
-  sugarú körön vett vonalmenti integrálját.
+\relativeinclude{../../../exercise/multivariable/integral-theorems/closed-contour.hu}
 
-  \exsol{%
-    Megoldás a Stokes-tétel segítségével:\\[2mm]
-    Először számítsuk ki a $\rot \rvec F$ rotációt:
-    \[
-      \rot \rvec F = \begin{bmatrix}
-        \partial_x \\ \partial_y \\ \partial_z
-      \end{bmatrix} \times \begin{bmatrix}
-        y \\ z \\ x^3
-      \end{bmatrix}
-      =
-      \begin{bmatrix}
-        -1 \\ -3x^2 \\ -1
-      \end{bmatrix}
-      \text.
-    \]
-  }
-\end{exercise}
+% \begin{exercise}{A Stokes-tétel alkalmazása}
+%   Adott az $\rvec F(x;y;z) = y \uvec i + z \uvec j + x^3 \uvec k$ függvény.
+%   Számítsuk ki az $\rvec F$ skalármező $x = 0$ síkon elhelyezkedő, 2 egység
+%   sugarú körön vett vonalmenti integrálját.
+%
+%   \exsol{%
+%     Megoldás a Stokes-tétel segítségével:\\[2mm]
+%     Először számítsuk ki a $\rot \rvec F$ rotációt:
+%     \[
+%       \rot \rvec F = \begin{bmatrix}
+%         \partial_x \\ \partial_y \\ \partial_z
+%       \end{bmatrix} \times \begin{bmatrix}
+%         y \\ z \\ x^3
+%       \end{bmatrix}
+%       =
+%       \begin{bmatrix}
+%         -1 \\ -3x^2 \\ -1
+%       \end{bmatrix}
+%       \text.
+%     \]
+%   }
+% \end{exercise}
 
 \end{document}

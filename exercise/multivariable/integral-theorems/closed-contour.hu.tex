@@ -1,0 +1,49 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{%
+    Integráljuk az alábbi vektormezőt a $z = 0$ síkon lévő, $r = 3$ sugarú kör
+    mentén!
+  }
+  \[
+    \rvec v(\coordv) = \ijk{y + z}{x + z}{x + y}
+  \]
+
+  \exsol{%
+    Vizsgáljuk meg, hogy a vektormező vektorpotenciálos-e:
+    \[
+      \rot \rvec v
+      =
+      \begin{bmatrix}
+        \partial_x \\ \partial_y \\ \partial_z
+      \end{bmatrix}
+      \times
+      \begin{bmatrix}
+        y + z \\ x + z \\ x + y
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        \partial_x (x + z) - \partial_y (y + z) \\
+        \partial_y (x + y) - \partial_z (x + z) \\
+        \partial_z (y + z) - \partial_x (x + y)
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        1 - 1 \\ 1 - 1 \\ 1 - 1
+      \end{bmatrix}
+      =
+      \nvec
+      \text.
+    \]
+
+    Mivel a vektormező vektorpotenciálos, ezért létezik olyan skalármező,
+    melynek gradiense maga a $\rvec v$ vektormező. Az integrál értéke tehát
+    csak a kezdő- és végpontoktól függ, melyek jelen esetben megegyeznek,
+    vagyis az integrál értéke zérus:
+    \[
+      \oint_\gamma \scalar{\rvec v}{\diff \arcv} = 0
+      \text.
+    \]
+  }
+\end{exercise}
+\end{document}
