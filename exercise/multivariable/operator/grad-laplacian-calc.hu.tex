@@ -10,7 +10,7 @@
       \item $f(\rvec r) = xyz$
       \item $g(\rvec r) = 6x^y + \sin e^z$
       \item $h(\rvec r) = \rvec r^2 / 2$
-      \item $i(\rvec r) = yz + xz + yz$
+      \item $i(\rvec r) = xy + xz + yz$
       \item $j(\rvec r) = 2 x^2 y + x z^2 + 6 y$
     \end{enumerate}
   \end{multicols}
@@ -95,7 +95,7 @@
               3
             \]
 
-      \item $i(\rvec r) = yz + xz + yz$
+      \item $i(\rvec r) = xy + xz + yz$
             \[
               \grad i
               =
@@ -106,7 +106,7 @@
               \right)
               =
               \begin{bmatrix}
-                0 \\ 0 \\ 0
+                y + z \\ x + z \\ x + y
               \end{bmatrix}
             \]
             \[
@@ -114,7 +114,7 @@
               =
               \Div \grad i
               =
-              \pdv{0}{x} + \pdv{0}{y} + \pdv{0}{z}
+              \pdv{(y + z)}{x} + \pdv{(x + z)}{y} + \pdv{(x + y)}{z}
               =
               0
             \]

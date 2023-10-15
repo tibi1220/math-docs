@@ -1,0 +1,163 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{%
+    Integráljuk az alábbi vektormezőt az $A(1;0;0)$, $B(0;2;0)$ $C(0;0;3)$
+    csúcsokkal meghatározott háromszögvonal mentén!
+  }
+  \[
+    \rvec v(\coordv) = \ijk{x + y / 2 + z / 3}{y}{z}
+  \]
+
+  \exsol{%
+    Alkalmazzuk a Stokes-tételt:
+    \[
+      \oint_{\partial S} \scalar{\rvec v}{\diff \rvec r}
+      =
+      \int_S \scalar{\rot \rvec v}{\diff \rvec S}
+      \text.
+    \]
+
+    A vektormező divergenciája:
+    \[
+      \rot \rvec v
+      =
+      \begin{bmatrix}
+        \partial_x \\ \partial_y \\ \partial_z
+      \end{bmatrix}
+      \times
+      \begin{bmatrix}
+        x + y / 2 + z / 3 \\ y \\ z
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        0 \\ 1/3 \\ -1/2
+      \end{bmatrix}
+      \text.
+    \]
+
+    A felület paraméterezése:
+    \[
+      \surfv(s;t)
+      =
+      A + s (B - A) + t (C - A)
+      =
+      \begin{bmatrix}
+        1 - s - t \\ 2s \\ 3t
+      \end{bmatrix}
+      \text.
+    \]
+
+    A felületi normális:
+    \[
+      \rvec n
+      =
+      \pdv{\surfv}{s} \times \pdv{\surfv}{t}
+      =
+      \begin{bmatrix}
+        -1 \\ 2 \\ 0
+      \end{bmatrix}
+      \times
+      \begin{bmatrix}
+        -1 \\ 0 \\ 3
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        6 \\ 3 \\ 2
+      \end{bmatrix}
+      \text.
+    \]
+
+    Az integrál tehát:
+    \[
+      \int_0^1 \int_0^{1 - t}
+      \scalar{\rot \rvec v (\surfv(s;t))}{\rvec n}
+      \, \diff s \, \diff t
+      =
+      \int_0^1 \int_0^{1 - t}
+      \begin{bmatrix}
+        0 \\ 1/3 \\ -1/2
+      \end{bmatrix}
+      \begin{bmatrix}
+        6 \\ 3 \\ 2
+      \end{bmatrix}
+      \, \diff s \, \diff t
+      =
+      \int_0^1 \int_0^{1 - t}
+      0
+      \, \diff s \, \diff t
+      =
+      0
+      \text.
+    \]
+
+    Amennyiben nem alkalmazzuk a tételt:
+    \begin{enumerate}
+      \item $(A) \rightarrow (B)$
+            \[
+              \arcv(t) = \begin{bmatrix}
+                1 - t \\ 2t \\ 0
+              \end{bmatrix}
+              \qquad
+              \dot{\arcv}(t) = \begin{bmatrix}
+                -1 \\ 2 \\ 0
+              \end{bmatrix}
+              \qquad
+              \rvec v(\rvec r(t)) = \begin{bmatrix}
+                1 - t + t \\ 2t \\ 0
+              \end{bmatrix} = \begin{bmatrix}
+                1 \\ 2t \\ 0
+              \end{bmatrix}
+            \]
+            \[
+              S_1 = \int_0^1 4t - 1 \, \diff t = \left[ 2t^2 - t \right]_0^1 = 1
+            \]
+
+      \item $(B) \rightarrow (C)$
+            \[
+              \arcv(t) = \begin{bmatrix}
+                0 \\ 2 - 2t \\ 3t
+              \end{bmatrix}
+              \qquad
+              \dot{\arcv}(t) = \begin{bmatrix}
+                0 \\ -2 \\ 3
+              \end{bmatrix}
+              \qquad
+              \rvec v(\rvec r(t)) = \begin{bmatrix}
+                1 - t + t \\ 2 - 2t \\ 3t
+              \end{bmatrix} = \begin{bmatrix}
+                1 \\ 2 - 2t \\ 3t
+              \end{bmatrix}
+            \]
+            \[
+              S_2 = \int_0^1 13t - 4 \, \diff t = \left[ 6.5t^2 - 4t \right]_0^1 = 2,5
+            \]
+
+      \item $(C) \rightarrow (A)$
+            \[
+              \arcv(t) = \begin{bmatrix}
+                t \\ 0 \\ 3 - 3t
+              \end{bmatrix}
+              \qquad
+              \dot{\arcv}(t) = \begin{bmatrix}
+                1 \\ 0 \\ -3
+              \end{bmatrix}
+              \qquad
+              \rvec v(\rvec r(t)) = \begin{bmatrix}
+                1 - t + t \\ 0 \\ 3 - 3t
+              \end{bmatrix} = \begin{bmatrix}
+                1 \\ 0 \\ 3 - 3t
+              \end{bmatrix}
+            \]
+            \[
+              S_3 = \int_0^1 9t - 8 \, \diff t = \left[ 4.5t^2 - 8t \right]_0^1 = -3,5
+            \]
+    \end{enumerate}
+    Látható, hogy ugyan azt az eredményt kaptuk:
+    \[
+      S_1 + S_2 + S_3 = 1 + 2,5 - 3,5 = 0
+      \text  \, \diff t = \left[ 9t - 4.5t^2 \right]_0^1 = 4,5.
+    \]
+  }
+\end{exercise}
+\end{document}

@@ -2,11 +2,15 @@
 
 \begin{document}
 \begin{exercise}{%
-    Integráljuk a $\rvec v(\coordv) = \ijk{x}{y}{z}$ vektormezőt az alábbi
+    Integráljuk a megadott vektormezőt a (0;1) és (2;0) pontok között az alábbi
     görbék mentén!
   }
-  \begin{enumerate}
-    \item
+  \[
+    \rvec v (\coordv) = \ijk{y}{x}{0}
+  \]
+  \begin{enumerate}[a)]
+    \item egyenes szakasz mentén
+    \item origó középpontú ellipszis mentén
   \end{enumerate}
 
   \exsol{%
@@ -19,17 +23,11 @@
       \end{bmatrix}
       \times
       \begin{bmatrix}
-        y + z \\ x + z \\ x + y
+        y \\ x \\ 0
       \end{bmatrix}
       =
       \begin{bmatrix}
-        \partial_x (x + z) - \partial_y (y + z) \\
-        \partial_y (x + y) - \partial_z (x + z) \\
-        \partial_z (y + z) - \partial_x (x + y)
-      \end{bmatrix}
-      =
-      \begin{bmatrix}
-        1 - 1 \\ 1 - 1 \\ 1 - 1
+        0 \\ 0 \\ 1 - 1
       \end{bmatrix}
       =
       \nvec
@@ -37,13 +35,88 @@
     \]
 
     Mivel a vektormező vektorpotenciálos, ezért létezik olyan skalármező,
-    melynek gradiense maga a $\rvec v$ vektormező. Az integrál értéke tehát
-    csak a kezdő- és végpontoktól függ, melyek jelen esetben megegyeznek,
-    vagyis az integrál értéke zérus:
+    melynek gradiense maga a $\rvec v$ vektormező.
+    \\[2mm]
+    A potenciálfüggvényt a következőképpen határozhatjuk meg:
     \[
-      \oint_\gamma \scalar{\rvec v}{\diff \arcv} = 0
+      V(\coordv)
+      =
+      \int_0^x y \, \diff \xi
+      + \int_0^y 0 \, \diff \xi
+      + \int_0^z 0 \, \diff \xi
+      =
+      xy + C
       \text.
     \]
+
+    Az integrál értéke tehát csak a kezdő- és végpontoktól függ, tehát mindhárom
+    esetben az integrál értéke megegyezik:
+    \[
+      \int_\gamma \scalar{\rvec v (\coordv)}{\diff \arcv} = V(2;0) - V(0;1) = 0
+      \text.
+    \]
+
+    Ha nem vettük volna észre, hogy a függvényünk skalárpotenciális:
+    \begin{enumerate}[a)]
+      \item egyenes szakasz mentén:
+            \[
+              \rvec r(t) = \begin{bmatrix}
+                1 \\ 0
+              \end{bmatrix} + t \begin{bmatrix}
+                0 - 1 \\ 2 - 0
+              \end{bmatrix} = \begin{bmatrix}
+                1 - t \\ 2t
+              \end{bmatrix}
+              \text, \quad
+              t \in [0;1]
+              \text, \quad
+              \dot{\rvec r}(t) = \begin{bmatrix}
+                -1 \\ 2
+              \end{bmatrix}
+            \]
+            \[
+              % \int_0^1 \scalar{\rvec w(\rvec r(t))}{\dot{\rvec r}(t)} \diff t
+              \int_0^1 \begin{bmatrix}
+                2t \\ 1 - t
+              \end{bmatrix}^\transpose
+              \begin{bmatrix}
+                -1 \\ 2
+              \end{bmatrix}
+              \diff t
+              = \int_0^1 (-2t + 2 - 2t) \diff t
+              = \int_0^1 2 - 4t \, \diff t
+              = \left[ 2t - 2t^2 \right]_0^1
+              = 0
+            \]
+
+      \item ellipszis mentén:
+            \[
+              \rvec r(t) = \begin{bmatrix}
+                \cos t \\ 2 \sin t
+              \end{bmatrix}
+              \text,\quad
+              t \in [0; \pi/2]
+              \text,\quad
+              \dot{\rvec r}(t) = \begin{bmatrix}
+                - \sin t \\ 2 \cos t
+              \end{bmatrix}
+            \]
+            \[
+              % \int_{\pi / 2}^0 \scalar{\rvec w(\rvec r(t))}{\dot{\rvec r}(t)} \diff t
+              \hspace{-1.3cm}
+              \int_0^{\pi / 2} \begin{bmatrix}
+                2 \sin t \\ \cos t
+              \end{bmatrix}^\transpose
+              \begin{bmatrix}
+                - \sin t \\ 2 \cos t
+              \end{bmatrix}
+              \diff t
+              = 2 \int_0^{\pi / 2} (\cos^2 t - \sin^2 t) \, \diff t
+              = 2 \int_0^{\pi / 2} \cos 2t \, \diff t
+              = 2 \left[ \frac{\sin 2t}{2} \right]_0^{\pi / 2}
+              = 0
+            \]
+    \end{enumerate}
   }
 \end{exercise}
 \end{document}

@@ -1,0 +1,47 @@
+\documentclass[exercise]{math-standalone}
+
+\begin{document}
+\begin{exercise}{%
+    Integráljuk az alábbi vektormezőt az első térnyolcadban lévő egységkocka
+    felületén kifele mutató irányítással!
+  }
+  \[
+    \rvec v(\coordv) = \ijk{x^2 y z}{x y^2 z}{2 x y z^2}
+  \]
+
+  \exsol{%
+    A felületi integrál kiszámítása rendkívül hosszadalmas lenne, hiszen a kocka
+    felületét 6 különböző felületdarab alkotja, melyek mindegyikén más a
+    felületi integrál értéke.
+    \\[2mm]
+    Alkalmazzuk a Gauss-Osztogradszkij-tételt:
+    \[
+      \oint_{\partial V} \scalar{\rvec v}{\diff \rvec S}
+      =
+      \int_V \Div \rvec v \, \diff V
+      \text.
+    \]
+
+    A vektormező divergenciája:
+    \[
+      \Div \rvec v
+      =
+      \pdv{x^2 y z}{x} +
+      \pdv{x y^2 z}{y} +
+      \pdv{2 x y z^2}{z}
+      =
+      8 x y z
+      \text.
+    \]
+
+    Az integrál tehát:
+    \[
+      \int_0^1 \int_0^1 \int_0^1 8 x y z \, \,\diff x \,\diff y \,\diff z =
+      \int_0^1 \int_0^1 4 y z \, \diff y \,\diff z =
+      \int_0^1 2 z \, \diff z =
+      1
+      \text.
+    \]
+  }
+\end{exercise}
+\end{document}
